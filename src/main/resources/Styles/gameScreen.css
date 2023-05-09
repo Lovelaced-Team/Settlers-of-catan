@@ -1,0 +1,10 @@
+.startScreen {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/main.png");
+    -fx-background-size: 100% 100%;
+}
+.creditScreen {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/mainBlurred.png");
+    -fx-background-size: 100% 100%;
+}
