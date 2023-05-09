@@ -1,0 +1,6 @@
+Clay,src/main/resources/assets/hexagons/clay_hex.png
+Desert,src/main/resources/assets/hexagons/desert_hex.png
+Forest,src/main/resources/assets/hexagons/forest_hex.png
+Rock,src/main/resources/assets/hexagons/rock_hex.png
+Sheep,src/main/resources/assets/hexagons/sheep_hex.png
+Wheat,src/main/resources/assets/hexagons/wheat_hex.png
