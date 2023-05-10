@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class CreditScreenController{
+public class CreditScreenController {
 
     @FXML
     private ResourceBundle resources;

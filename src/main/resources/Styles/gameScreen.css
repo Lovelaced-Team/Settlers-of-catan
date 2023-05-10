@@ -3,8 +3,25 @@
     -fx-background-image:url("../assets/gameScreen/main.png");
     -fx-background-size: 100% 100%;
 }
-.creditScreen,.endScreen {
+.creditScreen,.endScreen,.playerCustomizationScreen {
     -fx-background-repeat: no-repeat;
     -fx-background-image:url("../assets/gameScreen/mainBlurred.png");
     -fx-background-size: 100% 100%;
+}
+
+.playerPanel {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/playerCustomizationScreen/Character_Frame_Container.png");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
+}
+
+.playerNameTextField {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/playerCustomizationScreen/Name_Box.png");
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }

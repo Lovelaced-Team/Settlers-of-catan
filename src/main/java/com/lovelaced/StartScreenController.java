@@ -33,7 +33,15 @@ public class StartScreenController {
     @FXML
     void mouseClicked(MouseEvent event) throws IOException {
         if (event.getSource() == startButton) {
-            System.out.println("clickedStartButton");
+            root = FXMLLoader.load(getClass().getResource("PlayerCustomizationScreen-view.fxml"));
+
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.setTitle("Player Screen");
+            stage.show();
         }
         else if (event.getSource() == creditsButton) {
             root = FXMLLoader.load(getClass().getResource("CreditScreen-view.fxml"));

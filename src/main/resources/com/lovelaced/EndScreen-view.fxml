@@ -22,7 +22,7 @@
          <children>
             <ImageView fx:id="returnToMainButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../assets/gameScreen/exit.png" />
+                  <Image url="@../../assets/endScreen/playAgain.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" />
