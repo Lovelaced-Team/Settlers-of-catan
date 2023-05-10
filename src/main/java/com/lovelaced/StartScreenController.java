@@ -1,11 +1,6 @@
 package com.lovelaced;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
-import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,15 +11,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class StartScreenController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private ImageView creditsButton;
@@ -59,7 +47,6 @@ public class StartScreenController {
             stage.show();
         }
         else if (event.getSource() == exitButton) {
-            System.out.println("clickedExitPane");
             System.exit(0);
         }
     }
