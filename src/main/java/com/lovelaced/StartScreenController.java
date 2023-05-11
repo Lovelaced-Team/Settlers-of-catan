@@ -36,8 +36,7 @@ public class StartScreenController {
             root = FXMLLoader.load(getClass().getResource("PlayerCustomizationScreen-view.fxml"));
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
+            stage.getScene().setRoot(root);
             stage.setFullScreen(true);
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             stage.setTitle("Player Screen");
@@ -47,8 +46,7 @@ public class StartScreenController {
             root = FXMLLoader.load(getClass().getResource("CreditScreen-view.fxml"));
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
+            stage.getScene().setRoot(root);
             stage.setFullScreen(true);
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             stage.setTitle("Credit Screen");

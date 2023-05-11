@@ -82,8 +82,7 @@ public class PlayerCustomizationController {
         root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
         stage.setFullScreen(true);
         stage.setTitle("Start Screen");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
