@@ -11,17 +11,42 @@
 
 .playerPanel {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/playerCustomizationScreen/Character_Frame_Container.png");
+    -fx-background-image:url("../assets/gameScreen/Character_Frame_Container.png");
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }
 
 .playerNameTextField {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/playerCustomizationScreen/Name_Box.png");
+    -fx-background-image:url("../assets/gameScreen/Name_Box.png");
     -fx-background-color: transparent;
     -fx-background-position: center;
     -fx-font-size: 26px;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+.playerPanelGameScreen {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/Character_Frame_Container.png");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
+}
+
+.playerNameTextFieldGameScreen {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/Name_Box.png");
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-size: 100% 100%;
+}
+
+.gameScreenBackGround {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/tumblr_pix1msx6We1skkarx_640.gif");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
 }

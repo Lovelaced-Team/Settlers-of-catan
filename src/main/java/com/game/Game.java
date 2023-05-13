@@ -90,4 +90,8 @@ public class Game {
 	public static ArrayList<Player> getPlayerList(){
 		return Game.players;
 	}
+
+	public static void addPlayer(Player player){
+		players.add(player);
+	}
 }

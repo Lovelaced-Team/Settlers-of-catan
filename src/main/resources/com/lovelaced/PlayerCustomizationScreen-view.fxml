@@ -50,7 +50,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -119,7 +119,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -176,7 +176,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -233,7 +233,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -289,7 +289,7 @@
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#startGame" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Play_Button.png" />
                </image>

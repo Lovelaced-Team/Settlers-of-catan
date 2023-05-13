@@ -23,18 +23,18 @@ public class Player {
 	private HashMap<String, Integer> materials = new HashMap<>(); //HashMap storing the amount of every material that the player owns.
 	private HashMap<String, Integer> materialTradingCost = new HashMap<>(); //HashMap storing the trading cost for every material.
 	
-	public Player(String name, String avatar, String color, int points) {
+	public Player(String name, Image avatar, String color, int points) {
 		this.name = name;
-		try {
-			this.avatar = new Image(new FileInputStream(avatar));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+		this.avatar = avatar;
 		this.color = color;
 		this.points = points;
 		this.initializeMaterialAmounts();
 		this.initializeMaterialTradingCost();
 		this.initializeStructures();
+	}
+
+	public String getName () {
+		return name;
 	}
 
 	public void initializeMaterialAmounts(){

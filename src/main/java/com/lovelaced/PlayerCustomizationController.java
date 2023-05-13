@@ -3,13 +3,20 @@ package com.lovelaced;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.game.Game;
+import com.game.Player;
 import javafx.animation.TranslateTransition;
+import javafx.application.Preloader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
@@ -23,8 +30,9 @@ public class PlayerCustomizationController {
     private HashMap<String,String> selectedColors = new HashMap<String,String>();
     private HashMap<String,ImageView> selectedFlasks = new HashMap<String,ImageView>();
 
-    @FXML
-    private AnchorPane pane2;
+    private HashMap<String, String> selectedNameFields = new HashMap<String, String>();
+
+    private HashMap<String, Image> selectedPlayers = new HashMap<String, Image>();
 
     @FXML
     private ImageView arrow1;
@@ -50,6 +58,9 @@ public class PlayerCustomizationController {
     private AnchorPane pane3;
 
     @FXML
+    private AnchorPane pane2;
+
+    @FXML
     private AnchorPane pane1;
 
 
@@ -71,11 +82,54 @@ public class PlayerCustomizationController {
 
     @FXML
     private ImageView fourthPlayer;
-
-
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    Player createPlayer(String name, Image avatar, String colored) {
+        return new Player(name, avatar, colored, 0);
+    }
+
+    @FXML
+    void startGame(MouseEvent event) throws IOException {
+        Game.getPlayerList().clear();
+        String name = null;
+        String colored = null;
+        Image avatar = null;
+        boolean playerCreationFilter = true;
+
+        for ( String pane : selectedNameFields.keySet()) {
+            if (selectedColors.containsKey(pane)) {
+                name = selectedNameFields.get(pane);
+                colored = selectedColors.get(pane);
+                avatar = selectedPlayers.get(pane);
+                if (!name.equals(""))
+                    Game.addPlayer(createPlayer(name, avatar, colored));
+                else
+                    playerCreationFilter = false;
+            } else
+                playerCreationFilter = false;
+
+        }
+        if (Game.getPlayerList().size() >= 2 && playerCreationFilter) {
+            root = FXMLLoader.load(getClass().getResource("GameScreen-view.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+            stage.setFullScreen(true);
+            stage.setTitle("Start Screen");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.show();
+        }
+
+
+    }
+
+    @FXML
+    void nameTyped(MouseEvent event) {
+        TextField nameFiled = (TextField) event.getSource();
+        pane = nameFiled.getParent().getId();
+        selectedNameFields.put(pane, nameFiled.getText());
+    }
 
     @FXML
     void exitClicked(MouseEvent event) throws IOException {
@@ -98,12 +152,14 @@ public class PlayerCustomizationController {
         pane4.setVisible(true);
     }
     private ImageView arrow = new ImageView();
+    private String paneColor = null;
+
     private String pane = null;
     private String color = null;
     @FXML
     void arrowClicked(MouseEvent event) throws FileNotFoundException {
-        if(pane != null)
-            selectedFlasks.get(pane).setStyle(null);
+        if(paneColor != null)
+            selectedFlasks.get(paneColor).setStyle(null);
         boolean exist = false;
         ImageView flask =  (ImageView) event.getSource();
         colorPicker(flask);
@@ -114,21 +170,21 @@ public class PlayerCustomizationController {
 
         if ( !exist ){
 
-            if(pane != null && !pane.equals(flask.getParent().getId()) && color != null)
-                selectedFlasks.get(pane).setStyle("-fx-effect: dropShadow(three-pass-box, " + selectedColors.get(pane) + ", 10, 0, 0, 0)");
+            if(paneColor != null && !paneColor.equals(flask.getParent().getId()) && color != null)
+                selectedFlasks.get(paneColor).setStyle("-fx-effect: dropShadow(three-pass-box, " + selectedColors.get(paneColor) + ", 10, 0, 0, 0)");
 
-            pane = flask.getParent().getId();
+            paneColor = flask.getParent().getId();
 
-            selectedColors.put( pane, color );
+            selectedColors.put( paneColor, color );
 
             animateArrow(flask, 1000);
 
             flask.setStyle("-fx-effect: dropShadow(three-pass-box, " + color + ", 30, 0, 0, 0)");
 
-            selectedFlasks.put( pane, flask );
-            flask = selectedFlasks.get(pane);
+            selectedFlasks.put( paneColor, flask );
+            flask = selectedFlasks.get(paneColor);
 
-            setPlayerImage(pane);
+            setPlayerImage(paneColor);
         }
 
     }
@@ -151,7 +207,7 @@ public class PlayerCustomizationController {
 
         arrow.setVisible(false);
 
-        switch (pane) {
+        switch (paneColor) {
             case "pane1": arrow = arrow1; break;
             case "pane2": arrow = arrow2; break;
             case "pane3": arrow = arrow3; break;
@@ -181,22 +237,26 @@ public class PlayerCustomizationController {
     }
 
     public void setPlayerImage(String pane) throws FileNotFoundException {
-        String path = "src/main/resources/assets/playerCustomizationScreen/playerAvatars/Character_Window_";
+        String path = "src/main/resources/assets/gameScreen/Character_Window_";
         switch (pane) {
             case "pane1": {
                 firstPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                selectedPlayers.put(pane, firstPlayer.getImage());
                 break;
             }
             case "pane2": {
                 secondPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                selectedPlayers.put(pane, secondPlayer.getImage());
                 break;
             }
             case "pane3": {
                 thirdPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                selectedPlayers.put(pane, thirdPlayer.getImage());
                 break;
             }
             case "pane4": {
                 fourthPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                selectedPlayers.put(pane, fourthPlayer.getImage());
                 break;
             }
         }
