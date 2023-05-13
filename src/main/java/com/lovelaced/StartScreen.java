@@ -15,7 +15,7 @@ public class StartScreen extends Application {
     }
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
