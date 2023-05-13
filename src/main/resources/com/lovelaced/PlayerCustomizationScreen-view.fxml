@@ -35,7 +35,7 @@
                         <Image url="@../../assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="140.0" fitWidth="273.0" layoutX="322.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="358.0" layoutX="271.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
                      </image>
@@ -50,27 +50,27 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="368.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="314.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="415.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="462.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="506.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
@@ -104,11 +104,6 @@
                         <Image url="@../../assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="140.0" fitWidth="273.0" layoutX="322.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="309.0" layoutY="20.0" prefHeight="90.0" prefWidth="316.0" text=" Write your Name :" textFill="#d0d31a">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
@@ -119,27 +114,32 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="368.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="358.0" layoutX="271.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="314.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="415.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="462.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="506.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
@@ -161,11 +161,6 @@
                         <Image url="@../../assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="140.0" fitWidth="273.0" layoutX="322.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="309.0" layoutY="20.0" prefHeight="90.0" prefWidth="316.0" text=" Write your Name :" textFill="#d0d31a">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
@@ -176,27 +171,32 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="368.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="358.0" layoutX="271.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="314.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="415.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="462.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="506.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
@@ -218,11 +218,6 @@
                         <Image url="@../../assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="140.0" fitWidth="273.0" layoutX="322.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="309.0" layoutY="20.0" prefHeight="90.0" prefWidth="316.0" text=" Write your Name :" textFill="#d0d31a">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
@@ -233,27 +228,32 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="368.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="358.0" layoutX="271.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/Page_Name.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="314.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="415.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="462.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="506.0" layoutY="278.0" onMouseClicked="#arrowClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
