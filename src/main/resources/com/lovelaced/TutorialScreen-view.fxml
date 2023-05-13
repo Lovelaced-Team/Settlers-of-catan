@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="tutorialScreen" stylesheets="@../../Styles/gameScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.TutorialScreenController">
+   <center>
+      <ImageView fx:id="tutorialInfo" fitHeight="946.0" fitWidth="862.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../assets/tutorialScreen/TutorialScreen1.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </center>
+   <bottom>
+      <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Exit.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </bottom>
+   <left>
+      <ImageView fx:id="leftArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" pickOnBounds="true" preserveRatio="true" visible="false" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Left.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets left="100.0" top="50.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </left>
+   <right>
+      <ImageView fx:id="rightArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Right.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets right="100.0" top="50.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </right>
+</BorderPane>

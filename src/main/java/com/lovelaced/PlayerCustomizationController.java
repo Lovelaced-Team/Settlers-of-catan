@@ -26,9 +26,7 @@ public class PlayerCustomizationController {
 
     private HashMap<String,String> selectedColors = new HashMap<>();
     private HashMap<String,ImageView> selectedFlasks = new HashMap<>();
-
     private HashMap<String, String> selectedNameFields = new HashMap<>();
-
     private HashMap<String, Image> selectedPlayers = new HashMap<>();
 
     @FXML
@@ -71,7 +69,7 @@ public class PlayerCustomizationController {
                 playerCreationFilter = false;
 
         }
-        for(Player p : Game.getPlayerList()) {System.out.println(p.getName());}
+        
         if (Game.getPlayerList().size() >= 2 && playerCreationFilter) {
             root = FXMLLoader.load(getClass().getResource("GameScreen-view.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -289,7 +289,7 @@
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#startGame" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" onMouseClicked="#startGame" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Play_Button.png" />
                </image>

@@ -18,7 +18,7 @@
                   <Insets top="115.0" />
                </VBox.margin>
             </ImageView>
-            <ImageView fitHeight="90.0" fitWidth="252.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="tutorialButton" fitHeight="90.0" fitWidth="252.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/startScreen/tutorial.png" />
                </image>
