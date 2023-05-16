@@ -15,7 +15,7 @@ public class Quest {
         Quest.longestArmyAmount = 2;
 
         for(Player p: players){
-            addArmyAmount(p, 0);
+            armyAmounts.put(p, 0);
         }
     }
     public void setHasLongestRoad(Player player) {

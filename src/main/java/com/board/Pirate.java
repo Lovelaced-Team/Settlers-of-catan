@@ -21,7 +21,7 @@ public class Pirate {
 		this.belongsTo = hexagon;
 
 		try {
-			this.image = new Image(new FileInputStream("src/main/resources/assets/pirate/Pirate.png"));
+			this.image = new Image(new FileInputStream("src/main/resources/assets/hexagons/pirate/Pirate.png"));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -47,10 +47,10 @@ public class Pirate {
 	//Steals a random material or card from a victim and gives it to the perpetrator.
 	public void stealForPlayer(Player victim, Player perpetrator){
 		Random rand = new Random();
-		HashMap<String, Integer> victimMaterials = victim.getMaterials();
+		HashMap<String, Integer> victimMaterials = victim.getMaterials(); //HashMap containing quantities for every possible material that the victim can have
 
 		if(victim.getMaterialAmount("Sum") >= 1 ){
-			ArrayList<String> materials = new ArrayList<>(victim.getMaterials().keySet()); //Array that contains the victims materials
+			ArrayList<String> materials = new ArrayList<>(); //Array that contains only the names of the materials that the victim possesses
 
 			for(String material : victimMaterials.keySet()){
 				if( victimMaterials.get(material) > 0 ){
@@ -71,5 +71,9 @@ public class Pirate {
 			victim.removeCard(cardToBeRemoved);
 			perpetrator.addCard(cardToBeRemoved);
 		}
+	}
+
+	public Image getImage(){
+		return this.image;
 	}
 }

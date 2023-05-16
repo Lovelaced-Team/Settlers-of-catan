@@ -1,23 +1,18 @@
 package com.board;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 //Class representing the board of the game. Creates and stores a list of all the hexagons.
 public class Board {
-	//We need to update the offset with the corresponding image sizes
-	private final double XLOCATION = 396;
-	private final double YLOCATION = 14;
-	private final double XOFFSET = 930;
-	private final double YOFFSET = 782;
+	private final double XLOCATION = 0;
+	private final double YLOCATION = 0;
+	private final double XOFFSET = 161;
+	private final double YOFFSET = 140;
 	private static ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
 	private HashMap<Integer, String> biomes = new HashMap<>();
 
@@ -31,7 +26,7 @@ public class Board {
 			FileReader fileReader = new FileReader("src/main/resources/map/StartingMap.txt");
 			BufferedReader reader = new BufferedReader(fileReader);
 
-			double currentX = XLOCATION;
+			double currentX = XLOCATION+XOFFSET/2;
 			double currentY = YLOCATION;
 			int row = 1;
 
@@ -52,25 +47,13 @@ public class Board {
 					}
 
 					//Creates the hexagons
-					switch( Integer.parseInt(String.valueOf(s.charAt(2))) ) {
-						case 1:
-							hexagons.add(new Hexagon(coords, biomes.get(1), port));
-							break;
-						case 2:
-							hexagons.add(new Hexagon(coords, biomes.get(2), port));
-							break;
-						case 3:
-							hexagons.add(new Hexagon(coords, biomes.get(3), port));
-							break;
-						case 4:
-							hexagons.add(new Hexagon(coords, biomes.get(4), port));
-							break;
-						case 5:
-							hexagons.add(new Hexagon(coords, biomes.get(5), port));
-							break;
-						case 6:
-							hexagons.add(new Hexagon(coords, biomes.get(6), port));
-							break;
+					switch (Integer.parseInt(String.valueOf(s.charAt(2)))) {
+						case 1 -> hexagons.add(new Hexagon(coords, biomes.get(1), port));
+						case 2 -> hexagons.add(new Hexagon(coords, biomes.get(2), port));
+						case 3 -> hexagons.add(new Hexagon(coords, biomes.get(3), port));
+						case 4 -> hexagons.add(new Hexagon(coords, biomes.get(4), port));
+						case 5 -> hexagons.add(new Hexagon(coords, biomes.get(5), port));
+						case 6 -> hexagons.add(new Hexagon(coords, biomes.get(6), port));
 					}
 					currentX += XOFFSET;
 				}
@@ -79,7 +62,7 @@ public class Board {
 				//Offsets the x and y cordinates for the next row of hexagons
 				currentY += YOFFSET;
 				currentX = XLOCATION;
-				if( row % 2 == 0) {
+				if( row % 2 != 0) {
 					currentX += XOFFSET/2;
 				}
 
@@ -96,7 +79,7 @@ public class Board {
 	}
 
 	public void addHexagon(Hexagon e) {
-		this.hexagons.add(e);
+		Board.hexagons.add(e);
 	}
 
 	public static ArrayList<Hexagon> getHexagonList() {
@@ -125,6 +108,8 @@ public class Board {
 				randomNumber = rand.nextInt(numbers.size());
 				hex.setNumber(numbers.get(randomNumber));
 				numbers.remove(randomNumber);
+			} else {
+				hex.setNumber(7);
 			}
 		}
 	}
@@ -137,5 +122,6 @@ public class Board {
 		this.biomes.put(4, "Forest");
 		this.biomes.put(5, "Sheep");
 		this.biomes.put(6, "Clay");
+		this.biomes.put(7, "All");
 	}
 }

@@ -29,6 +29,8 @@ public class Village extends Structure{
 			}
 			if( structures[position] == null || structures[position] instanceof Road ){
 				structures[position] = this;
+				this.owner.addStructure("Village", 1);
+
 				this.owner.subtractMaterial("Wood", 1);
 				this.owner.subtractMaterial("Clay", 1);
 				this.owner.subtractMaterial("Sheep", 1);
@@ -52,6 +54,8 @@ public class Village extends Structure{
 				if( structures[i].equals(this) ) {
 					city = new City("", this.coords, this.owner);
 					structures[i] = city;
+					this.owner.addStructure("City", 1);
+					this.owner.subtractStructure("Village", 1);
 
 					this.owner.subtractPoints(this.points);
 					this.owner.addPoints(city.getPoints());

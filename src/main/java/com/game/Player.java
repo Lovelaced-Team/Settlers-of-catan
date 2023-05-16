@@ -1,11 +1,6 @@
 package com.game;
 
-import com.board.Structure;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -35,6 +30,10 @@ public class Player {
 
 	public String getName () {
 		return name;
+	}
+
+	public Image getImage () {
+		return avatar;
 	}
 
 	public void initializeMaterialAmounts(){
@@ -89,6 +88,9 @@ public class Player {
 		this.materials.put(structure, this.materials.get(structure) + amount);
 	}
 
+	public void subtractStructure(String structure, int amount){
+		this.materials.put(structure, this.materials.get(structure) - amount);
+	}
 
 	public int getPoints(){
 		return this.points;

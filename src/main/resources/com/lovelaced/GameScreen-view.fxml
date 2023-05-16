@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="startScreen" stylesheets="@../../Styles/gameScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" styleClass="startScreen" stylesheets="@../../Styles/gameScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
+      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
-            <Label alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" text="Chrysostomos" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -57,60 +57,7 @@
                   <Image url="@../../assets/gameScreen/Character_Stats_Container.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="266.0" fitWidth="166.0" layoutX="31.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="1556.0" layoutY="486.0" prefHeight="591.0" prefWidth="354.0">
-         <children>
-            <AnchorPane layoutX="24.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="218.0" fitWidth="328.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
-                     </image>
-                  </ImageView>
-                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <Label alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" text="Chrysostomos" textAlignment="CENTER" textFill="#fff702">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <font>
-                  <Font name="Nirmala UI Bold" size="12.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="251.0" fitWidth="332.0" layoutX="22.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/Character_Stats_Container.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="266.0" fitWidth="166.0" layoutX="33.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerBoard1" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
@@ -119,7 +66,7 @@
       </AnchorPane>
       <AnchorPane layoutX="1556.0" layoutY="14.0" prefHeight="486.0" prefWidth="358.0">
          <children>
-            <Label alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" text="Chrysostomos" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel2" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -163,14 +110,14 @@
                   <Image url="@../../assets/gameScreen/Character_Stats_Container.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="266.0" fitWidth="166.0" layoutX="31.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerBoard2" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="488.0" prefHeight="591.0" prefWidth="354.0">
+      <AnchorPane layoutY="488.0" prefHeight="591.0" prefWidth="354.0" visible="false">
          <children>
             <AnchorPane layoutX="24.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -203,7 +150,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" text="Chrysostomos" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel3" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -216,13 +163,65 @@
                   <Image url="@../../assets/gameScreen/Character_Stats_Container.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="266.0" fitWidth="166.0" layoutX="33.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerBoard3" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="376.0" layoutY="132.0" prefHeight="852.0" prefWidth="1174.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" />
+      <AnchorPane layoutX="1556.0" layoutY="486.0" prefHeight="591.0" prefWidth="354.0" visible="false">
+         <children>
+            <AnchorPane layoutX="24.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="218.0" fitWidth="328.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
+                     </image>
+                  </ImageView>
+                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
+                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
+                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label fx:id="nameLabel4" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Nirmala UI Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="251.0" fitWidth="332.0" layoutX="22.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Stats_Container.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="playerBoard4" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -18,6 +18,8 @@ public class Road extends Structure {
 		if( canBeBuilt(this.owner) && position % 2 != 0){
 			if( structures[position] == null ){
 				structures[position] = this;
+				this.owner.addStructure("Road", 1);
+
 				this.owner.subtractMaterial("Wood", 1);
 				this.owner.subtractMaterial("Clay", 1);
 			}

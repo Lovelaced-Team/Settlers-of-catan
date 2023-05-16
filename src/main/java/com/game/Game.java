@@ -2,13 +2,8 @@ package com.game;
 
 import com.board.Board;
 import com.board.Hexagon;
-import javafx.scene.paint.Color;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 public class Game {
 	private static ArrayList<Player> players = new ArrayList<>();
 	private static ArrayList<Card> cards = new ArrayList<>();
@@ -20,12 +15,8 @@ public class Game {
 		board = new Board();
 		quest = new Quest(players);
 		Game.currentPlayer = 0;
-        Game.initializeCards();
+      //  Game.initializeCards();
 	}
-	public static void main(String[] args) {
-		Game game = new Game();
-	}
-
 	public static Player getCurrentPlayer(){
 		return Game.players.get(currentPlayer);
 	}
