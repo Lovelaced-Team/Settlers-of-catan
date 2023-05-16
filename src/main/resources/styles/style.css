@@ -46,7 +46,14 @@
 
 .gameScreenBackGround {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/tumblr_pix1msx6We1skkarx_640.gif");
+    -fx-background-image:url("../assets/gameScreen/12efb857005f76685eeb8b41d87571f0.jpg");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
+}
+
+.menuScreen {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:url("../assets/gameScreen/gameBack.png");
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }

@@ -14,58 +14,44 @@ import javafx.stage.Stage;
 public class StartScreenController {
 
     @FXML
-    private ImageView creditsButton;
-
-    @FXML
-    private ImageView startButton;
+    private ImageView creditsButton, startButton, exitButton ,tutorialButton;
 
     @FXML
     private BorderPane startPane;
-
-    @FXML
-    private ImageView exitButton;
-
-    @FXML
-    private ImageView tutorialButton;
 
     private Stage stage;
     private Parent root;
 
     @FXML
     void mouseClicked(MouseEvent event) throws IOException {
-        if (event.getSource() == startButton) {
-            root = FXMLLoader.load(getClass().getResource("PlayerCustomizationScreen-view.fxml"));
 
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.setTitle("Player Screen");
-            stage.show();
-        }
-        else if (event.getSource() == creditsButton) {
-            root = FXMLLoader.load(getClass().getResource("CreditScreen-view.fxml"));
+        //START
+        if (event.getSource() == startButton)
+            sceneGenerator("PlayerCustomizationScreen-view.fxml", event, "Player Screen");
 
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.setTitle("Credit Screen");
-            stage.show();
-        }
-        else if (event.getSource() == exitButton) {
+        //CREDITS
+        else if (event.getSource() == creditsButton)
+            sceneGenerator("CreditScreen-view.fxml", event, "Credit Screen");
+
+        //TUTORIAL
+        else if (event.getSource() == tutorialButton)
+            sceneGenerator("TutorialScreen-view.fxml", event, "Player Screen");
+
+        //EXIT
+        else if (event.getSource() == exitButton)
             System.exit(0);
-        }
-        else if (event.getSource() == tutorialButton) {
-            root = FXMLLoader.load(getClass().getResource("TutorialScreen-view.fxml"));
 
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.setTitle("Player Screen");
-            stage.show();
-        }
+    }
+
+    private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(name));
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setTitle(Player_Screen);
+        stage.show();
     }
 
     @FXML

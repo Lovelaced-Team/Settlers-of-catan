@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="playerCustomizationScreen" stylesheets="@../../Styles/gameScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.PlayerCustomizationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="playerCustomizationScreen" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.PlayerCustomizationController">
    <center>
       <GridPane prefHeight="1022.0" prefWidth="1820.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -25,7 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane fx:id="pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../Styles/gameScreen.css">
+            <AnchorPane fx:id="pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../styles/style.css">
                <GridPane.margin>
                   <Insets left="180.0" />
                </GridPane.margin>
@@ -50,7 +50,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -97,7 +97,7 @@
                   <Insets left="360.0" />
                </GridPane.margin>
             </ImageView>
-            <AnchorPane fx:id="pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../Styles/gameScreen.css" GridPane.columnIndex="1">
+            <AnchorPane fx:id="pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../styles/style.css" GridPane.columnIndex="1">
                <children>
                   <ImageView fx:id="secondPlayer" fitHeight="313.0" fitWidth="204.0" layoutX="94.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -114,7 +114,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -154,7 +154,7 @@
                   <Insets left="140.0" />
                </GridPane.margin>
             </AnchorPane>
-            <AnchorPane fx:id="pane3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../Styles/gameScreen.css" visible="false" GridPane.rowIndex="1">
+            <AnchorPane fx:id="pane3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../styles/style.css" visible="false" GridPane.rowIndex="1">
                <children>
                   <ImageView fx:id="thirdPlayer" fitHeight="313.0" fitWidth="204.0" layoutX="94.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -171,7 +171,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -211,7 +211,7 @@
                   <Insets left="180.0" />
                </GridPane.margin>
             </AnchorPane>
-            <AnchorPane fx:id="pane4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../Styles/gameScreen.css" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="pane4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../styles/style.css" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <ImageView fx:id="fourthPlayer" fitHeight="313.0" fitWidth="204.0" layoutX="94.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -228,7 +228,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../Styles/gameScreen.css">
+                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>

@@ -71,13 +71,7 @@ public class PlayerCustomizationController {
         }
         
         if (Game.getPlayerList().size() >= 2 && playerCreationFilter) {
-            root = FXMLLoader.load(getClass().getResource("GameScreen-view.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setFullScreen(true);
-            stage.setTitle("Start Screen");
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.show();
+            sceneGenerator("GameScreen-view.fxml", event, "Game Screen");
         }
 
 
@@ -92,13 +86,17 @@ public class PlayerCustomizationController {
 
     @FXML
     public void exitClicked(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+        sceneGenerator("StartScreen-view.fxml", event, "Start Screen");
+    }
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(name));
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.setFullScreen(true);
-        stage.setTitle("Start Screen");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setTitle(Player_Screen);
         stage.show();
     }
 

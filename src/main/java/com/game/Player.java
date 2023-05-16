@@ -74,7 +74,7 @@ public class Player {
 		return this.materials.get(material);
 	}
 
-	public void addMaterial(String material, int amount){
+	public void addMaterial(String material, int amount) {
 		this.materials.put(material, this.materials.get(material) + amount);
 		this.materials.put("Sum", this.materials.get("Sum") + amount);
 	}

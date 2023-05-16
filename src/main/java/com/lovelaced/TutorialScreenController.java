@@ -16,13 +16,7 @@ import javafx.stage.Stage;
 public class TutorialScreenController {
 
     @FXML
-    private ImageView leftArrow;
-
-    @FXML
-    private ImageView rightArrow;
-
-    @FXML
-    private ImageView tutorialInfo;
+    private ImageView leftArrow, rightArrow, tutorialInfo;
 
     private Stage stage;
     private Parent root;
@@ -49,16 +43,19 @@ public class TutorialScreenController {
         }
 
     }
-
     @FXML
     public void exit(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+        sceneGenerator("StartScreen-view.fxml", event, "Start Screen");
+    }
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(name));
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.setFullScreen(true);
-        stage.setTitle("Start Screen");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setTitle(Player_Screen);
         stage.show();
     }
 
