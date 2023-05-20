@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" styleClass="startScreen" stylesheets="@../../Styles/gameScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
-      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" />
+      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
             <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">

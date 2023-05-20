@@ -3,6 +3,7 @@ package com.lovelaced;
 import com.board.Board;
 import com.board.Hexagon;
 import com.game.Game;
+import com.game.Music;
 import com.game.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -69,6 +70,9 @@ public class GameScreenController {
     }
 
     private void initializePlayers() {
+
+        Music.changeSong(Music.gameScreenSong);
+
         nameLabel1.setText(players.get(0).getName());
         playerBoard1.setImage(players.get(0).getImage());
 

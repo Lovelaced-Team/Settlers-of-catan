@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,6 +18,9 @@
                <VBox.margin>
                   <Insets top="115.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="tutorialButton" fitHeight="90.0" fitWidth="252.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -25,6 +29,9 @@
                <VBox.margin>
                   <Insets top="8.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="exitButton" fitHeight="90.0" fitWidth="206.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,6 +40,9 @@
                <VBox.margin>
                   <Insets top="8.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
          <BorderPane.margin>

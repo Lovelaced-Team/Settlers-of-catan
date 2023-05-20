@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -59,21 +60,33 @@
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="arrow1" fitHeight="56.0" fitWidth="60.0" layoutX="366.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
@@ -88,6 +101,9 @@
                <GridPane.margin>
                   <Insets left="455.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="rightAddButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#rightClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
@@ -96,6 +112,9 @@
                <GridPane.margin>
                   <Insets left="360.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <AnchorPane fx:id="pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="670.0" styleClass="playerPanel" stylesheets="@../../Styles/gameScreen.css" GridPane.columnIndex="1">
                <children>
@@ -128,21 +147,33 @@
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="arrow2" fitHeight="56.0" fitWidth="60.0" layoutX="366.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
@@ -185,21 +216,33 @@
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="arrow3" fitHeight="56.0" fitWidth="60.0" layoutX="366.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
@@ -242,21 +285,33 @@
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="394.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskGreen.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="474.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskRed.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="555.0" layoutY="278.0" onMouseClicked="#flaskClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskYellow.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="arrow4" fitHeight="56.0" fitWidth="60.0" layoutX="366.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>

@@ -63,7 +63,7 @@ public class Game {
 		Collections.shuffle(Game.cards);
 	}
 
-	//Updates the materials for all the players that have build a structure on the hexagon that got rolled.
+	//Updates the materials for all the players that have built a structure on the hexagon that got rolled.
 	public void updateMaterials(int rolledNumber){
 		for(Hexagon h : Board.getHexagonList()){
 			if( h.getNumber() == rolledNumber ){
