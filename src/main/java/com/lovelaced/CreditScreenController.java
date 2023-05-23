@@ -15,12 +15,6 @@ import javafx.stage.Stage;
 public class CreditScreenController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private ImageView exitButton;
 
     private Stage stage;
@@ -29,16 +23,20 @@ public class CreditScreenController {
     @FXML
     void returnToMain(MouseEvent event) throws IOException {
         if (event.getSource() == exitButton) {
-
             root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setFullScreen(true);
-            stage.setTitle("Start Screen");
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.show();
+            configureStage(stage, "Start");
         }
+
+    }
+
+    private void configureStage(Stage stage, String stageTitle) throws IOException {
+        stage.getScene().setRoot(root);
+        stage.setFullScreen(true);
+        stage.setTitle(stageTitle + " " + "Screen");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.show();
     }
 
     @FXML

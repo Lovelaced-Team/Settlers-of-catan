@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+
 public class StartScreen extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -17,6 +18,7 @@ public class StartScreen extends Application {
     @Override
     public void start(Stage stage) {
         Parent root = null;
+
         try {
             root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
         } catch (IOException e) {
