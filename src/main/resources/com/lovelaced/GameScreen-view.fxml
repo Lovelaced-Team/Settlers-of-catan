@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
-      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" />
+      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
-            <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -28,7 +28,8 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView layoutX="182.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
+                  <ListView layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
+                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
                   <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
@@ -49,7 +50,6 @@
                         <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
                      </image>
                   </ImageView>
-                  <ListView fx:id="materials1" layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
                </children>
             </AnchorPane>
             <ImageView fitHeight="251.0" fitWidth="332.0" layoutX="20.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
@@ -66,7 +66,7 @@
       </AnchorPane>
       <AnchorPane layoutX="1556.0" layoutY="14.0" prefHeight="486.0" prefWidth="358.0">
          <children>
-            <Label fx:id="nameLabel2" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel2" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -81,7 +81,7 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView fx:id="materials2" layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
+                  <ListView layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
                   <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
                   <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -126,7 +126,7 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView fx:id="materials3" layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
+                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
                   <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
                   <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -150,7 +150,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label fx:id="nameLabel3" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel3" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -179,7 +179,7 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView fx:id="materials4" layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
+                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
                   <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
                   <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -203,7 +203,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label fx:id="nameLabel4" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel4" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -219,20 +219,6 @@
             <ImageView fx:id="playerBoard4" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">
-         <children>
-            <ImageView fitHeight="751.0" fitWidth="962.0" layoutX="476.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="857.0" layoutY="675.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
          </children>

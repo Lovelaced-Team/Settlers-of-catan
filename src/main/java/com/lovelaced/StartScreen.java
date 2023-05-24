@@ -1,5 +1,6 @@
 package com.lovelaced;
 
+import com.game.Music;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,5 +32,6 @@ public class StartScreen extends Application {
         stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
+        new Music();
     }
 }

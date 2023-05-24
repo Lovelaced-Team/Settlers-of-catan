@@ -6,6 +6,7 @@ module com.lovelaced {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires javafx.media;
 
     opens com.lovelaced to javafx.fxml;
     exports com.lovelaced;

@@ -9,8 +9,8 @@ import java.util.Random;
 
 //Class representing the board of the game. Creates and stores a list of all the hexagons.
 public class Board {
-	private final double XLOCATION = 0;
-	private final double YLOCATION = 0;
+	private final double XLOCATION = 394;
+	private final double YLOCATION = 5;
 	private final double XOFFSET = 161;
 	private final double YOFFSET = 140;
 	private static ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
