@@ -18,6 +18,7 @@ public class StartScreen extends Application {
 
     @Override
     public void start(Stage stage) {
+
         Parent root = null;
 
         try {

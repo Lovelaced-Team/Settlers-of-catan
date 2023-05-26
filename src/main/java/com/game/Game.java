@@ -35,29 +35,19 @@ public class Game {
 
 	//Creates the special cards, adds them to a cards list and shuffles it.
 	//Need to add image paths
-	public static void initializeCards(){
-        for(int i=0; i<29; i++){
-			Game.cards.add(new SpecialCard("PirateCard",
-					"",
-					0));
-		}
+	public static void initializeCards() {
+        for(int i=0; i<29; i++)
+			Game.cards.add(new SpecialCard("PirateCard",0));
+		
         for(int i=0; i<5; i++) {
-			Game.cards.add(new SpecialCard("PlusOnePointCard",
-                    "",
-                    1));
+			Game.cards.add(new SpecialCard("PlusOnePointCard",1));
 
             if (i < 2) {
-				Game.cards.add(new SpecialCard("RoadCard",
-                        "",
-                        0));
+				Game.cards.add(new SpecialCard("RoadCard", 0));
 
-				Game.cards.add(new SpecialCard("MonopolyCard",
-                        "",
-                        0));
+				Game.cards.add(new SpecialCard("MonopolyCard", 0));
 
-				Game.cards.add(new SpecialCard("YearOfPlentyCard",
-                        "",
-                        0));
+				Game.cards.add(new SpecialCard("YearOfPlentyCard", 0));
             }
         }
 		Collections.shuffle(Game.cards);

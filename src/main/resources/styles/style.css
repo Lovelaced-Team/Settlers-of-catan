@@ -1,24 +1,25 @@
 .startScreen {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/main.png");
+    -fx-background-image: url("../assets/gameScreen/main.png");
     -fx-background-size: 100% 100%;
 }
+
 .creditScreen,.endScreen,.playerCustomizationScreen, .tutorialScreen {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/mainBlurred.png");
+    -fx-background-image: url("../assets/gameScreen/mainBlurred.png");
     -fx-background-size: 100% 100%;
 }
 
 .playerPanel {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/Character_Frame_Container.png");
+    -fx-background-image: url("../assets/gameScreen/Character_Frame_Container.png");
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }
 
 .playerNameTextField {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/Name_Box.png");
+    -fx-background-image: url("../assets/gameScreen/Name_Box.png");
     -fx-background-color: transparent;
     -fx-background-position: center;
     -fx-font-size: 26px;
@@ -56,4 +57,57 @@
     -fx-background-image:url("../assets/gameScreen/gameBack.png");
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
+}
+
+.materialList .list-cell {
+    -fx-text-fill: gold;
+    -fx-alignment: center-right;
+    -fx-font-size: 20px;
+    -fx-cell-size: 35px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.materialList{
+    -fx-text-fill: gold;
+    -fx-alignment: center-right;
+    -fx-font-size: 20px;
+    -fx-cell-size: 35px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.cardList{
+    -fx-text-fill: gold;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.cardList .list-cell {
+    -fx-text-fill: rgb(179, 151, 2);
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+    -fx-cell-size: 35px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.cardList .list-cell:selected {
+    -fx-border-color: gold;
+    -fx-border-style: solid;
+    -fx-text-fill: gold;
+    -fx-border-radius: 60%;
+}
+
+.cardList .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-visibility: hidden;
+    -fx-scale-x: 0;
+}
+
+
+.materialList .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-visibility: hidden;
+    -fx-scale-x: 0;
 }

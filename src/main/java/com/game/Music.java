@@ -25,4 +25,14 @@ public class Music {
         currentSong.setCycleCount(MediaPlayer.INDEFINITE);
         currentSong.play();
     }
+
+    public static Boolean songPlaying() {
+
+        if(currentSong.isPlaying())
+            currentSong.stop();
+        else
+            currentSong.play();
+
+        return currentSong.isPlaying();
+    }
 }

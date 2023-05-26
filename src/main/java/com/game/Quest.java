@@ -55,4 +55,8 @@ public class Quest {
     public HashMap<Player, Integer> getArmyAmounts(){
         return Quest.armyAmounts;
     }
+
+    public static int getPlayerArmyAmount(Player player){
+        return Quest.armyAmounts.get(player);
+    }
 }

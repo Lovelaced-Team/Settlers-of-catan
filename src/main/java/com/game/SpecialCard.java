@@ -5,8 +5,8 @@ import com.board.Hexagon;
 import com.board.Pirate;
 
 public class SpecialCard extends Card{
-	public SpecialCard(String name, String image, int points) {
-		super(name, image, points);
+	public SpecialCard(String name, int points) {
+		super(name, points);
 	}
 
 	public void usePirateCard(Player perpatrator, Player victim, Hexagon hexagon){

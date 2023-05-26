@@ -7,16 +7,10 @@ import java.io.FileNotFoundException;
 
 abstract public class Card {
 	protected String name;
-	protected Image image;
 	protected int points;
-	public Card(String name, String image, int points) {
+	public Card(String name, int points) {
 		this.name = name;
 		this.points = points;
-		try {
-			this.image = new Image(new FileInputStream(image));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	public String getName(){

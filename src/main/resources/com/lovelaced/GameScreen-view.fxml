@@ -8,12 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#startBoard" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
-      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" styleClass="gameScreenBackGround" stylesheets="@../../Styles/gameScreen.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="-3.0" layoutY="-2.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/settings/settings.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
-            <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -28,26 +35,31 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
-                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ListView fx:id="materials1" layoutX="182.0" layoutY="19.0" prefHeight="197.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                  <ListView fx:id="cards1" layoutX="33.0" layoutY="73.0" prefHeight="117.0" prefWidth="162.0" styleClass="cardList" stylesheets="@../../styles/style.css" />
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
                </children>
@@ -62,11 +74,12 @@
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
+            <ListView fx:id="stats1" layoutX="239.0" layoutY="119.0" prefHeight="133.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1556.0" layoutY="14.0" prefHeight="486.0" prefWidth="358.0">
          <children>
-            <Label fx:id="nameLabel2" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel2" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -81,26 +94,31 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView layoutX="45.0" layoutY="81.0" prefHeight="109.0" prefWidth="81.0" />
-                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ListView fx:id="cards2" layoutX="33.0" layoutY="73.0" prefHeight="117.0" prefWidth="162.0" styleClass="cardList" stylesheets="@../../styles/style.css" />
+                  <ListView fx:id="materials2" layoutX="182.0" layoutY="19.0" prefHeight="197.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
                </children>
@@ -115,6 +133,7 @@
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
+            <ListView fx:id="stats2" layoutX="239.0" layoutY="119.0" prefHeight="133.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="488.0" prefHeight="591.0" prefWidth="354.0" visible="false">
@@ -126,31 +145,36 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ListView fx:id="materials3" layoutX="182.0" layoutY="19.0" prefHeight="197.0" prefWidth="81.0" styleClass="materialList" />
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
+                     </image>
+                  </ImageView>
+                  <ListView fx:id="cards3" layoutX="26.0" layoutY="51.0" prefHeight="117.0" prefWidth="162.0" styleClass="cardList" />
                </children>
             </AnchorPane>
-            <Label fx:id="nameLabel3" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel3" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -168,6 +192,7 @@
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
+            <ListView fx:id="stats3" layoutX="239.0" layoutY="367.0" prefHeight="133.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1556.0" layoutY="486.0" prefHeight="591.0" prefWidth="354.0" visible="false">
@@ -179,31 +204,36 @@
                         <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                      </image>
                   </ImageView>
-                  <ListView layoutX="45.0" layoutY="57.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ListView layoutX="166.0" layoutY="42.0" prefHeight="133.0" prefWidth="81.0" />
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="131.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ListView fx:id="cards4" layoutX="33.0" layoutY="51.0" prefHeight="117.0" prefWidth="162.0" styleClass="cardList" />
+                  <ListView fx:id="materials4" layoutX="182.0" layoutY="19.0" prefHeight="197.0" prefWidth="81.0" styleClass="materialList" />
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="133.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="135.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/playerCustomizationScreen/flaskBlue.png" />
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="254.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gameScreen/materials/rock.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label fx:id="nameLabel4" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../Styles/gameScreen.css" textAlignment="CENTER" textFill="#fff702">
+            <Label fx:id="nameLabel4" alignment="CENTER" layoutX="25.0" layoutY="246.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -219,6 +249,31 @@
             <ImageView fx:id="playerBoard4" fitHeight="266.0" fitWidth="166.0" layoutX="43.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
+               </image>
+            </ImageView>
+            <ListView fx:id="stats4" layoutX="239.0" layoutY="366.0" prefHeight="133.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">
+         <children>
+            <ImageView fitHeight="505.0" fitWidth="862.0" layoutX="590.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/exit.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/settings/sound_ON.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="79.0" fitWidth="81.0" layoutX="1094.0" layoutY="525.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/settings/settings.png" />
                </image>
             </ImageView>
          </children>
