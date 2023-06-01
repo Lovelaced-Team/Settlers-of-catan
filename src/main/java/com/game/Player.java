@@ -1,5 +1,6 @@
 package com.game;
 
+import com.board.Structure;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class Player {
 	private int points;
 
 	private ArrayList<Card> cards = new ArrayList<>(); //ArrayList with all of the player's cards.
-	private HashMap<String, Integer> structures = new HashMap<>(); //HashMap storing the amount of structures that the player has build.
+	private HashMap<String, ArrayList<Structure>> structures = new HashMap<>(); //HashMap storing the amount of structures that the player has build.
 	private HashMap<String, Integer> materials = new HashMap<>(); //HashMap storing the amount of every material that the player owns.
 	private HashMap<String, Integer> materialTradingCost = new HashMap<>(); //HashMap storing the trading cost for every material.
 	
@@ -38,25 +39,25 @@ public class Player {
 
 	public void initializeMaterialAmounts(){
 		this.materials.put("Rock", 0);
-		this.materials.put("Wheat", 0);
-		this.materials.put("Forest", 0);
-		this.materials.put("Sheep", 0);
-		this.materials.put("Clay", 0);
-		this.materials.put("Sum", 0);
+		this.materials.put("Wheat", 4);
+		this.materials.put("Wood", 6);
+		this.materials.put("Wool", 4);
+		this.materials.put("Clay", 6);
+		this.materials.put("Sum", 12);
 	}
 
 	public void initializeMaterialTradingCost(){
 		this.materialTradingCost.put("Rock", 4);
 		this.materialTradingCost.put("Wheat", 4);
-		this.materialTradingCost.put("Forest", 4);
-		this.materialTradingCost.put("Sheep", 4);
+		this.materialTradingCost.put("Wood", 4);
+		this.materialTradingCost.put("Wool", 4);
 		this.materialTradingCost.put("Clay", 4);
 	}
 
 	public void initializeStructures(){
-		structures.put("Road", 0);
-		structures.put("Village", 0);
-		structures.put("City", 0);
+		structures.put("Road", new ArrayList<>());
+		structures.put("Village", new ArrayList<>());
+		structures.put("City", new ArrayList<>());
 	}
 
 	public HashMap<String, Integer> getMaterials(){
@@ -75,22 +76,34 @@ public class Player {
 	}
 
 	public void addMaterial(String material, int amount) {
+		if(material.equals("Forest")) material = "Wood";
+		else if(material.equals("Sheep")) material = "Wool";
+
 		this.materials.put(material, this.materials.get(material) + amount);
 		this.materials.put("Sum", this.materials.get("Sum") + amount);
 	}
 
 	public void subtractMaterial(String material, int amount){
+		if(material.equals("Forest")) material = "Wood";
+		else if(material.equals("Sheep")) material = "Wool";
+
 		this.materials.put(material, this.materials.get(material) - amount);
 		this.materials.put("Sum", this.materials.get("Sum") - amount);
 	}
 
-	public void addStructure(String structure, int amount){
-		this.materials.put(structure, this.materials.get(structure) + amount);
+	public HashMap<String, ArrayList<Structure>> getStructureMap(){
+		return this.structures;
 	}
 
-	public void subtractStructure(String structure, int amount){
-		this.materials.put(structure, this.materials.get(structure) - amount);
+	public void addStructure(String structure, Structure addedStructure){
+		this.structures.get(structure).add(addedStructure);
 	}
+
+	public void removeStructure(String structure, Structure addedStructure){
+		this.structures.get(structure).remove(addedStructure);
+	}
+
+	public String getColor() { return this.color; }
 
 	public int getPoints(){
 		return this.points;
@@ -120,11 +133,11 @@ public class Player {
 
 	public boolean getSpecialCard(){
 		if( Game.getCardList().size() > 0) {
-			if( this.materials.get("Sheep") > 1 &&
+			if( this.materials.get("Wool") > 1 &&
 				this.materials.get("Rock") > 1 &&
 				this.materials.get("Wheat") > 1)
 			{
-				subtractMaterial("Sheep", 1);
+				subtractMaterial("Wool", 1);
 				subtractMaterial("Rock", 1);
 				subtractMaterial("Wheat", 1);
 

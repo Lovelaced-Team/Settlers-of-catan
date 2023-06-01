@@ -32,11 +32,15 @@ public class Hexagon implements Serializable{
 		this.hasPirate = hasPirate;
 		this.canProduce = canProduce;
 		this.port = port;
-		//
-		//if( port != null ){
-			//addStructure(port.getEdge()+1, new Road("", null, null));
-			//addStructure(port.getEdge()-1, new Road("", null, null));
-		//}
+
+		if( port != null ){
+			int leftCorner=port.getEdge()-1, rightCorner=port.getEdge()+1;
+			if( leftCorner == -1 ) leftCorner = 10;
+			else if( rightCorner == 12 ) rightCorner = 0;
+
+			addStructure(leftCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+		}
 
 	}
 
@@ -49,10 +53,15 @@ public class Hexagon implements Serializable{
 		}
 		this.coords = coords;
 		this.port = port;
-		//if( port != null ){
-			//addStructure(port.getEdge()+1, new Road("", null, null));
-			//addStructure(port.getEdge()-1, new Road("", null, null));
-		//}
+
+		if( port != null ){
+			int leftCorner=port.getEdge()-1, rightCorner=port.getEdge()+1;
+			if( leftCorner == -1 ) leftCorner = 10;
+			else if( rightCorner == 12 ) rightCorner = 0;
+
+			addStructure(leftCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+		}
 
 		this.canProduce = true;
 		if( biome.equals("Desert") ){
@@ -119,6 +128,10 @@ public class Hexagon implements Serializable{
 
 	public Structure[] getStructures() {
 		return structures;
+	}
+
+	public Structure getStructure(int index) {
+		return structures[index];
 	}
 
 	public Port getPort(){

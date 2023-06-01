@@ -1,6 +1,6 @@
 package com.board;
 
-import com.game.Player;
+import java.util.Objects;
 
 //Class used to track the Coordinates of structures, ports and hexagons
 public class Coordinates {
@@ -36,4 +36,9 @@ public class Coordinates {
 		Coordinates c = (Coordinates) object;
 		return this.x == c.x && this.y == c.y;
 	}
+	public int hashCode() {
+		return Objects.hash(x, y);
+	}
+
+
 }

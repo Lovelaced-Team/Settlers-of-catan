@@ -1,6 +1,9 @@
 package com.board;
 
 import com.game.Player;
+import javafx.scene.image.Image;
+
+import java.util.HashMap;
 
 public class Road extends Structure {
 	
@@ -13,19 +16,26 @@ public class Road extends Structure {
 				player.getMaterialAmount("Clay") >= 1;
 	}
 
-	public void build(Hexagon hexagon, int position){
-		Structure[] structures = hexagon.getStructures();
-		if( canBeBuilt(this.owner) && position % 2 != 0){
-			if( structures[position] == null ){
+	public void build(HashMap<Integer, Hexagon> hexagonEdges){
+		boolean flag = false;
+		for(int position:hexagonEdges.keySet()){
+			Structure[] structures = hexagonEdges.get(position).getStructures();
+			if( canBeBuilt(this.owner) && position % 2 != 0){
 				structures[position] = this;
-				this.owner.addStructure("Road", 1);
-
-				this.owner.subtractMaterial("Wood", 1);
-				this.owner.subtractMaterial("Clay", 1);
+				flag = true;
 			}
+		}
+		if( flag ){
+			this.owner.addStructure("Road", this);
+			this.owner.subtractMaterial("Wood", 1);
+			this.owner.subtractMaterial("Clay", 1);
 		}
 	}
 	public int getPoints() {
 		return 0;
+	}
+
+	public Image getImage() {
+		return super.getImage();
 	}
 }

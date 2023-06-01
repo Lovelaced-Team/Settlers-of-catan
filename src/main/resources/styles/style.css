@@ -47,7 +47,7 @@
 
 .gameScreenBackGround {
     -fx-background-repeat: no-repeat;
-    -fx-background-image:url("../assets/gameScreen/12efb857005f76685eeb8b41d87571f0.jpg");
+    -fx-background-image:url("../assets/gameScreen/sea.png");
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }
@@ -105,9 +105,14 @@
     -fx-scale-x: 0;
 }
 
-
 .materialList .scroll-bar:vertical {
     -fx-opacity: 0;
     -fx-visibility: hidden;
     -fx-scale-x: 0;
 }
+
+.toolBar {
+    -fx-background-color: transparent;
+}
+
+

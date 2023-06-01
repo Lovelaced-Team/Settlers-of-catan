@@ -14,6 +14,9 @@ public class Board {
 	private final double XOFFSET = 161;
 	private final double YOFFSET = 140;
 	private static ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
+	private static HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonCorners = new HashMap<>();
+
+	private static HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonEdges = new HashMap<>();
 	private HashMap<Integer, String> biomes = new HashMap<>();
 
 	public Board() {
@@ -42,18 +45,18 @@ public class Board {
 
 					//Creates the port
 					Port port = null;
-					if( Character.getNumericValue(s.charAt(0)) != 0 && Character.getNumericValue(s.charAt(1)) != 0){
-						port = new Port(coords, biomes.get(Character.getNumericValue(s.charAt(0))+1), Character.getNumericValue(s.charAt(1)));
+					if (Character.getNumericValue(s.charAt(0)) != 0 && Character.getNumericValue(s.charAt(1)) != 0) {
+						port = new Port(coords, biomes.get(Character.getNumericValue(s.charAt(1)) + 1), (Character.getNumericValue(s.charAt(0)-1)*2+1));
 					}
 
+
 					//Creates the hexagons
-					switch (Integer.parseInt(String.valueOf(s.charAt(2)))) {
-						case 1 -> hexagons.add(new Hexagon(coords, biomes.get(1), port));
-						case 2 -> hexagons.add(new Hexagon(coords, biomes.get(2), port));
-						case 3 -> hexagons.add(new Hexagon(coords, biomes.get(3), port));
-						case 4 -> hexagons.add(new Hexagon(coords, biomes.get(4), port));
-						case 5 -> hexagons.add(new Hexagon(coords, biomes.get(5), port));
-						case 6 -> hexagons.add(new Hexagon(coords, biomes.get(6), port));
+					String biome = biomes.get(Integer.parseInt(String.valueOf(s.charAt(2))));
+					if ( biome != null ){
+						Hexagon hexagon = new Hexagon(coords, biome, port);
+						hexagons.add(hexagon);
+						addHexagonCorners(hexagon);
+						addHexagonEdges(hexagon);
 					}
 					currentX += XOFFSET;
 				}
@@ -80,6 +83,14 @@ public class Board {
 
 	public void addHexagon(Hexagon e) {
 		Board.hexagons.add(e);
+	}
+
+	public static HashMap <Coordinates, HashMap<Integer, Hexagon>> getHexagonCorners() {
+		return Board.hexagonCorners;
+	}
+
+	public static HashMap<Coordinates, HashMap<Integer, Hexagon>> getHexagonEdges() {
+		return Board.hexagonEdges;
 	}
 
 	public static ArrayList<Hexagon> getHexagonList() {
@@ -110,6 +121,58 @@ public class Board {
 				numbers.remove(randomNumber);
 			} else {
 				hex.setNumber(7);
+			}
+		}
+	}
+
+	/*
+	    This method utilizes a hashmap to store hexagonal data in a structured manner.
+	    The hashmap's keys are pairs of coordinates that correspond to the corners of each hexagon.
+	    The values associated with these keys are inner hashmaps, where the key represents the number of the corner,
+	    and the value represents the hexagon itself.
+	*/
+	public void addHexagonCorners(Hexagon hexagon){
+		HashMap<Coordinates, Integer> coordsToCorners = new HashMap<>();
+
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7, hexagon.getCoords().getY()+36), 0);
+		coordsToCorners.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+74, hexagon.getCoords().getY()-7), 2);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+154, hexagon.getCoords().getY()+36), 4);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+154, hexagon.getCoords().getY()+133), 6);
+		coordsToCorners.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+74, hexagon.getCoords().getY()+176), 8);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7, hexagon.getCoords().getY()+133), 10);
+
+		for(Coordinates coords : coordsToCorners.keySet()) {
+			if( !Board.hexagonCorners.containsKey(coords) ){
+				Board.hexagonCorners.put(coords, new HashMap<Integer, Hexagon>());
+			}
+			if ( !Board.hexagonCorners.get(coords).containsKey(coordsToCorners.get(coords)) ){
+				Board.hexagonCorners.get(coords).put(coordsToCorners.get(coords), hexagon);
+			}
+		}
+	}
+
+	/*
+    	This method utilizes a hashmap to store hexagonal data in a structured manner.
+    	The hashmap's keys are pairs of coordinates that correspond to the edges of each hexagon.
+    	The values associated with these keys are inner hashmaps, where the key represents the number of the edge,
+    	and the value represents the hexagon itself.
+	*/
+	public void addHexagonEdges(Hexagon hexagon){
+		HashMap<Coordinates, Integer> coordsToEdges = new HashMap<>();
+
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32, hexagon.getCoords().getY()+13), 1);
+		coordsToEdges.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+113, hexagon.getCoords().getY()+13), 3);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+153, hexagon.getCoords().getY()+82), 5);
+		coordsToEdges.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+113, hexagon.getCoords().getY()+153), 7);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32, hexagon.getCoords().getY()+153), 9);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-8, hexagon.getCoords().getY()+82), 11);
+
+		for(Coordinates coords : coordsToEdges.keySet()) {
+			if( !Board.hexagonEdges.containsKey(coords) ){
+				Board.hexagonEdges.put(coords, new HashMap<Integer, Hexagon>());
+			}
+			if ( !Board.hexagonEdges.get(coords).containsKey(coordsToEdges.get(coords)) ){
+				Board.hexagonEdges.get(coords).put(coordsToEdges.get(coords), hexagon);
 			}
 		}
 	}

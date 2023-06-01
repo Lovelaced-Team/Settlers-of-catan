@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 abstract public class Structure {
 	
@@ -24,7 +25,7 @@ abstract public class Structure {
 	
     public abstract int getPoints() ;
 
-	public abstract void build(Hexagon hexagon, int position);
+	public abstract void build(HashMap<Integer, Hexagon> hexagonsAndPositions);
 
 	public Coordinates getCoords() {
 		return coords;

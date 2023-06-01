@@ -19,7 +19,7 @@ public class StartScreen extends Application {
     @Override
     public void start(Stage stage) {
 
-        Parent root = null;
+        Parent root;
 
         try {
             root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
