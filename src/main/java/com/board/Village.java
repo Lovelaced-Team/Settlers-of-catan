@@ -6,14 +6,14 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Village extends Structure{
+public class Village extends Structure {
 	protected int points;
-	
+
 	public Village(String image, Coordinates coords, Player player) {
 		super(image, coords, player);
 		this.points = 1;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
@@ -25,20 +25,24 @@ public class Village extends Structure{
 				player.getMaterialAmount("Wheat") >= 1;
 	}
 
-	public void build(HashMap<Integer, Hexagon> hexagonCorners){
-		Boolean flag = false;
-		for(int position : hexagonCorners.keySet()){
+	public void build(HashMap<Integer, Hexagon> hexagonCorners) {
+		Boolean flag = false, tradingCost = false;
+		Port port = null;
+		for (int position : hexagonCorners.keySet()) {
 			Structure[] structures = hexagonCorners.get(position).getStructures();
-			if( canBeBuilt(this.owner) && position % 2 == 0){
-				if( structures[position] instanceof Road ){
-					hexagonCorners.get(position).getPort().changePlayerTradingValue(this.owner);
-					System.out.println("test");
+
+			if (canBeBuilt(this.owner) && position % 2 == 0) {
+				if (structures[position] instanceof Road) {
+					port = hexagonCorners.get(position).getPort();
+					tradingCost = true;
+
 				}
 				structures[position] = this;
 				flag = true;
 			}
 		}
-		if( flag ){
+
+		if( flag ) {
 			this.owner.addStructure("Village", this);
 			this.owner.subtractMaterial("Wood", 1);
 			this.owner.subtractMaterial("Clay", 1);
@@ -47,6 +51,9 @@ public class Village extends Structure{
 
 			this.owner.addPoints(this.points);
 		}
+
+		if(tradingCost )
+			port.changePlayerTradingValue(this.owner);
 	}
 
 	public static City upgradeToCity(HashMap<Integer, Hexagon> hexagonCorners, Player owner, Coordinates coords) {

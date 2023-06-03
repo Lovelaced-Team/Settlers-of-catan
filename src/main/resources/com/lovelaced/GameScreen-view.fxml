@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
-      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" />
+      <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="-2.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" />
       <AnchorPane fx:id="buildSelectionButtonsPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" visible="false" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
@@ -250,39 +251,40 @@
             <ListView fx:id="stats4" layoutX="239.0" layoutY="366.0" prefHeight="133.0" prefWidth="81.0" styleClass="materialList" stylesheets="@../../styles/style.css" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="buildPane" layoutX="465.0" layoutY="845.0" prefHeight="133.0" prefWidth="294.0" styleClass="playerPanel" visible="false">
+      <AnchorPane fx:id="buildPane" layoutX="788.0" layoutY="802.0" prefHeight="160.0" prefWidth="348.0" styleClass="buildPanel" visible="false">
          <children>
-            <ImageView fx:id="upgrateToCityButton" fitHeight="75.0" fitWidth="99.0" layoutX="166.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="upgradeToCityButton" fitHeight="75.0" fitWidth="99.0" layoutX="204.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Build/City/city_blue.png" />
                </image></ImageView>
-            <ImageView fx:id="buildVillageButton" fitHeight="75.6" fitWidth="83.7" layoutX="72.0" layoutY="32.0">
+            <ImageView fx:id="buildVillageButton" fitHeight="75.6" fitWidth="83.7" layoutX="110.0" layoutY="32.0">
                <image>
                   <Image url="@../../assets/gameScreen/Build/Village/village_blue.png" />
                </image></ImageView>
-            <ImageView fx:id="buildRoadButton" fitHeight="100.0" fitWidth="30.0" layoutX="30.0" layoutY="20.0">
+            <ImageView fx:id="buildRoadButton" fitHeight="100.0" fitWidth="30.0" layoutX="68.0" layoutY="20.0">
                <image>
                   <Image url="@../../assets/gameScreen/Build/Road/road_blue.png" />
                </image></ImageView>
          </children>
       </AnchorPane>
-      <ToolBar layoutX="600.0" layoutY="970.0" prefHeight="117.0" prefWidth="789.0" styleClass="toolBar" stylesheets="@../../styles/style.css">
-         <items>
-            <ImageView fx:id="buildButton" fitHeight="75.0" fitWidth="197.0" onMouseClicked="#buildMenu" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/Build/buildButton.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="161.0" onMouseClicked="#endTurn">
-               <image>
-                  <Image url="@../../assets/gameScreen/Build/endTurn.png" />
-               </image>
-            </ImageView>
-         </items>
-      </ToolBar>
       <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="347.0" layoutY="4.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/settings/settings.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="buildButton" fitHeight="115.0" fitWidth="115.0" layoutX="747.0" layoutY="957.0" onMouseClicked="#buildMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/gameScreen/Build/buildButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="1055.0" layoutY="957.0" onMouseClicked="#endTurn">
+         <image>
+            <Image url="@../../assets/gameScreen/Build/endTurn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tradeButton" fitHeight="115.0" fitWidth="115.0" layoutX="901.0" layoutY="957.0" onMouseClicked="#tradeMenu">
+         <image>
+            <Image url="@../../assets/gameScreen/Build/tradeButton.png" />
          </image>
       </ImageView>
       <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">
@@ -306,6 +308,110 @@
             <ImageView fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/settings/settings.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="tradePane" layoutX="862.0" layoutY="443.0" prefHeight="509.0" prefWidth="658.0" styleClass="buildPanel" visible="false">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/clay.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/rock.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wood.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wool.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wheat.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="tradeClay" layoutX="230.0" layoutY="65.0" prefHeight="40.0" prefWidth="80.0" />
+
+            <ChoiceBox fx:id="tradeRock" layoutX="230.0" layoutY="128.0" prefHeight="40.0" prefWidth="80.0" />
+
+            <ChoiceBox fx:id="tradeWood" layoutX="230.0" layoutY="189.0" prefHeight="40.0" prefWidth="80.0" />
+
+            <ChoiceBox fx:id="tradeWool" layoutX="230.0" layoutY="266.0" prefHeight="40.0" prefWidth="80.0" />
+
+            <ChoiceBox fx:id="tradeWheat" layoutX="230.0" layoutY="340.0" prefHeight="40.0" prefWidth="80.0" />
+
+            <ImageView fitHeight="109.0" fitWidth="134.0" layoutX="330.0" layoutY="102.0" onMouseClicked="#tradeWithPlayer" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/tradeWithPlayer.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="134.0" layoutX="332.0" layoutY="238.0" onMouseClicked="#tradeWithBank" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/tradeWithBank.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tradePlayerName" layoutX="429.0" layoutY="130.0" prefHeight="40.0" prefWidth="174.0">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="bankTradeMaterial" layoutX="454.0" layoutY="282.0" prefHeight="40.0" prefWidth="137.0">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="tradePlayer" layoutX="862.0" layoutY="445.0" prefHeight="509.0" prefWidth="658.0" styleClass="buildPanel" visible="false">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/clay.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/rock.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wood.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wool.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wheat.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="tradingClay" layoutX="230.0" layoutY="65.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="tradingRock" layoutX="230.0" layoutY="128.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="tradingWood" layoutX="230.0" layoutY="189.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="tradingWool" layoutX="230.0" layoutY="266.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="tradingWheat" layoutX="230.0" layoutY="340.0" prefHeight="40.0" prefWidth="80.0" />
+            <ImageView fitHeight="82.0" fitWidth="200.0" layoutX="357.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="tradingButton" fitHeight="115.0" fitWidth="115.0" layoutX="487.0" layoutY="285.0" onMouseClicked="#tradeConfirmed">
+               <image>
+                  <Image url="@../../assets/gameScreen/Build/tradeButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="playerTrading" fitHeight="266.0" fitWidth="166.0" layoutX="331.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
          </children>

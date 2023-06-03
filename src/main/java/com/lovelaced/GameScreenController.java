@@ -3,14 +3,15 @@ package com.lovelaced;
 import com.board.*;
 import com.game.*;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -28,7 +29,16 @@ public class GameScreenController {
     private Stage stage;
     // FXML elements
     @FXML
-    private AnchorPane boardPane, menuScreen, buildPane, buildSelectionButtonsPane;
+    private AnchorPane boardPane, menuScreen, buildPane, buildSelectionButtonsPane, tradePane, tradePlayer;
+
+    private ArrayList<ChoiceBox<Integer>> trades = new ArrayList<>();
+    private ArrayList<ChoiceBox<Integer>> tradings = new ArrayList<>();
+
+    @FXML
+    private ChoiceBox<Integer> tradeClay, tradeRock, tradeWheat, tradeWool, tradeWood, tradingClay, tradingRock, tradingWheat, tradingWool, tradingWood ;
+
+    @FXML
+    private TextField bankTradeMaterial, tradePlayerName;
 
     @FXML
     private ListView<String> cards1, cards2, cards3, cards4;
@@ -40,13 +50,14 @@ public class GameScreenController {
     private Label nameLabel1, nameLabel2, nameLabel3, nameLabel4;
 
     @FXML
-    private ImageView playerBoard1, playerBoard2, playerBoard3, playerBoard4;
+    private ImageView playerBoard1, playerBoard2, playerBoard3, playerBoard4, playerTrading;
+
 
     @FXML
     private ListView<Integer> materials1, materials2, materials3, materials4;
 
     @FXML
-    private ImageView sound, settingsButton, buildButton, buildRoadButton, buildVillageButton, upgrateToCityButton, pirate;
+    private ImageView sound, buildButton, tradeButton, buildRoadButton, buildVillageButton, upgradeToCityButton, pirate, tradingButton;
 
     @FXML
     private Slider volumeSlider;
@@ -59,7 +70,13 @@ public class GameScreenController {
 
     // Data structures to store player and UI elements
     private ArrayList<Player> players = new ArrayList<>();
+
+    private ArrayList<ImageView> playerBorders = new ArrayList<ImageView>();
+
+    private HashMap<String, Integer> demandedMaterials = new HashMap<>();
     private HashMap<Player, ArrayList<Node>> playersItems = new HashMap<>();
+
+    private ArrayList<String> materials = new ArrayList<>();
 
     // This boolean flag is used for two rounds per player to determine if they have successfully built a village
     // in order to connect a road.
@@ -82,6 +99,7 @@ public class GameScreenController {
 
     @FXML
     void buildMenu(MouseEvent event){
+        if (tradePane.isVisible()) tradePane.setVisible(false);
         AnchorPane pane = null;
         if(event.getSource() == buildButton) {
             //Player should not be able to open the build menu in his first two rounds
@@ -93,9 +111,139 @@ public class GameScreenController {
         }
         if( pane!= null) pane.setVisible(!pane.isVisible());
     }
+
+    @FXML
+    void tradeMenu(MouseEvent event) {
+
+        if (buildPane.isVisible()) buildPane.setVisible(false);
+
+        tradePlayerName.clear();
+        bankTradeMaterial.clear();
+
+        for(ChoiceBox<Integer> temp : trades) {
+            for (int i = 0; i <= 10; i++){
+                temp.getSelectionModel().selectFirst();
+            }
+        }
+
+        for(ChoiceBox<Integer> temp : tradings) {
+            for (int i = 0; i <= 10; i++){
+                temp.getSelectionModel().selectFirst();
+            }
+        }
+
+        AnchorPane pane = null;
+        if(event.getSource() == tradeButton) {
+            //Player should not be able to open the trade menu in his first two rounds
+            if (round > Game.getPlayerList().size() * 2) {
+                pane = tradePane;
+                circleGroup.getChildren().clear();
+                upgradeButtonMode = false;
+            }
+        }
+        if( pane!= null) pane.setVisible(!pane.isVisible());
+    }
     @FXML
     void settings(MouseEvent event) {
         menuScreen.setVisible(!menuScreen.isVisible());
+    }
+
+    @FXML
+    void tradeWithBank (MouseEvent event) throws IOException {
+
+        int i = 0;
+        int tradingCost;
+        int amount;
+
+        if(bankTradeMaterial.getText().toLowerCase().equals("special card")) {
+            Game.getCurrentPlayer().getSpecialCard();
+            updatePlayerMaterials(Game.getCurrentPlayer());
+            updatePlayerCards(Game.getCurrentPlayer());
+        } else {
+            switch (bankTradeMaterial.getText().toLowerCase()) {
+                case "clay":
+                case "rock":
+                case "wood":
+                case "wool":
+                case "wheat":
+
+                    String material = bankTradeMaterial.getText().toLowerCase();
+                    material = material.substring(0, 1).toUpperCase() + material.substring(1);
+
+                    for (ChoiceBox<Integer> temp: trades) {
+
+
+                        amount = temp.getValue();
+                        tradingCost = Game.getCurrentPlayer().getTradingCost(materials.get(i));
+
+                        while((amount % tradingCost >= 0) && amount >= tradingCost) {
+
+                            Game.getCurrentPlayer().tradeWithBank(material, materials.get(i), tradingCost);
+                            updatePlayerMaterials(Game.getCurrentPlayer());
+                            amount -= tradingCost;
+
+                        }
+
+                        i++;
+                    }
+                    break;
+                default: bankTradeMaterial.setStyle("-fx-text-fill: red;"); break;
+
+            }
+        }
+    }
+    @FXML
+    void tradeWithPlayer (MouseEvent event) {
+
+        int amount;
+        Boolean flag = false;
+        int i = 0, j = 0;
+
+        Player currentPlayer = null;
+        for (i = 0; i < players.size(); i++) {
+            if(players.get(i).getName().toLowerCase().equals(tradePlayerName.getText().toLowerCase()) && !tradePlayerName.getText().toLowerCase().equals(Game.getCurrentPlayer().getName().toLowerCase())) {
+                currentPlayer = players.get(i);
+                flag = true;
+            }
+        }
+        if(flag) {
+            playerTrading.setImage(currentPlayer.getImage());
+            for (ChoiceBox<Integer> temp: trades) {
+                amount = temp.getValue();
+                demandedMaterials.put(materials.get(j), amount);
+                j++;
+            }
+            if( tradePane!= null) tradePane.setVisible(!tradePane.isVisible());
+            if( tradePlayer!= null) tradePlayer.setVisible(!tradePlayer.isVisible());
+        } else
+            tradePlayerName.setStyle("-fx-text-fill: red;");
+
+
+    }
+    @FXML
+    void tradeConfirmed (MouseEvent event) throws IOException {
+
+        int i = 0, j = 0, amount = 0;
+        HashMap<String, Integer> suppliedMaterials = new HashMap<>();
+
+        Player currentPlayer = null;
+        for (i = 0; i < players.size(); i++) {
+            if(players.get(i).getName().toLowerCase().equals(tradePlayerName.getText().toLowerCase()))
+                currentPlayer = players.get(i);
+        }
+
+        for (ChoiceBox<Integer> temp: tradings) {
+            amount = temp.getValue();
+            suppliedMaterials.put(materials.get(j), amount);
+            j++;
+        }
+
+        Game.getCurrentPlayer().tradeWithPlayers(currentPlayer, suppliedMaterials, demandedMaterials);
+
+        updatePlayerMaterials(Game.getCurrentPlayer());
+        updatePlayerMaterials(currentPlayer);
+
+        if( tradePlayer!= null) tradePlayer.setVisible(!tradePlayer.isVisible());
     }
 
     // Handle escape key event to toggle the menu screen visibility
@@ -114,12 +262,20 @@ public class GameScreenController {
 
     @FXML
     void endTurn(MouseEvent event) throws FileNotFoundException {
+        if (tradePane.isVisible()) tradePane.setVisible(false);
+        if (buildPane.isVisible()) buildPane.setVisible(false);
         if(!hasBuiltVillage){
+            playersItems.get(Game.getCurrentPlayer()).get(1).setStyle(null);
+
             Game.endTurn();
+
             updateBuildPane();
             circleGroup.getChildren().clear();
             upgradeButtonMode = false;
             round++;
+
+            playersItems.get(Game.getCurrentPlayer()).get(1).setStyle("-fx-effect: dropShadow(three-pass-box, " + Game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
+
 
             if( round <= Game.getPlayerList().size() * 2 ) {
                 initializeButtons(calculateAvailableVillages(), "Village");
@@ -129,11 +285,11 @@ public class GameScreenController {
     }
 
     private void updateBuildPane() throws FileNotFoundException {
-        upgrateToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_blank.png")));
+        upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_blank.png")));
         buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_blank.png")));
         buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_blank.png")));
 
-        if( City.canBeBuilt(Game.getCurrentPlayer()) ) upgrateToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_" + Game.getCurrentPlayer().getColor() + ".png")));
+        if( City.canBeBuilt(Game.getCurrentPlayer()) ) upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_" + Game.getCurrentPlayer().getColor() + ".png")));
         if( Village.canBeBuilt(Game.getCurrentPlayer()) ) buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_"+ Game.getCurrentPlayer().getColor() + ".png")));
         if( Road.canBeBuilt(Game.getCurrentPlayer()) ) buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_"+ Game.getCurrentPlayer().getColor() + ".png")));
     }
@@ -303,6 +459,7 @@ public class GameScreenController {
                 try {
                     updatePlayerPoints(Game.getCurrentPlayer());
                     updatePlayerMaterials(Game.getCurrentPlayer());
+                    updateBuildPane();
                     if( round <= Game.getPlayerList().size()*2 && hasBuiltVillage){
                         initializeButtons(calculateAvailableRoads(), "Road");
                     }
@@ -330,6 +487,7 @@ public class GameScreenController {
     // Initialize player information on the UI
     private void initializePlayers() throws FileNotFoundException {
         Music.changeSong(Music.gameScreenSong);
+        playerBoard1.setStyle("-fx-effect: dropShadow(three-pass-box, " + Game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
         initializePlayerItemsMap();
         initializePlayerInfo();
         initializeMaterialList();
@@ -348,6 +506,7 @@ public class GameScreenController {
             tempLabel.setText(player.getName());
             tempImageView.setImage(player.getImage());
         }
+
     }
 
 
@@ -440,7 +599,7 @@ public class GameScreenController {
                         if ( Math.sqrt(Math.pow(coordsForEveryCorner.getX() - tempX, 2) + Math.pow(coordsForEveryCorner.getY() - tempY, 2)) < 55 ) {
                             for(int index :  Board.getHexagonCorners().get(coordsForEveryCorner).keySet()){
                                 hexagon = Board.getHexagonCorners().get(coordsForEveryCorner).get(index);
-                                if(hexagon.getStructure(index) == null) possibleVillagePositions.add(coordsForEveryCorner);
+                                if(hexagon.getStructure(index) == null || hexagon.getStructure(index) instanceof Road) possibleVillagePositions.add(coordsForEveryCorner);
                             }
                         }
                     }
@@ -496,16 +655,62 @@ public class GameScreenController {
         }
     }
 
+    private void updatePlayerCards(Player player) {
+
+        ListView<String> tempList = (ListView<String>) playersItems.get(player).get(3);
+        tempList.getItems().clear();
+        for( Card card : player.getCardsList()) {
+
+            tempList.getItems().add(card.getName());
+
+        }
+    }
+
+    private void errorEvent(MouseEvent event) {
+        ((TextField)event.getSource()).setStyle("-fx-text-fill: black;");
+    }
+
     // FXML initialization method
     @FXML
     void initialize() throws FileNotFoundException {
         startBoard();
+        playerBorders.add(playerBoard1);
+        playerBorders.add(playerBoard2);
+        playerBorders.add(playerBoard3);
+        playerBorders.add(playerBoard4);
+
+
+        trades.add(tradeClay); trades.add(tradeRock);
+        trades.add(tradeWood);  trades.add(tradeWool);
+        trades.add(tradeWheat);
+
+        for(ChoiceBox<Integer> temp : trades) {
+            for (int i = 0; i <= 10; i++){
+                temp.getItems().add(i);
+            }
+        }
+
+        tradings.add(tradingClay); tradings.add(tradingRock);
+        tradings.add(tradingWood);  tradings.add(tradingWool);
+        tradings.add(tradingWheat);
+
+        for(ChoiceBox<Integer> temp : tradings) {
+            for (int i = 0; i <= 10; i++){
+                temp.getItems().add(i);
+            }
+        }
+
+        materials.add("Clay");materials.add("Rock");
+        materials.add("Wood");materials.add("Wool");
+        materials.add("Wheat");
+
+        assert bankTradeMaterial != null : "fx:id=\"bankTradeMaterial\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert boardPane != null : "fx:id=\"boardPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildButton != null : "fx:id=\"buildButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildPane != null : "fx:id=\"buildPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert upgrateToCityButton != null : "fx:id=\"upgrateToCityButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildRoadButton != null : "fx:id=\"buildRoadButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildSelectionButtonsPane != null : "fx:id=\"buildSelectionButtonsPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert buildVillageButton != null : "fx:id=\"buildVillageButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards1 != null : "fx:id=\"cards1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards2 != null : "fx:id=\"cards2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards3 != null : "fx:id=\"cards3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -523,13 +728,32 @@ public class GameScreenController {
         assert playerBoard2 != null : "fx:id=\"playerBoard2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard3 != null : "fx:id=\"playerBoard3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard4 != null : "fx:id=\"playerBoard4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert settingsButton != null : "fx:id=\"settingsButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert playerTrading != null : "fx:id=\"playerTrading\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert sound != null : "fx:id=\"sound\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats1 != null : "fx:id=\"stats1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats2 != null : "fx:id=\"stats2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats3 != null : "fx:id=\"stats3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats4 != null : "fx:id=\"stats4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeButton != null : "fx:id=\"tradeButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeClay != null : "fx:id=\"tradeClay\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradePane != null : "fx:id=\"tradePane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradePlayer != null : "fx:id=\"tradePlayer\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradePlayerName != null : "fx:id=\"tradePlayerName\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeRock != null : "fx:id=\"tradeRock\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeWheat != null : "fx:id=\"tradeWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeWood != null : "fx:id=\"tradeWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradeWool != null : "fx:id=\"tradeWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingClay != null : "fx:id=\"tradingClay\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingRock != null : "fx:id=\"tradingRock\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingWheat != null : "fx:id=\"tradingWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingWood != null : "fx:id=\"tradingWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingWool != null : "fx:id=\"tradingWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert upgradeToCityButton != null : "fx:id=\"upgradeToCityButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert volumeSlider != null : "fx:id=\"volumeSlider\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+
+        EventHandler<MouseEvent> temp = this::errorEvent;
+        bankTradeMaterial.setOnMouseClicked(temp);
+        tradePlayerName.setOnMouseClicked(temp);
         
         volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Music.setVolume(newValue.doubleValue());
@@ -567,7 +791,7 @@ public class GameScreenController {
             }
         });
 
-        upgrateToCityButton.setOnMouseClicked(event -> {
+        upgradeToCityButton.setOnMouseClicked(event -> {
             if( City.canBeBuilt(Game.getCurrentPlayer()) ){
                 buildPane.setVisible(false);
                 try {

@@ -11,11 +11,11 @@ public class Game {
 	private static Board board;
 	private static Quest quest;
 
-	public Game(){
+	public Game() {
 		board = new Board();
 		quest = new Quest(players);
 		Game.currentPlayer = 0;
-      //  Game.initializeCards();
+        Game.initializeCards();
 	}
 	public static Player getCurrentPlayer(){
 		return Game.players.get(currentPlayer);
@@ -37,17 +37,17 @@ public class Game {
 	//Need to add image paths
 	public static void initializeCards() {
         for(int i=0; i<29; i++)
-			Game.cards.add(new SpecialCard("PirateCard",0));
+			Game.cards.add(new SpecialCard("Pirate",0));
 		
         for(int i=0; i<5; i++) {
-			Game.cards.add(new SpecialCard("PlusOnePointCard",1));
+			Game.cards.add(new SpecialCard("PlusOne",1));
 
             if (i < 2) {
 				Game.cards.add(new SpecialCard("RoadCard", 0));
 
-				Game.cards.add(new SpecialCard("MonopolyCard", 0));
+				Game.cards.add(new SpecialCard("Monopoly", 0));
 
-				Game.cards.add(new SpecialCard("YearOfPlentyCard", 0));
+				Game.cards.add(new SpecialCard("YearOfPlenty", 0));
             }
         }
 		Collections.shuffle(Game.cards);

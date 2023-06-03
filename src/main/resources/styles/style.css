@@ -86,7 +86,7 @@
 .cardList .list-cell {
     -fx-text-fill: rgb(179, 151, 2);
     -fx-alignment: center;
-    -fx-font-size: 20px;
+    -fx-font-size: 18px;
     -fx-cell-size: 35px;
     -fx-font-weight: bold;
     -fx-background-color: transparent;
@@ -113,6 +113,13 @@
 
 .toolBar {
     -fx-background-color: transparent;
+}
+
+.buildPanel {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../assets/gameScreen/actionContainer.png");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
 }
 
 

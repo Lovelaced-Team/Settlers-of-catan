@@ -38,12 +38,19 @@ public class Player {
 	}
 
 	public void initializeMaterialAmounts(){
-		this.materials.put("Rock", 0);
+		//giorgo na to allaksw apla kanw test
+		/*this.materials.put("Rock", 0);
 		this.materials.put("Wheat", 4);
 		this.materials.put("Wood", 6);
 		this.materials.put("Wool", 4);
 		this.materials.put("Clay", 6);
-		this.materials.put("Sum", 12);
+		this.materials.put("Sum", 12);*/
+		this.materials.put("Rock", 100);
+		this.materials.put("Wheat", 100);
+		this.materials.put("Wood", 100);
+		this.materials.put("Wool", 100);
+		this.materials.put("Clay", 100);
+		this.materials.put("Sum", 500);
 	}
 
 	public void initializeMaterialTradingCost(){
@@ -131,7 +138,7 @@ public class Player {
 		this.cards.remove(c);
 	}
 
-	public boolean getSpecialCard(){
+	public boolean getSpecialCard() {
 		if( Game.getCardList().size() > 0) {
 			if( this.materials.get("Wool") > 1 &&
 				this.materials.get("Rock") > 1 &&
@@ -156,16 +163,15 @@ public class Player {
 	}
 
 	//Method that takes specific materials from a player and gives gives him the one he choose
-	public void tradeWithBank(String material, HashMap<String, Integer> suppliedMaterial){
-		for(String s : suppliedMaterial.keySet()){
-			this.subtractMaterial(s, suppliedMaterial.get(s));
+	public void tradeWithBank(String material, String suppliedMaterial, Integer amount) {
+		if(this.getMaterialAmount(suppliedMaterial) >= amount) {
+			this.subtractMaterial(suppliedMaterial, amount);
+			this.addMaterial(material, 1);
 		}
-
-		this.addMaterial(material, 1);
 	}
 
 	//Method that takes materials from one player and adds them to another one
-	public void tradeWithPlayers(Player player, HashMap<String, Integer> demandedMaterials, HashMap<String, Integer> suppliedMaterials){
+	public void tradeWithPlayers(Player player, HashMap<String, Integer> demandedMaterials, HashMap<String, Integer> suppliedMaterials) {
 		for(String s : demandedMaterials.keySet()){
 			this.addMaterial(s, demandedMaterials.get(s));
 			player.subtractMaterial(s, demandedMaterials.get(s));
@@ -186,14 +192,17 @@ public class Player {
 		return new int[]{firstDice, secondDice, firstDice + secondDice };
 	}
 
-	public void changeTradingCost(String material, int amount){
+	public void changeTradingCost(String material, int amount) {
 		if( this.materialTradingCost.get(material) - amount >= 0 ) {
-			this.materialTradingCost.put(material, this.materialTradingCost.get(material) - amount);
+			this.materialTradingCost.put(material, amount);
 		}
 	}
 
 	public int getTradingCost(String material){
 		return this.materialTradingCost.get(material);
+	}
+	public HashMap<String, Integer> getTradingCostList(){
+		return materialTradingCost;
 	}
 
 	public boolean equals(Object object) {

@@ -63,7 +63,7 @@ public class Port{
         this.edge = edge;
         Random rand = new Random();
 
-        this.cost = rand.nextInt(2) + 2;
+        this.cost = 3;
     }
 
     public int getEdge(){
@@ -79,7 +79,16 @@ public class Port{
     }
 
     public void changePlayerTradingValue(Player player){
-        if( player.getTradingCost(this.material) < this.cost ) {
+        String material = this.material;
+
+        if( material.equals("All") ) {
+
+            for (String tempMaterial : player.getTradingCostList().keySet()){
+                if( player.getTradingCost(tempMaterial) > this.cost ) {
+                    player.changeTradingCost(tempMaterial, this.cost);
+                }
+            }
+        } else if( player.getTradingCost(this.material) > this.cost ) {
             player.changeTradingCost(this.material, this.cost);
         }
     }
