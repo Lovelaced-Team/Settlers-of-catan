@@ -122,4 +122,11 @@
     -fx-background-size: 100% 100%;
 }
 
+.piratePanel {
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../assets/gameScreen/actionContainerFullScreen.png");
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
+}
+
 

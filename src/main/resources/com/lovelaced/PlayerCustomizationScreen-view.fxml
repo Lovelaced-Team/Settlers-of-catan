@@ -249,11 +249,11 @@
                         <Image url="@../../assets/playerCustomizationScreen/Color_Picker_Arrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="leftDelete" fitHeight="88.0" fitWidth="110.0" layoutX="20.0" layoutY="21.0" onMouseClicked="#deletePlayer" pickOnBounds="true" preserveRatio="true" rotate="-47.0">
-                     <image>
-                        <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Right.png" />
-                     </image>
-                  </ImageView>
+               <ImageView fx:id="leftDelete" fitHeight="88.0" fitWidth="110.0" layoutX="20.0" layoutY="21.0" onMouseClicked="#deletePlayer" pickOnBounds="true" preserveRatio="true" rotate="-47.0">
+                  <image>
+                     <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Right.png" />
+                  </image>
+               </ImageView>
                </children>
                <GridPane.margin>
                   <Insets left="180.0" />

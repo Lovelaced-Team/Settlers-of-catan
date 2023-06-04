@@ -5,8 +5,6 @@ import com.game.*;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +30,14 @@ public class GameScreenController {
     private Stage stage;
     // FXML elements
     @FXML
-    private AnchorPane boardPane, menuScreen, buildPane, buildSelectionButtonsPane, tradePane, tradePlayer;
+    private AnchorPane boardPane, menuScreen, buildPane, tradePane, tradePlayer, dicePane, piratePane;
 
     private ArrayList<ChoiceBox<Integer>> trades = new ArrayList<>();
     private ArrayList<ChoiceBox<Integer>> tradings = new ArrayList<>();
+    private ArrayList<ChoiceBox<Integer>> giveToPirate = new ArrayList<>();
 
     @FXML
-    private ChoiceBox<Integer> tradeClay, tradeRock, tradeWheat, tradeWool, tradeWood, tradingClay, tradingRock, tradingWheat, tradingWool, tradingWood ;
+    private ChoiceBox<Integer> tradeClay, tradeRock, tradeWheat, tradeWool, tradeWood, tradingClay, tradingRock, tradingWheat, tradingWool, tradingWood, pirateClay, pirateRock, pirateWheat, pirateWool, pirateWood ;
 
     @FXML
     private TextField bankTradeMaterial, tradePlayerName;
@@ -60,12 +59,10 @@ public class GameScreenController {
     private ListView<Integer> materials1, materials2, materials3, materials4;
 
     @FXML
-    private ImageView sound, buildButton, tradeButton, buildRoadButton, buildVillageButton, upgradeToCityButton, pirate, tradingButton;
+    private ImageView sound, buildButton, tradeButton, buildRoadButton, buildVillageButton, upgradeToCityButton, pirate, diceButton, firstDie, secondDie, giveToPirateButton;
 
     @FXML
     private Slider volumeSlider;
-
-    boolean upgradeButtonMode;
 
     private Group roadGroup = new Group();
     private Group buildingsGroup = new Group();
@@ -73,24 +70,37 @@ public class GameScreenController {
 
     // Data structures to store player and UI elements
     private ArrayList<Player> players = new ArrayList<>();
-
-    private ArrayList<ImageView> playerBorders = new ArrayList<ImageView>();
-
+    private ArrayList<Player> victims = new ArrayList<>();
     private HashMap<String, Integer> demandedMaterials = new HashMap<>();
     private HashMap<Player, ArrayList<Node>> playersItems = new HashMap<>();
-
     private ArrayList<String> materials = new ArrayList<>();
+    private Game game;
 
     // This boolean flag is used for two rounds per player to determine if they have successfully built a village
     // in order to connect a road.
     private boolean hasBuiltVillage;
-    private int round;
+    boolean upgradeButtonMode; // This boolean flag toggles the ability for a player to upgrade his villages into cities.
+    boolean hasRolled; // This boolean prevents the player from clicking on other buttons until he has rolled the dice.
+
+    // Start the Game board
+    public void startBoard() throws FileNotFoundException {
+        game = new Game();
+
+        players = Game.getPlayerList();
+        initializePlayers(); // Adds player info to the scene
+        hasRolled = false;
+
+        initializeHexagons();
+
+        initializeButtons(calculateAvailableVillages(), "Village");
+        hasBuiltVillage = true;
+    }
 
 
     @FXML
     void animationPop(MouseEvent event) {
-        if(((ImageView)event.getSource()) == settingsButton || ((ImageView)event.getSource()) == settingsButton2 ||
-                ((ImageView)event.getSource()) == exitButton|| ((ImageView)event.getSource()) == sound)
+        if(event.getSource() == settingsButton || event.getSource() == settingsButton2 ||
+                event.getSource() == exitButton|| event.getSource() == sound)
             ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + "#1DCC04" + ", 28, 0, 0, 0)");
         else {
             TranslateTransition translate = new TranslateTransition();
@@ -111,8 +121,8 @@ public class GameScreenController {
     }
     @FXML
     void animationPopUp(MouseEvent event) {
-        if(((ImageView)event.getSource()) == settingsButton || ((ImageView)event.getSource()) == settingsButton2 ||
-                ((ImageView)event.getSource()) == exitButton|| ((ImageView)event.getSource()) == sound)
+        if(event.getSource() == settingsButton || event.getSource() == settingsButton2 ||
+                event.getSource() == exitButton|| event.getSource() == sound)
             ((ImageView)event.getSource()).setStyle(null);
         else {
             TranslateTransition translate = new TranslateTransition();
@@ -132,30 +142,18 @@ public class GameScreenController {
         }
     }
 
-    // Start the game board
-    public void startBoard() throws FileNotFoundException {
-        new Game();
-        round = 1;
-
-        players = Game.getPlayerList();
-        initializePlayers(); // Adds player info to the scene
-
-        initializeHexagons();
-
-        initializeButtons(calculateAvailableVillages(), "Village");
-        hasBuiltVillage = true;
-    }
-
     @FXML
     void buildMenu(MouseEvent event){
-        if (tradePane.isVisible()) tradePane.setVisible(false);
         AnchorPane pane = null;
-        if(event.getSource() == buildButton) {
-            //Player should not be able to open the build menu in his first two rounds
-            if (round > Game.getPlayerList().size() * 2) {
-                pane = buildPane;
-                circleGroup.getChildren().clear();
-                upgradeButtonMode = false;
+        if(hasRolled && !piratePane.isVisible()) {
+            if (tradePane.isVisible()) tradePane.setVisible(false);
+            if (event.getSource() == buildButton) {
+                //Player should not be able to open the build menu in his first two rounds
+                if (game.getRound() > Game.getPlayerList().size() * 2) {
+                    pane = buildPane;
+                    circleGroup.getChildren().clear();
+                    upgradeButtonMode = false;
+                }
             }
         }
         if( pane!= null) pane.setVisible(!pane.isVisible());
@@ -163,34 +161,31 @@ public class GameScreenController {
 
     @FXML
     void tradeMenu(MouseEvent event) {
+        if(hasRolled && !piratePane.isVisible()){
+            if (buildPane.isVisible()) buildPane.setVisible(false);
 
-        if (buildPane.isVisible()) buildPane.setVisible(false);
+            tradePlayerName.clear();
+            bankTradeMaterial.clear();
 
-        tradePlayerName.clear();
-        bankTradeMaterial.clear();
-
-        for(ChoiceBox<Integer> temp : trades) {
-            for (int i = 0; i <= 10; i++){
+            for(ChoiceBox<Integer> temp : trades) {
                 temp.getSelectionModel().selectFirst();
             }
-        }
 
-        for(ChoiceBox<Integer> temp : tradings) {
-            for (int i = 0; i <= 10; i++){
+            for(ChoiceBox<Integer> temp : tradings) {
                 temp.getSelectionModel().selectFirst();
             }
-        }
 
-        AnchorPane pane = null;
-        if(event.getSource() == tradeButton) {
-            //Player should not be able to open the trade menu in his first two rounds
-            if (round > Game.getPlayerList().size() * 2) {
-                pane = tradePane;
-                circleGroup.getChildren().clear();
-                upgradeButtonMode = false;
+            AnchorPane pane = null;
+            if(event.getSource() == tradeButton) {
+                //Player should not be able to open the trade menu in his first two rounds
+                if (game.getRound() > Game.getPlayerList().size() * 2) {
+                    pane = tradePane;
+                    circleGroup.getChildren().clear();
+                    upgradeButtonMode = false;
+                }
             }
+            if( pane!= null) pane.setVisible(!pane.isVisible());
         }
-        if( pane!= null) pane.setVisible(!pane.isVisible());
     }
     @FXML
     void settings(MouseEvent event) {
@@ -204,10 +199,11 @@ public class GameScreenController {
         int tradingCost;
         int amount;
 
-        if(bankTradeMaterial.getText().toLowerCase().equals("special card")) {
-            Game.getCurrentPlayer().getSpecialCard();
-            updatePlayerMaterials(Game.getCurrentPlayer());
-            updatePlayerCards(Game.getCurrentPlayer());
+        if(bankTradeMaterial.getText().equalsIgnoreCase("special card")) {
+            game.getCurrentPlayer().getSpecialCard();
+            updatePlayerMaterials(game.getCurrentPlayer());
+            updatePlayerCards(game.getCurrentPlayer());
+            updatePlayerPoints(game.getCurrentPlayer());
         } else {
             switch (bankTradeMaterial.getText().toLowerCase()) {
                 case "clay":
@@ -223,12 +219,12 @@ public class GameScreenController {
 
 
                         amount = temp.getValue();
-                        tradingCost = Game.getCurrentPlayer().getTradingCost(materials.get(i));
+                        tradingCost = game.getCurrentPlayer().getTradingCost(materials.get(i));
 
                         while((amount % tradingCost >= 0) && amount >= tradingCost) {
 
-                            Game.getCurrentPlayer().tradeWithBank(material, materials.get(i), tradingCost);
-                            updatePlayerMaterials(Game.getCurrentPlayer());
+                            game.getCurrentPlayer().tradeWithBank(material, materials.get(i), tradingCost);
+                            updatePlayerMaterials(game.getCurrentPlayer());
                             amount -= tradingCost;
 
                         }
@@ -243,20 +239,20 @@ public class GameScreenController {
     }
     @FXML
     void tradeWithPlayer (MouseEvent event) {
-
         int amount;
-        Boolean flag = false;
-        int i = 0, j = 0;
+        boolean flag = false;
+        int j = 0;
 
         Player currentPlayer = null;
-        for (i = 0; i < players.size(); i++) {
-            if(players.get(i).getName().toLowerCase().equals(tradePlayerName.getText().toLowerCase()) && !tradePlayerName.getText().toLowerCase().equals(Game.getCurrentPlayer().getName().toLowerCase())) {
-                currentPlayer = players.get(i);
+        for (Player player : players) {
+            if (player.getName().equalsIgnoreCase(tradePlayerName.getText()) && !tradePlayerName.getText().equalsIgnoreCase(game.getCurrentPlayer().getName())) {
+                currentPlayer = player;
                 flag = true;
             }
         }
         if(flag) {
             playerTrading.setImage(currentPlayer.getImage());
+            demandedMaterials.clear();
             for (ChoiceBox<Integer> temp: trades) {
                 amount = temp.getValue();
                 demandedMaterials.put(materials.get(j), amount);
@@ -272,12 +268,12 @@ public class GameScreenController {
     @FXML
     void tradeConfirmed (MouseEvent event) throws IOException {
 
-        int i = 0, j = 0, amount = 0;
+        int i, j = 0, amount;
         HashMap<String, Integer> suppliedMaterials = new HashMap<>();
 
         Player currentPlayer = null;
         for (i = 0; i < players.size(); i++) {
-            if(players.get(i).getName().toLowerCase().equals(tradePlayerName.getText().toLowerCase()))
+            if(players.get(i).getName().equalsIgnoreCase(tradePlayerName.getText()))
                 currentPlayer = players.get(i);
         }
 
@@ -287,12 +283,44 @@ public class GameScreenController {
             j++;
         }
 
-        Game.getCurrentPlayer().tradeWithPlayers(currentPlayer, suppliedMaterials, demandedMaterials);
+        game.getCurrentPlayer().tradeWithPlayers(currentPlayer, suppliedMaterials, demandedMaterials);
 
-        updatePlayerMaterials(Game.getCurrentPlayer());
+        updatePlayerMaterials(game.getCurrentPlayer());
         updatePlayerMaterials(currentPlayer);
 
         if( tradePlayer!= null) tradePlayer.setVisible(!tradePlayer.isVisible());
+    }
+
+    @FXML
+    void takeMaterial(MouseEvent event) throws IOException {
+        int i=0, amount, totalAmount=0;
+        boolean flag = false;
+
+        Player player = victims.get(0);
+
+        for (ChoiceBox<Integer> temp : giveToPirate) {
+            amount = temp.getValue();
+            demandedMaterials.put(materials.get(i), amount);
+            totalAmount += amount;
+            i++;
+            if(totalAmount == Math.ceil((double) player.getMaterialAmount("Sum") /2)) flag = true;
+        }
+
+        if(flag){
+            Pirate.stealFromPlayer(player, demandedMaterials);
+            updatePlayerMaterials(player);
+
+            victims.remove(player);
+            if (victims.size() == 0) {
+                piratePane.setVisible(false);
+            } else {
+                giveToPirateButton.setImage(victims.get(0).getImage());
+            }
+            demandedMaterials.clear();
+            for (ChoiceBox<Integer> temp : giveToPirate) {
+                temp.getSelectionModel().selectFirst();
+            }
+        }
     }
 
     // Handle escape key event to toggle the menu screen visibility
@@ -311,26 +339,65 @@ public class GameScreenController {
 
     @FXML
     void endTurn(MouseEvent event) throws FileNotFoundException {
-        if (tradePane.isVisible()) tradePane.setVisible(false);
-        if (buildPane.isVisible()) buildPane.setVisible(false);
-        if(!hasBuiltVillage){
-            playersItems.get(Game.getCurrentPlayer()).get(1).setStyle(null);
+        if((hasRolled || game.getRound() <= Game.getPlayerList().size() * 2) && !piratePane.isVisible()){
+            if (tradePane.isVisible()) tradePane.setVisible(false);
+            if (buildPane.isVisible()) buildPane.setVisible(false);
+            if(!hasBuiltVillage){
+                playersItems.get(game.getCurrentPlayer()).get(1).setStyle(null);
 
-            Game.endTurn();
+                game.endTurn();
+                hasRolled = false;
 
-            updateBuildPane();
-            circleGroup.getChildren().clear();
-            upgradeButtonMode = false;
-            round++;
+                dicePane.setVisible(false);
+                diceButton.setVisible(true);
 
-            playersItems.get(Game.getCurrentPlayer()).get(1).setStyle("-fx-effect: dropShadow(three-pass-box, " + Game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
+                updateBuildPane();
+                circleGroup.getChildren().clear();
+                upgradeButtonMode = false;
+
+                playersItems.get(game.getCurrentPlayer()).get(1).setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
 
 
-            if( round <= Game.getPlayerList().size() * 2 ) {
-                initializeButtons(calculateAvailableVillages(), "Village");
-                hasBuiltVillage = true;
+                if( game.getRound() <= Game.getPlayerList().size() * 2 ) {
+                    initializeButtons(calculateAvailableVillages(), "Village");
+                    hasBuiltVillage = true;
+                }
             }
         }
+    }
+
+    @FXML
+    void rollDice(MouseEvent event) throws IOException {
+        if( game.getRound() > Game.getPlayerList().size() * 2 ) {
+            dicePane.setVisible(true);
+            diceButton.setVisible(false);
+            int dice = updateDice();
+            if( dice!=7 ) {
+                game.updateMaterials(dice);
+
+                for (Player player : Game.getPlayerList()) {
+                    updatePlayerMaterials(player);
+                }
+
+                updateBuildPane();
+
+                hasRolled = true;
+            } else {
+                HashSet<Coordinates> hexagonCoordinatesList = new HashSet<>();
+                for(Hexagon hexagon : game.getBoard().getHexagonList()){
+                    if( !hexagon.getBiome().equals("Desert") && hexagon.getHasPirate() == null)
+                        hexagonCoordinatesList.add(new Coordinates(hexagon.getCoords().getX()+74, hexagon.getCoords().getY()+80));
+                }
+                initializeButtons(hexagonCoordinatesList, "Hexagon");
+            }
+        }
+    }
+
+    private int updateDice() throws FileNotFoundException {
+        int[] dice = game.getCurrentPlayer().rollDice();
+        firstDie.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Dice/" + dice[0]+".png")));
+        secondDie.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Dice/" + dice[1]+".png")));
+        return dice[2];
     }
 
     private void updateBuildPane() throws FileNotFoundException {
@@ -338,9 +405,9 @@ public class GameScreenController {
         buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_blank.png")));
         buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_blank.png")));
 
-        if( City.canBeBuilt(Game.getCurrentPlayer()) ) upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_" + Game.getCurrentPlayer().getColor() + ".png")));
-        if( Village.canBeBuilt(Game.getCurrentPlayer()) ) buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_"+ Game.getCurrentPlayer().getColor() + ".png")));
-        if( Road.canBeBuilt(Game.getCurrentPlayer()) ) buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_"+ Game.getCurrentPlayer().getColor() + ".png")));
+        if( City.canBeBuilt(game.getCurrentPlayer()) ) upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_" + game.getCurrentPlayer().getColor() + ".png")));
+        if( Village.canBeBuilt(game.getCurrentPlayer()) ) buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_"+ game.getCurrentPlayer().getColor() + ".png")));
+        if( Road.canBeBuilt(game.getCurrentPlayer()) ) buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_"+ game.getCurrentPlayer().getColor() + ".png")));
     }
 
     // Exit the game and go back to the start screen
@@ -406,7 +473,7 @@ public class GameScreenController {
 
     // Initialize the hexagons on the game board
     private void initializeHexagons() throws FileNotFoundException {
-        for(Hexagon hexagon : Board.getHexagonList()) {
+        for(Hexagon hexagon : game.getBoard().getHexagonList()) {
             ImageView boardItems = new ImageView(hexagon.getImage());
             initializeBoardImages(hexagon.getCoords(), boardItems, 0, 0, 178.0, 195.0);
             boardPane.getChildren().add(boardItems);
@@ -418,7 +485,7 @@ public class GameScreenController {
                 boardPane.getChildren().add(boardItems);
             } else {
                 pirate = new ImageView(hexagon.getHasPirate().getImage());
-                initializeBoardImages(hexagon.getCoords(), pirate, 55, 23, 93.0, 119.0);
+                initializeBoardImages(hexagon.getCoords(), pirate, 60, 15, 83.0, 109.0);
                 boardPane.getChildren().add(pirate);
             }
 
@@ -426,22 +493,12 @@ public class GameScreenController {
                 Port port = hexagon.getPort();
                 boardItems = new ImageView(port.getImage());
                 initializeBoardImages(port.getCoords(), boardItems, 0, 0, 128,140);
-                switch(port.getEdge()){
-                    case 3:
-                        boardItems.setRotate(57);
-                        break;
-                    case 5:
-                        boardItems.setRotate(118);
-                        break;
-                    case 7:
-                        boardItems.setRotate(180);
-                        break;
-                    case 9:
-                        boardItems.setRotate(-123);
-                        break;
-                    case 11:
-                        boardItems.setRotate(-57);
-                        break;
+                switch (port.getEdge()) {
+                    case 3 -> boardItems.setRotate(57);
+                    case 5 -> boardItems.setRotate(118);
+                    case 7 -> boardItems.setRotate(180);
+                    case 9 -> boardItems.setRotate(-123);
+                    case 11 -> boardItems.setRotate(-57);
                 }
                 roadGroup.getChildren().add(boardItems);
             }
@@ -465,17 +522,17 @@ public class GameScreenController {
             button.setOnMouseClicked(event -> {
                 if( button.getImage() == buttonImage ) {
                     if( structure.equals("Village") ){
-                        String villageImagePath = "src/main/resources/assets/gameScreen/Build/Village/village_" + Game.getCurrentPlayer().getColor() + ".png";
-                        Village village = new Village(villageImagePath, new Coordinates(coords.getX(), coords.getY()), Game.getCurrentPlayer());
-                        village.build(Board.getHexagonCorners().get(coords));
+                        String villageImagePath = "src/main/resources/assets/gameScreen/Build/Village/village_" + game.getCurrentPlayer().getColor() + ".png";
+                        Village village = new Village(villageImagePath, new Coordinates(coords.getX(), coords.getY()), game.getCurrentPlayer());
+                        village.build(game.getBoard().getHexagonCorners().get(coords));
 
                         initializeBoardImages(coords, button, -10, -18, 48, 41.8);
                         button.setImage(village.getImage());
                         buildingsGroup.getChildren().add(button);
                     } else if( structure.equals("Road") ){
-                        String roadImagePath = "src/main/resources/assets/gameScreen/Build/Road/road_" + Game.getCurrentPlayer().getColor() + ".png";
-                        Road road = new Road(roadImagePath, new Coordinates(coords.getX(), coords.getY()), Game.getCurrentPlayer());
-                        HashMap<Integer, Hexagon> edgeCoords = Board.getHexagonEdges().get(coords);
+                        String roadImagePath = "src/main/resources/assets/gameScreen/Build/Road/road_" + game.getCurrentPlayer().getColor() + ".png";
+                        Road road = new Road(roadImagePath, new Coordinates(coords.getX(), coords.getY()), game.getCurrentPlayer());
+                        HashMap<Integer, Hexagon> edgeCoords = game.getBoard().getHexagonEdges().get(coords);
                         road.build(edgeCoords);
 
                         initializeBoardImages(coords, button, 5, -41, 20, 110);
@@ -487,30 +544,49 @@ public class GameScreenController {
                         } else if( edgeCoords.containsKey(3) ||edgeCoords.containsKey(9) ) {
                             button.setRotate(-61);
                         }
+                    } else if( structure.equals("Hexagon") ){
+                        Hexagon pirateHexagon = game.getBoard().getHexagonContainingPirate();
 
-                        hasBuiltVillage = false;
+                        Coordinates hexagonCoordinates = new Coordinates(coords.getX()-74, coords.getY()-80);
+                        Hexagon hexagonToMoveTo = game.getBoard().coordinatesToHexagon(hexagonCoordinates);
+                        pirateHexagon.getHasPirate().moveHexagon(hexagonToMoveTo);
+
+                        pirate.toFront();
+                        pirate.setLayoutX(hexagonCoordinates.getX()+60);
+                        pirate.setLayoutY(hexagonCoordinates.getY()+15);
+
+                        for(Player player : players){
+                            if( player.getMaterialAmount("Sum") > 8 ){
+                                victims.add(player);
+                                giveToPirateButton.setImage(victims.get(0).getImage());
+                                piratePane.setVisible(true);
+                            }
+                        }
+
+                        hasRolled = true;
                     }
                     circleGroup.getChildren().clear();
-                } else if(upgradeButtonMode && Board.getHexagonCorners().containsKey(new Coordinates(button.getLayoutX()+10, button.getLayoutY()+18)) ){
+                } else if(upgradeButtonMode && game.getBoard().getHexagonCorners().containsKey(new Coordinates(button.getLayoutX()+10, button.getLayoutY()+18)) ){
                     upgradeButtonMode = false;
                     boolean isCity = false;
                     Player owner = null;
-                    for(int corner : Board.getHexagonCorners().get(coords).keySet()) {
-                        owner = Board.getHexagonCorners().get(coords).get(corner).getStructure(corner).getOwner();
-                        if(Board.getHexagonCorners().get(coords).get(corner).getStructure(corner) instanceof City) isCity = true;
+                    for(int corner : game.getBoard().getHexagonCorners().get(coords).keySet()) {
+                        owner = game.getBoard().getHexagonCorners().get(coords).get(corner).getStructure(corner).getOwner();
+                        if(game.getBoard().getHexagonCorners().get(coords).get(corner).getStructure(corner) instanceof City) isCity = true;
                         break;
                     }
-                    if( owner.equals(Game.getCurrentPlayer()) && !isCity ){
-                        City city = Village.upgradeToCity(Board.getHexagonCorners().get(coords), owner, coords);
+                    if( owner.equals(game.getCurrentPlayer()) && !isCity ){
+                        City city = Village.upgradeToCity(game.getBoard().getHexagonCorners().get(coords), owner, coords);
                         button.setImage(city.getImage());
                     }
                 }
                 try {
-                    updatePlayerPoints(Game.getCurrentPlayer());
-                    updatePlayerMaterials(Game.getCurrentPlayer());
+                    updatePlayerPoints(game.getCurrentPlayer());
+                    updatePlayerMaterials(game.getCurrentPlayer());
                     updateBuildPane();
-                    if( round <= Game.getPlayerList().size()*2 && hasBuiltVillage){
+                    if( game.getRound() <= Game.getPlayerList().size()*2 && hasBuiltVillage){
                         initializeButtons(calculateAvailableRoads(), "Road");
+                        hasBuiltVillage = false;
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -536,7 +612,7 @@ public class GameScreenController {
     // Initialize player information on the UI
     private void initializePlayers() throws FileNotFoundException {
         Music.changeSong(Music.gameScreenSong);
-        playerBoard1.setStyle("-fx-effect: dropShadow(three-pass-box, " + Game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
+        playerBoard1.setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
         initializePlayerItemsMap();
         initializePlayerInfo();
         initializeMaterialList();
@@ -598,12 +674,12 @@ public class GameScreenController {
     private HashSet<Coordinates> calculateAvailableRoads() {
         HashSet<Coordinates> availableRoadPositions = new HashSet<>();
         ArrayList<Structure> buildings = new ArrayList<>();
-        if (round <= Game.getPlayerList().size() || round >= Game.getPlayerList().size() * 2){
-            buildings.addAll(Game.getCurrentPlayer().getStructureMap().get("Village"));
-            buildings.addAll(Game.getCurrentPlayer().getStructureMap().get("City"));
-            buildings.addAll(Game.getCurrentPlayer().getStructureMap().get("Road"));
+        if (game.getRound() <= Game.getPlayerList().size() || game.getRound() > Game.getPlayerList().size() * 2){
+            buildings.addAll(game.getCurrentPlayer().getStructureMap().get("Village"));
+            buildings.addAll(game.getCurrentPlayer().getStructureMap().get("City"));
+            buildings.addAll(game.getCurrentPlayer().getStructureMap().get("Road"));
         } else {
-            buildings.add(Game.getCurrentPlayer().getStructureMap().get("Village").get(1));
+            buildings.add(game.getCurrentPlayer().getStructureMap().get("Village").get(1));
         }
 
         for(Structure tempBuilding : buildings){
@@ -611,10 +687,10 @@ public class GameScreenController {
             double tempY = tempBuilding.getCoords().getY();
             Hexagon hexagon;
 
-            for(Coordinates coordsForEveryEdge : Board.getHexagonEdges().keySet()) {
+            for(Coordinates coordsForEveryEdge : game.getBoard().getHexagonEdges().keySet()) {
                 if ( Math.sqrt(Math.pow(coordsForEveryEdge.getX() - tempX, 2) + Math.pow(coordsForEveryEdge.getY() - tempY, 2)) <= 100 ) {
-                    for(int index :  Board.getHexagonEdges().get(coordsForEveryEdge).keySet()){
-                        hexagon = Board.getHexagonEdges().get(coordsForEveryEdge).get(index);
+                    for(int index :  game.getBoard().getHexagonEdges().get(coordsForEveryEdge).keySet()){
+                        hexagon = game.getBoard().getHexagonEdges().get(coordsForEveryEdge).get(index);
                         if( hexagon.getStructure(index) == null ) {
                             availableRoadPositions.add(coordsForEveryEdge);
                         }
@@ -635,19 +711,19 @@ public class GameScreenController {
 
         double tempX, tempY;
 
-        if(round > Game.getPlayerList().size() * 2){
-            ArrayList<Structure> roads = new ArrayList<>(Game.getCurrentPlayer().getStructureMap().get("Road"));
+        if(game.getRound() > Game.getPlayerList().size() * 2){
+            ArrayList<Structure> roads = new ArrayList<>(game.getCurrentPlayer().getStructureMap().get("Road"));
 
             for(Structure tempRoad : roads){
                 tempX = tempRoad.getCoords().getX();
                 tempY = tempRoad.getCoords().getY();
                 Hexagon hexagon;
 
-                for(Coordinates coordsForEveryCorner : Board.getHexagonCorners().keySet()) {
+                for(Coordinates coordsForEveryCorner : game.getBoard().getHexagonCorners().keySet()) {
                     if( !possibleVillagePositions.contains(coordsForEveryCorner) ){
                         if ( Math.sqrt(Math.pow(coordsForEveryCorner.getX() - tempX, 2) + Math.pow(coordsForEveryCorner.getY() - tempY, 2)) < 55 ) {
-                            for(int index :  Board.getHexagonCorners().get(coordsForEveryCorner).keySet()){
-                                hexagon = Board.getHexagonCorners().get(coordsForEveryCorner).get(index);
+                            for(int index :  game.getBoard().getHexagonCorners().get(coordsForEveryCorner).keySet()){
+                                hexagon = game.getBoard().getHexagonCorners().get(coordsForEveryCorner).get(index);
                                 if(hexagon.getStructure(index) == null || hexagon.getStructure(index) instanceof Road) possibleVillagePositions.add(coordsForEveryCorner);
                             }
                         }
@@ -655,7 +731,7 @@ public class GameScreenController {
                 }
             }
         } else {
-            possibleVillagePositions.addAll(Board.getHexagonCorners().keySet());
+            possibleVillagePositions.addAll(game.getBoard().getHexagonCorners().keySet());
         }
 
         for(Player player : Game.getPlayerList()) {
@@ -680,7 +756,7 @@ public class GameScreenController {
         ListView<Integer> tempList = (ListView<Integer>) playersItems.get(player).get(4);
         tempList.getItems().set(0, player.getPoints());
 
-        if( Game.hasWon() ){
+        if( game.hasWon() ){
             root = FXMLLoader.load(getClass().getResource("EndScreen-view.fxml"));
 
             stage = (Stage) menuScreen.getScene().getWindow();
@@ -723,11 +799,6 @@ public class GameScreenController {
     @FXML
     void initialize() throws FileNotFoundException {
         startBoard();
-        playerBorders.add(playerBoard1);
-        playerBorders.add(playerBoard2);
-        playerBorders.add(playerBoard3);
-        playerBorders.add(playerBoard4);
-
 
         trades.add(tradeClay); trades.add(tradeRock);
         trades.add(tradeWood);  trades.add(tradeWool);
@@ -753,18 +824,34 @@ public class GameScreenController {
         materials.add("Wood");materials.add("Wool");
         materials.add("Wheat");
 
+        giveToPirate.add(pirateClay); giveToPirate.add(pirateRock);
+        giveToPirate.add(pirateWood); giveToPirate.add(pirateWool);
+        giveToPirate.add(pirateWheat);
+
+        for(ChoiceBox<Integer> temp : giveToPirate){
+            for (int i = 0; i <= 10; i++){
+                temp.getItems().add(i);
+            }
+        }
+
+        for(ChoiceBox<Integer> temp : giveToPirate) {
+            temp.getSelectionModel().selectFirst();
+        }
+
         assert bankTradeMaterial != null : "fx:id=\"bankTradeMaterial\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert boardPane != null : "fx:id=\"boardPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildButton != null : "fx:id=\"buildButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildPane != null : "fx:id=\"buildPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildRoadButton != null : "fx:id=\"buildRoadButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert buildSelectionButtonsPane != null : "fx:id=\"buildSelectionButtonsPane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert buildVillageButton != null : "fx:id=\"buildVillageButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards1 != null : "fx:id=\"cards1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards2 != null : "fx:id=\"cards2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards3 != null : "fx:id=\"cards3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards4 != null : "fx:id=\"cards4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert diceButton != null : "fx:id=\"diceButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert dicePane != null : "fx:id=\"dicePane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert firstDie != null : "fx:id=\"firstDie\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert giveToPirateButton != null : "fx:id=\"giveToPirateButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials1 != null : "fx:id=\"materials1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials2 != null : "fx:id=\"materials2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials3 != null : "fx:id=\"materials3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -774,13 +861,18 @@ public class GameScreenController {
         assert nameLabel2 != null : "fx:id=\"nameLabel2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert nameLabel3 != null : "fx:id=\"nameLabel3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert nameLabel4 != null : "fx:id=\"nameLabel4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert pirateClay != null : "fx:id=\"pirateClay\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert piratePane != null : "fx:id=\"piratePane\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert pirateRock != null : "fx:id=\"pirateRock\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert pirateWheat != null : "fx:id=\"pirateWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert pirateWood != null : "fx:id=\"pirateWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert pirateWool != null : "fx:id=\"pirateWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard1 != null : "fx:id=\"playerBoard1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard2 != null : "fx:id=\"playerBoard2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard3 != null : "fx:id=\"playerBoard3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard4 != null : "fx:id=\"playerBoard4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerTrading != null : "fx:id=\"playerTrading\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert settingsButton != null : "fx:id=\"settingsButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert settingsButton2 != null : "fx:id=\"settingsButton2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert secondDie != null : "fx:id=\"secondDie\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert sound != null : "fx:id=\"sound\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats1 != null : "fx:id=\"stats1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats2 != null : "fx:id=\"stats2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -795,7 +887,6 @@ public class GameScreenController {
         assert tradeWheat != null : "fx:id=\"tradeWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradeWood != null : "fx:id=\"tradeWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradeWool != null : "fx:id=\"tradeWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert tradingButton != null : "fx:id=\"tradingButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingClay != null : "fx:id=\"tradingClay\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingRock != null : "fx:id=\"tradingRock\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingWheat != null : "fx:id=\"tradingWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -803,6 +894,9 @@ public class GameScreenController {
         assert tradingWool != null : "fx:id=\"tradingWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert upgradeToCityButton != null : "fx:id=\"upgradeToCityButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert volumeSlider != null : "fx:id=\"volumeSlider\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert settingsButton != null : "fx:id=\"settingsButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert settingsButton2 != null : "fx:id=\"settingsButton2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
 
         EventHandler<MouseEvent> temp = this::errorEvent;
         bankTradeMaterial.setOnMouseClicked(temp);
@@ -819,7 +913,7 @@ public class GameScreenController {
         });
         
         buildVillageButton.setOnMouseClicked(event -> {
-            if( Village.canBeBuilt(Game.getCurrentPlayer()) ){
+            if( Village.canBeBuilt(game.getCurrentPlayer()) ){
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();
@@ -831,7 +925,7 @@ public class GameScreenController {
         });
 
         buildRoadButton.setOnMouseClicked(event -> {
-            if( Road.canBeBuilt(Game.getCurrentPlayer()) ){
+            if( Road.canBeBuilt(game.getCurrentPlayer()) ){
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();
@@ -845,7 +939,7 @@ public class GameScreenController {
         });
 
         upgradeToCityButton.setOnMouseClicked(event -> {
-            if( City.canBeBuilt(Game.getCurrentPlayer()) ){
+            if( City.canBeBuilt(game.getCurrentPlayer()) ){
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();

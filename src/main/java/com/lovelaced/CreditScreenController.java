@@ -1,8 +1,7 @@
 package com.lovelaced;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,7 +30,6 @@ public class CreditScreenController {
 
     }
 
-
     @FXML
     void animationPop(MouseEvent event) {
         String color = "#1DCC04";
@@ -41,6 +39,7 @@ public class CreditScreenController {
     void animationPopUp(MouseEvent event) {
         ((ImageView)event.getSource()).setStyle(null);
     }
+
 
 
     private void configureStage(Stage stage, String stageTitle) throws IOException {

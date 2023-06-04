@@ -14,6 +14,7 @@ public class Quest {
         Quest.longestRoadAmount = 4;
         Quest.longestArmyAmount = 2;
 
+        armyAmounts.clear();
         for(Player p: players){
             armyAmounts.put(p, 0);
         }

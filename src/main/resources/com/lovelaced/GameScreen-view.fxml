@@ -14,7 +14,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
    <children>
       <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="-2.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" />
-      <AnchorPane fx:id="buildSelectionButtonsPane" layoutX="389.0" layoutY="25.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" visible="false" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">
          <children>
             <Label fx:id="nameLabel1" alignment="CENTER" layoutX="23.0" layoutY="-3.0" prefHeight="81.0" prefWidth="321.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" textAlignment="CENTER" textFill="#fff702">
@@ -267,6 +266,25 @@
                </image></ImageView>
          </children>
       </AnchorPane>
+      <ImageView fx:id="diceButton" fitHeight="100.0" fitWidth="100.0" layoutX="1350.0" layoutY="957.0" onMouseClicked="#rollDice">
+         <image>
+            <Image url="@../../assets/gameScreen/Dice/dice_icon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="dicePane" layoutX="1304.0" layoutY="957.0" prefHeight="99.0" prefWidth="230.0" visible="false">
+         <children>
+            <ImageView fx:id="secondDie" fitHeight="100.0" fitWidth="100.0" layoutX="130.0">
+               <image>
+                  <Image url="@../../assets/gameScreen/Dice/1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="firstDie" fitHeight="100.0" fitWidth="100.0">
+               <image>
+                  <Image url="@../../assets/gameScreen/Dice/1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <ImageView fx:id="settingsButton" fitHeight="59.0" fitWidth="57.0" layoutX="347.0" layoutY="4.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/settings/settings.png" />
@@ -287,31 +305,6 @@
             <Image url="@../../assets/gameScreen/Build/tradeButton.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">
-         <children>
-            <ImageView fitHeight="505.0" fitWidth="862.0" layoutX="590.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/gameScreen/exit.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/settings/sound_ON.png" />
-               </image>
-            </ImageView>
-            <Slider fx:id="volumeSlider" layoutX="809.0" layoutY="522.0" prefHeight="66.0" prefWidth="294.0" value="100.0" />
-            <ImageView fx:id="settingsButton2" fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/settings/settings.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="tradePane" layoutX="862.0" layoutY="443.0" prefHeight="509.0" prefWidth="658.0" styleClass="buildPanel" visible="false">
          <children>
             <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="135.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
@@ -412,6 +405,70 @@
             <ImageView fx:id="playerTrading" fitHeight="266.0" fitWidth="166.0" layoutX="331.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="piratePane" layoutX="674.0" layoutY="298.0" prefHeight="509.0" prefWidth="658.0" styleClass="buildPanel" visible="false">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="156.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/clay.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="361.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/rock.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="156.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wood.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="361.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wool.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="156.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/materials/wheat.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="pirateClay" layoutX="251.0" layoutY="101.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="pirateRock" layoutX="456.0" layoutY="101.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="pirateWood" layoutX="251.0" layoutY="176.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="pirateWool" layoutX="456.0" layoutY="176.0" prefHeight="40.0" prefWidth="80.0" />
+            <ChoiceBox fx:id="pirateWheat" layoutX="251.0" layoutY="263.0" prefHeight="40.0" prefWidth="80.0" />
+            <ImageView fx:id="giveToPirateButton" fitHeight="176.0" fitWidth="123.0" layoutX="389.0" layoutY="238.0" onMouseClicked="#takeMaterial">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">
+         <children>
+            <ImageView fitHeight="505.0" fitWidth="862.0" layoutX="590.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/gameScreen/exit.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/settings/sound_ON.png" />
+               </image>
+            </ImageView>
+            <Slider fx:id="volumeSlider" layoutX="809.0" layoutY="522.0" prefHeight="66.0" prefWidth="294.0" value="100.0" />
+            <ImageView fx:id="settingsButton2" fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/settings/settings.png" />
                </image>
             </ImageView>
          </children>

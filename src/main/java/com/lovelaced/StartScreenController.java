@@ -1,10 +1,6 @@
 package com.lovelaced;
 
 import java.io.IOException;
-
-import com.game.Game;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +10,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class StartScreenController {
 
@@ -48,15 +43,6 @@ public class StartScreenController {
 
     }
 
-    @FXML
-    void animationPop(MouseEvent event) {
-        ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + "#FFC31C" + ", 28, 0.7, 0, 0)");
-    }
-    @FXML
-    void animationPopUp(MouseEvent event) {
-        ((ImageView)event.getSource()).setStyle(null);
-    }
-
     private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
         root = FXMLLoader.load(getClass().getResource(name));
 
@@ -66,6 +52,15 @@ public class StartScreenController {
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setTitle(Player_Screen);
         stage.show();
+    }
+
+    @FXML
+    void animationPop(MouseEvent event) {
+        ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + "#FFC31C" + ", 28, 0.7, 0, 0)");
+    }
+    @FXML
+    void animationPopUp(MouseEvent event) {
+        ((ImageView)event.getSource()).setStyle(null);
     }
 
     @FXML

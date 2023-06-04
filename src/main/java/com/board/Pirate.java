@@ -29,16 +29,14 @@ public class Pirate {
 
 	public void moveHexagon(Hexagon hexagon) {
 		belongsTo.setHasPirate(null);
-		belongsTo.setCanProduce(true);
 
 		this.belongsTo = hexagon;
 
 		hexagon.setHasPirate(this);
-		hexagon.setCanProduce(false);
 	}
 
 	//If a player has more than 8 cards the pirate steals half of them.
-	public void stealFromPlayer(Player player, HashMap<String, Integer> suppliedMaterials){
+	public static void stealFromPlayer(Player player, HashMap<String, Integer> suppliedMaterials){
 		for(String s : suppliedMaterials.keySet()){
 			player.subtractMaterial(s, suppliedMaterials.get(s));
 		}

@@ -1,25 +1,26 @@
 package com.game;
 
-import com.board.Board;
 import com.board.Hexagon;
 import com.board.Pirate;
+
+import java.util.ArrayList;
 
 public class SpecialCard extends Card{
 	public SpecialCard(String name, int points) {
 		super(name, points);
 	}
 
-	public void usePirateCard(Player perpatrator, Player victim, Hexagon hexagon){
+	public void usePirateCard(Player perpetrator, Player victim, Hexagon hexagon, ArrayList<Hexagon> boardHexagons){
 		Pirate pirate;
-		for(Hexagon h : Board.getHexagonList()){
+		for(Hexagon h : boardHexagons){
 			if( h.getHasPirate() != null ){
 				pirate = h.getHasPirate();
 				pirate.moveHexagon(hexagon);
-				pirate.stealForPlayer(victim, perpatrator);
+				pirate.stealForPlayer(victim, perpetrator);
 				break;
 			}
 		}
-		Quest.addArmyAmount(perpatrator, 1);
+		Quest.addArmyAmount(perpetrator, 1);
 	}
 
 	public void takeMaterialFromPlayers(Player player, String material){

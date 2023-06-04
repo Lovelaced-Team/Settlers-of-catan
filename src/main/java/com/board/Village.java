@@ -3,7 +3,6 @@ package com.board;
 import com.game.Player;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Village extends Structure {
@@ -26,7 +25,7 @@ public class Village extends Structure {
 	}
 
 	public void build(HashMap<Integer, Hexagon> hexagonCorners) {
-		Boolean flag = false, tradingCost = false;
+		boolean flag = false, tradingCost = false;
 		Port port = null;
 		for (int position : hexagonCorners.keySet()) {
 			Structure[] structures = hexagonCorners.get(position).getStructures();

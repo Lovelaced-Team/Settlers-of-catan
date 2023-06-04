@@ -4,7 +4,6 @@ import com.game.Player;
 import javafx.scene.image.Image;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 //Class representing the hexagons of the game.
@@ -15,22 +14,18 @@ public class Hexagon implements Serializable{
 	private String biome;
 	private Image image;
 	private int number;
-	private boolean canProduce;
 	private Coordinates coords;
 	private Pirate hasPirate;
 	private Port port;
 	private Structure[] structures = new Structure[12];
-	private Coordinates[] structureCoords;
-	private ArrayList<Coordinates> coordinatesList = new ArrayList<>();
-	private static HashMap<String, String> biomeImages = new HashMap<String, String>(initializeBiomeImages()); //All the biome image sources.
+	private static HashMap<String, String> biomeImages = new HashMap<>(initializeBiomeImages()); //All the biome image sources.
 
-	public Hexagon(String biome, String image, int number, Coordinates coords, Pirate hasPirate, boolean canProduce, Port port) {
+	public Hexagon(String biome, String image, int number, Coordinates coords, Pirate hasPirate, Port port) {
 		this.biome = biome;
 		this.image = new Image(image);
 		this.number = number;
 		this.coords = coords;
 		this.hasPirate = hasPirate;
-		this.canProduce = canProduce;
 		this.port = port;
 
 		if( port != null ){
@@ -63,15 +58,13 @@ public class Hexagon implements Serializable{
 			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
 		}
 
-		this.canProduce = true;
 		if( biome.equals("Desert") ){
 			this.hasPirate = new Pirate(this);
-			this.canProduce = false;
 		}
 	}
 
 	public String toString() {
-		return this.biome + ", " + this.image + ", " + this.number + ", " + this.coords + ", " + this.hasPirate + ", " + this.canProduce + ", " + this.port;
+		return this.biome + ", " + this.image + ", " + this.number + ", " + this.coords + ", " + this.hasPirate + ", " + this.port;
 	}
 
 	public void addStructure(int position, Structure struct) {
@@ -82,20 +75,12 @@ public class Hexagon implements Serializable{
 		return this.coords;
 	}
 
-	public void setCoords(Coordinates coords) {
-		this.coords = coords;
-	}
-
 	public Pirate getHasPirate() {
 		return hasPirate;
 	}
 
 	public String getBiome() {
 		return biome;
-	}
-
-	public void setBiome(String biome) {
-		this.biome = biome;
 	}
 
 	public Image getImage() {
@@ -118,14 +103,6 @@ public class Hexagon implements Serializable{
 		this.hasPirate = pirate;
 	}
 
-	public boolean getCanProduce() {
-		return canProduce;
-	}
-
-	public void setCanProduce(boolean canProduce) {
-		this.canProduce = canProduce;
-	}
-
 	public Structure[] getStructures() {
 		return structures;
 	}
@@ -138,25 +115,9 @@ public class Hexagon implements Serializable{
 		return this.port;
 	}
 
-	public void setPort(Port port){
-		this.port = port;
-	}
-	//Returns an ArrayList with the players that have placed structures in this hexagon
-	public ArrayList<Player> hexagonToPlayer(){
-		ArrayList<Player> players = new ArrayList<>();
-
-		for(Structure s : structures){
-			if( s instanceof Village ){
-				players.add(s.getOwner());
-			}
-		}
-
-		return players;
-	}
-
 	//Returns a hashMap that contains an image source for every biome
 	public static HashMap<String, String> initializeBiomeImages(){
-		HashMap<String, String> biomeImageSources = new HashMap<String, String>();
+		HashMap<String, String> biomeImageSources = new HashMap<>();
 
 		try {
 			FileReader fileIn = new FileReader("src/main/resources/map/biomeImages.txt");
@@ -186,9 +147,9 @@ public class Hexagon implements Serializable{
 
 	//Produces materials and adds them to a player.
 	public void produceMaterials(Player player){
-		if( this.canProduce ){
+		if( getHasPirate() == null ){
 			for(int i = 0; i<12; i += 2){
-				if( structures[i].getOwner().equals(player) && structures[i] instanceof Village ){
+				if( structures[i] instanceof Village && structures[i].getOwner().equals(player) ){
 					player.addMaterial(this.biome, structures[i].getPoints());
 					break;
 				}

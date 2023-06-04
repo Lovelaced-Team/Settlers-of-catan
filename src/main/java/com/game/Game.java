@@ -7,35 +7,40 @@ import java.util.Collections;
 public class Game {
 	private static ArrayList<Player> players = new ArrayList<>();
 	private static ArrayList<Card> cards = new ArrayList<>();
-	private static int currentPlayer;
-	private static Board board;
-	private static Quest quest;
+	private int currentPlayer;
+	private Board board;
+	private Quest quest;
+
+	private int round;
 
 	public Game() {
-		board = new Board();
-		quest = new Quest(players);
-		Game.currentPlayer = 0;
-        Game.initializeCards();
+		this.board = new Board();
+		this.quest = new Quest(players);
+		this.currentPlayer = 0;
+		this.round = 1;
+		initializeCards();
 	}
-	public static Player getCurrentPlayer(){
+	public Player getCurrentPlayer(){
 		return Game.players.get(currentPlayer);
 	}
 
-	public static void endTurn(){
-		Game.currentPlayer++;
-		if( Game.currentPlayer == Game.players.size() ){
-			Game.currentPlayer = 0;
+	public void endTurn(){
+		this.currentPlayer++;
+		if( this.currentPlayer == Game.players.size() ){
+			this.currentPlayer = 0;
 		}
+		round++;
 	}
 
 	//Checks if the current player has reached 10 points
-	public static boolean hasWon(){
-		return Game.getCurrentPlayer().getPoints() == 10;
+	public boolean hasWon(){
+		return this.getCurrentPlayer().getPoints() == 10;
 	}
 
 	//Creates the special cards, adds them to a cards list and shuffles it.
 	//Need to add image paths
-	public static void initializeCards() {
+	public void initializeCards() {
+		cards.clear();
         for(int i=0; i<29; i++)
 			Game.cards.add(new SpecialCard("Pirate",0));
 		
@@ -55,7 +60,7 @@ public class Game {
 
 	//Updates the materials for all the players that have built a structure on the hexagon that got rolled.
 	public void updateMaterials(int rolledNumber){
-		for(Hexagon h : Board.getHexagonList()){
+		for(Hexagon h : board.getHexagonList()){
 			if( h.getNumber() == rolledNumber ){
 				for(Player p : Game.players){
 					h.produceMaterials(p);
@@ -74,5 +79,17 @@ public class Game {
 
 	public static void addPlayer(Player player){
 		players.add(player);
+	}
+
+	public Board getBoard(){
+		return this.board;
+	}
+
+	public Quest getQuest(){
+		return this.quest;
+	}
+
+	public int getRound(){
+		return this.round;
 	}
 }

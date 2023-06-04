@@ -13,10 +13,10 @@ public class Board {
 	private final double YLOCATION = 0;
 	private final double XOFFSET = 161;
 	private final double YOFFSET = 140;
-	private static ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
-	private static HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonCorners = new HashMap<>();
+	private ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
+	private HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonCorners = new HashMap<>();
 
-	private static HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonEdges = new HashMap<>();
+	private HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonEdges = new HashMap<>();
 	private HashMap<Integer, String> biomes = new HashMap<>();
 
 	public Board() {
@@ -38,7 +38,7 @@ public class Board {
 			String line = reader.readLine();
 
 			while (line != null) {
-				String hexagonLocations[] = line.split(" "); //Stores all the 3 digit numbers that a line contain seperately
+				String hexagonLocations[] = line.split(" "); //Stores all the 3-digit numbers that a line contain separately
 
 				for(String s : hexagonLocations) {
 					coords = new Coordinates(currentX, currentY);
@@ -54,7 +54,7 @@ public class Board {
 					String biome = biomes.get(Integer.parseInt(String.valueOf(s.charAt(2))));
 					if ( biome != null ){
 						Hexagon hexagon = new Hexagon(coords, biome, port);
-						hexagons.add(hexagon);
+						addHexagon(hexagon);
 						addHexagonCorners(hexagon);
 						addHexagonEdges(hexagon);
 					}
@@ -82,19 +82,37 @@ public class Board {
 	}
 
 	public void addHexagon(Hexagon e) {
-		Board.hexagons.add(e);
+		this.hexagons.add(e);
 	}
 
-	public static HashMap <Coordinates, HashMap<Integer, Hexagon>> getHexagonCorners() {
-		return Board.hexagonCorners;
+	public HashMap <Coordinates, HashMap<Integer, Hexagon>> getHexagonCorners() {
+		return this.hexagonCorners;
 	}
 
-	public static HashMap<Coordinates, HashMap<Integer, Hexagon>> getHexagonEdges() {
-		return Board.hexagonEdges;
+	public HashMap<Coordinates, HashMap<Integer, Hexagon>> getHexagonEdges() {
+		return this.hexagonEdges;
 	}
 
-	public static ArrayList<Hexagon> getHexagonList() {
-		return Board.hexagons;
+	public ArrayList<Hexagon> getHexagonList() {
+		return this.hexagons;
+	}
+
+	public Hexagon coordinatesToHexagon(Coordinates coords) {
+		for(Hexagon hexagon : getHexagonList()){
+			if( hexagon.getCoords().equals(coords) ) {
+				return hexagon;
+			}
+		}
+		return null;
+	}
+
+	public Hexagon getHexagonContainingPirate() {
+		for(Hexagon hexagon : getHexagonList()){
+			if( hexagon.getHasPirate() != null ) {
+				return hexagon;
+			}
+		}
+		return null;
 	}
 
 	//Sets a random number for every hexagon.
@@ -142,11 +160,11 @@ public class Board {
 		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7, hexagon.getCoords().getY()+133), 10);
 
 		for(Coordinates coords : coordsToCorners.keySet()) {
-			if( !Board.hexagonCorners.containsKey(coords) ){
-				Board.hexagonCorners.put(coords, new HashMap<Integer, Hexagon>());
+			if( !this.hexagonCorners.containsKey(coords) ){
+				this.hexagonCorners.put(coords, new HashMap<>());
 			}
-			if ( !Board.hexagonCorners.get(coords).containsKey(coordsToCorners.get(coords)) ){
-				Board.hexagonCorners.get(coords).put(coordsToCorners.get(coords), hexagon);
+			if ( !this.hexagonCorners.get(coords).containsKey(coordsToCorners.get(coords)) ){
+				this.hexagonCorners.get(coords).put(coordsToCorners.get(coords), hexagon);
 			}
 		}
 	}
@@ -168,11 +186,11 @@ public class Board {
 		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-8, hexagon.getCoords().getY()+82), 11);
 
 		for(Coordinates coords : coordsToEdges.keySet()) {
-			if( !Board.hexagonEdges.containsKey(coords) ){
-				Board.hexagonEdges.put(coords, new HashMap<Integer, Hexagon>());
+			if( !this.hexagonEdges.containsKey(coords) ){
+				this.hexagonEdges.put(coords, new HashMap<>());
 			}
-			if ( !Board.hexagonEdges.get(coords).containsKey(coordsToEdges.get(coords)) ){
-				Board.hexagonEdges.get(coords).put(coordsToEdges.get(coords), hexagon);
+			if ( !this.hexagonEdges.get(coords).containsKey(coordsToEdges.get(coords)) ){
+				this.hexagonEdges.get(coords).put(coordsToEdges.get(coords), hexagon);
 			}
 		}
 	}

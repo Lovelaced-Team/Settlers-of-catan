@@ -1,10 +1,5 @@
 package com.game;
 
-import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 abstract public class Card {
 	protected String name;
 	protected int points;

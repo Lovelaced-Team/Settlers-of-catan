@@ -14,8 +14,8 @@ public class Player {
 	private String color;
 	private int points;
 
-	private ArrayList<Card> cards = new ArrayList<>(); //ArrayList with all of the player's cards.
-	private HashMap<String, ArrayList<Structure>> structures = new HashMap<>(); //HashMap storing the amount of structures that the player has build.
+	private ArrayList<Card> cards = new ArrayList<>(); //ArrayList with all the player's cards.
+	private HashMap<String, ArrayList<Structure>> structures = new HashMap<>(); //HashMap storing the amount of structures that the player has built.
 	private HashMap<String, Integer> materials = new HashMap<>(); //HashMap storing the amount of every material that the player owns.
 	private HashMap<String, Integer> materialTradingCost = new HashMap<>(); //HashMap storing the trading cost for every material.
 	
@@ -38,19 +38,12 @@ public class Player {
 	}
 
 	public void initializeMaterialAmounts(){
-		//giorgo na to allaksw apla kanw test
-		/*this.materials.put("Rock", 0);
-		this.materials.put("Wheat", 4);
-		this.materials.put("Wood", 6);
-		this.materials.put("Wool", 4);
-		this.materials.put("Clay", 6);
-		this.materials.put("Sum", 12);*/
-		this.materials.put("Rock", 100);
-		this.materials.put("Wheat", 100);
-		this.materials.put("Wood", 100);
-		this.materials.put("Wool", 100);
-		this.materials.put("Clay", 100);
-		this.materials.put("Sum", 500);
+		this.materials.put("Rock", 0);
+		this.materials.put("Wheat", 2);
+		this.materials.put("Wood", 4);
+		this.materials.put("Wool", 2);
+		this.materials.put("Clay", 4);
+		this.materials.put("Sum", 12);
 	}
 
 	public void initializeMaterialTradingCost(){
@@ -138,7 +131,7 @@ public class Player {
 		this.cards.remove(c);
 	}
 
-	public boolean getSpecialCard() {
+	public void getSpecialCard() {
 		if( Game.getCardList().size() > 0) {
 			if( this.materials.get("Wool") > 1 &&
 				this.materials.get("Rock") > 1 &&
@@ -156,13 +149,11 @@ public class Player {
 				this.addCard(card);
 
 				cards.remove(card);
-				return true;
 			}
 		}
-		return false;
 	}
 
-	//Method that takes specific materials from a player and gives gives him the one he choose
+	//Method that takes specific materials from a player and gives him the one he chose
 	public void tradeWithBank(String material, String suppliedMaterial, Integer amount) {
 		if(this.getMaterialAmount(suppliedMaterial) >= amount) {
 			this.subtractMaterial(suppliedMaterial, amount);
