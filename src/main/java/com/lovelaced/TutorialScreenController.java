@@ -48,6 +48,16 @@ public class TutorialScreenController {
         sceneGenerator("StartScreen-view.fxml", event, "Start Screen");
     }
 
+    @FXML
+    void animationPop(MouseEvent event) {
+        String color = "#FF48B3";
+        ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + color + ", 28, 0.7, 0, 0)");
+    }
+    @FXML
+    void animationPopUp(MouseEvent event) {
+        ((ImageView)event.getSource()).setStyle(null);
+    }
+
     private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
         root = FXMLLoader.load(getClass().getResource(name));
 

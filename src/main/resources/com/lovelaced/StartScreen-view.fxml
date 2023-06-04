@@ -11,7 +11,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="startButton" fitHeight="162.0" fitWidth="357.0" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="startButton" fitHeight="162.0" fitWidth="357.0" onMouseClicked="#mouseClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/startScreen/start.png" />
                </image>
@@ -22,7 +22,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="tutorialButton" fitHeight="90.0" fitWidth="252.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="tutorialButton" fitHeight="90.0" fitWidth="252.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/startScreen/tutorial.png" />
                </image>
@@ -33,7 +33,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="exitButton" fitHeight="90.0" fitWidth="206.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitButton" fitHeight="90.0" fitWidth="206.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
@@ -51,7 +51,7 @@
       </VBox>
    </center>
    <bottom>
-      <ImageView fx:id="creditsButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#mouseClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
+      <ImageView fx:id="creditsButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#mouseClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
          <image>
             <Image url="@../../assets/startScreen/credits.png" />
          </image>

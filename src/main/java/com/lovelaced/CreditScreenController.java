@@ -31,6 +31,18 @@ public class CreditScreenController {
 
     }
 
+
+    @FXML
+    void animationPop(MouseEvent event) {
+        String color = "#1DCC04";
+        ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + color + ", 28, 0.7, 0, 0)");
+    }
+    @FXML
+    void animationPopUp(MouseEvent event) {
+        ((ImageView)event.getSource()).setStyle(null);
+    }
+
+
     private void configureStage(Stage stage, String stageTitle) throws IOException {
         stage.getScene().setRoot(root);
         stage.setFullScreen(true);

@@ -267,22 +267,22 @@
                </image></ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="347.0" layoutY="4.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="settingsButton" fitHeight="59.0" fitWidth="57.0" layoutX="347.0" layoutY="4.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/settings/settings.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="buildButton" fitHeight="115.0" fitWidth="115.0" layoutX="747.0" layoutY="957.0" onMouseClicked="#buildMenu" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="buildButton" fitHeight="115.0" fitWidth="115.0" layoutX="747.0" layoutY="957.0" onMouseClicked="#buildMenu" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/gameScreen/Build/buildButton.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="1055.0" layoutY="957.0" onMouseClicked="#endTurn">
+      <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="1055.0" layoutY="957.0" onMouseClicked="#endTurn" onMouseEntered="#animationPop" onMouseExited="#animationPopUp">
          <image>
             <Image url="@../../assets/gameScreen/Build/endTurn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tradeButton" fitHeight="115.0" fitWidth="115.0" layoutX="901.0" layoutY="957.0" onMouseClicked="#tradeMenu">
+      <ImageView fx:id="tradeButton" fitHeight="115.0" fitWidth="115.0" layoutX="901.0" layoutY="957.0" onMouseClicked="#tradeMenu" onMouseEntered="#animationPop" onMouseExited="#animationPopUp">
          <image>
             <Image url="@../../assets/gameScreen/Build/tradeButton.png" />
          </image>
@@ -294,18 +294,18 @@
                   <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/settings/sound_ON.png" />
                </image>
             </ImageView>
             <Slider fx:id="volumeSlider" layoutX="809.0" layoutY="522.0" prefHeight="66.0" prefWidth="294.0" value="100.0" />
-            <ImageView fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="settingsButton2" fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/settings/settings.png" />
                </image>

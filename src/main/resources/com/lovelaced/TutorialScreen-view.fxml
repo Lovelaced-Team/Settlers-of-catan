@@ -18,7 +18,7 @@
       </ImageView>
    </center>
    <bottom>
-      <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exit" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Exit.png" />
          </image>
@@ -31,7 +31,7 @@
       </ImageView>
    </bottom>
    <left>
-      <ImageView fx:id="leftArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" pickOnBounds="true" preserveRatio="true" visible="false" BorderPane.alignment="CENTER">
+      <ImageView fx:id="leftArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" visible="false" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Left.png" />
          </image>
@@ -41,7 +41,7 @@
       </ImageView>
    </left>
    <right>
-      <ImageView fx:id="rightArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="rightArrow" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changePage" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../../assets/tutorialScreen/Parts/Tutorial_Right.png" />
          </image>

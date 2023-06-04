@@ -3,6 +3,8 @@ package com.lovelaced;
 import com.board.*;
 import com.game.*;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -50,7 +53,7 @@ public class GameScreenController {
     private Label nameLabel1, nameLabel2, nameLabel3, nameLabel4;
 
     @FXML
-    private ImageView playerBoard1, playerBoard2, playerBoard3, playerBoard4, playerTrading;
+    private ImageView playerBoard1, playerBoard2, playerBoard3, playerBoard4, playerTrading, settingsButton, settingsButton2, exitButton;
 
 
     @FXML
@@ -82,6 +85,52 @@ public class GameScreenController {
     // in order to connect a road.
     private boolean hasBuiltVillage;
     private int round;
+
+
+    @FXML
+    void animationPop(MouseEvent event) {
+        if(((ImageView)event.getSource()) == settingsButton || ((ImageView)event.getSource()) == settingsButton2 ||
+                ((ImageView)event.getSource()) == exitButton|| ((ImageView)event.getSource()) == sound)
+            ((ImageView)event.getSource()).setStyle("-fx-effect: dropShadow(gaussian, " + "#1DCC04" + ", 28, 0, 0, 0)");
+        else {
+            TranslateTransition translate = new TranslateTransition();
+            ScaleTransition scale = new ScaleTransition();
+
+            translate.setToY(-12);
+            scale.setToX(1.07);
+            scale.setToY(1.07);
+            scale.setDuration(Duration.millis(700));
+            translate.setDuration(Duration.millis(500));
+            scale.setAutoReverse(true);
+            translate.setAutoReverse(true);
+            scale.setNode((ImageView)event.getSource());
+            translate.setNode((ImageView)event.getSource());
+            scale.play();
+            translate.play();
+        }
+    }
+    @FXML
+    void animationPopUp(MouseEvent event) {
+        if(((ImageView)event.getSource()) == settingsButton || ((ImageView)event.getSource()) == settingsButton2 ||
+                ((ImageView)event.getSource()) == exitButton|| ((ImageView)event.getSource()) == sound)
+            ((ImageView)event.getSource()).setStyle(null);
+        else {
+            TranslateTransition translate = new TranslateTransition();
+            ScaleTransition scale = new ScaleTransition();
+
+            translate.setToY(0);
+            scale.setToX(1);
+            scale.setToY(1);
+            scale.setDuration(Duration.millis(700));
+            translate.setDuration(Duration.millis(500));
+            scale.setAutoReverse(true);
+            translate.setAutoReverse(true);
+            scale.setNode((ImageView) event.getSource());
+            translate.setNode((ImageView) event.getSource());
+            scale.play();
+            translate.play();
+        }
+    }
 
     // Start the game board
     public void startBoard() throws FileNotFoundException {
@@ -715,6 +764,7 @@ public class GameScreenController {
         assert cards2 != null : "fx:id=\"cards2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards3 != null : "fx:id=\"cards3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert cards4 != null : "fx:id=\"cards4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials1 != null : "fx:id=\"materials1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials2 != null : "fx:id=\"materials2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert materials3 != null : "fx:id=\"materials3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -729,6 +779,8 @@ public class GameScreenController {
         assert playerBoard3 != null : "fx:id=\"playerBoard3\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerBoard4 != null : "fx:id=\"playerBoard4\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert playerTrading != null : "fx:id=\"playerTrading\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert settingsButton != null : "fx:id=\"settingsButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert settingsButton2 != null : "fx:id=\"settingsButton2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert sound != null : "fx:id=\"sound\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats1 != null : "fx:id=\"stats1\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert stats2 != null : "fx:id=\"stats2\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
@@ -743,6 +795,7 @@ public class GameScreenController {
         assert tradeWheat != null : "fx:id=\"tradeWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradeWood != null : "fx:id=\"tradeWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradeWool != null : "fx:id=\"tradeWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
+        assert tradingButton != null : "fx:id=\"tradingButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingClay != null : "fx:id=\"tradingClay\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingRock != null : "fx:id=\"tradingRock\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingWheat != null : "fx:id=\"tradingWheat\" was not injected: check your FXML file 'GameScreen-view.fxml'.";

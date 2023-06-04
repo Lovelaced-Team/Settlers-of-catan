@@ -94,7 +94,7 @@
                      </image>
                   </ImageView>
                </children></AnchorPane>
-            <ImageView fx:id="leftAddButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#leftClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fx:id="leftAddButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#leftClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Left.png" />
                </image>
@@ -105,7 +105,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="rightAddButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#rightClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="rightAddButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#rightClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Right.png" />
                </image>
@@ -202,7 +202,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
+                  <TextField fx:id="thirdField" alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -249,6 +249,11 @@
                         <Image url="@../../assets/playerCustomizationScreen/Color_Picker_Arrow.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="leftDelete" fitHeight="88.0" fitWidth="110.0" layoutX="20.0" layoutY="21.0" onMouseClicked="#deletePlayer" pickOnBounds="true" preserveRatio="true" rotate="-47.0">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Right.png" />
+                     </image>
+                  </ImageView>
                </children>
                <GridPane.margin>
                   <Insets left="180.0" />
@@ -271,7 +276,7 @@
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
+                  <TextField fx:id="fourthField" alignment="CENTER" layoutX="321.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#nameTyped" prefHeight="95.0" prefWidth="269.0" promptText="..." styleClass="playerNameTextField" stylesheets="@../../styles/style.css">
                      <font>
                         <Font name="Nirmala UI Bold" size="34.0" />
                      </font>
@@ -318,6 +323,11 @@
                         <Image url="@../../assets/playerCustomizationScreen/Color_Picker_Arrow.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="rightDelete" fitHeight="88.0" fitWidth="110.0" layoutX="20.0" layoutY="21.0" onMouseClicked="#deletePlayer" pickOnBounds="true" preserveRatio="true" rotate="-47.0">
+                     <image>
+                        <Image url="@../../assets/playerCustomizationScreen/Add_Player_Button_Right.png" />
+                     </image>
+                  </ImageView>
                </children>
                <GridPane.margin>
                   <Insets left="140.0" />
@@ -339,12 +349,12 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exitClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exitClicked" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" onMouseClicked="#startGame" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" onMouseClicked="#startGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Play_Button.png" />
                </image>
