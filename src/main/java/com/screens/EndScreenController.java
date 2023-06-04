@@ -1,4 +1,4 @@
-package com.lovelaced;
+package com.screens;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

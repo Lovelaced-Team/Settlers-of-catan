@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#escape" prefHeight="1080.0" prefWidth="1920.0" styleClass="gameScreenBackGround" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screens.GameScreenController">
    <children>
       <AnchorPane fx:id="boardPane" layoutX="389.0" layoutY="-2.0" prefHeight="1030.0" prefWidth="1144.0" stylesheets="@../../styles/style.css" />
       <AnchorPane layoutY="8.0" prefHeight="458.0" prefWidth="392.0">

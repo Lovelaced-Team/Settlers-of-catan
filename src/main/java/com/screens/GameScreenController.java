@@ -1,4 +1,4 @@
-package com.lovelaced;
+package com.screens;
 
 import com.board.*;
 import com.game.*;

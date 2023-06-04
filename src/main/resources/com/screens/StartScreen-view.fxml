@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="startPane" onMouseClicked="#mouseClicked" prefHeight="1080.0" prefWidth="1920.0" styleClass="startScreen" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lovelaced.StartScreenController">
+<BorderPane fx:id="startPane" onMouseClicked="#mouseClicked" prefHeight="1080.0" prefWidth="1920.0" styleClass="startScreen" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screens.StartScreenController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>

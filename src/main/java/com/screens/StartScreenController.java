@@ -1,4 +1,4 @@
-package com.lovelaced;
+package com.screens;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

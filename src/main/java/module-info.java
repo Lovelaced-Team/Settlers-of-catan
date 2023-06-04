@@ -1,4 +1,4 @@
-module com.lovelaced {
+module com.screens {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -8,6 +8,6 @@ module com.lovelaced {
     requires com.almasb.fxgl.all;
     requires javafx.media;
 
-    opens com.lovelaced to javafx.fxml;
-    exports com.lovelaced;
+    opens com.screens to javafx.fxml;
+    exports com.screens;
 }

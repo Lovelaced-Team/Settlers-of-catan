@@ -1,4 +1,4 @@
-package com.lovelaced;
+package com.screens;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

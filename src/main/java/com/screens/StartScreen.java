@@ -1,4 +1,4 @@
-package com.lovelaced;
+package com.screens;
 
 import com.game.Music;
 import javafx.application.Application;
