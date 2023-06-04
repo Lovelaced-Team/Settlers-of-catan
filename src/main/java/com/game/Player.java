@@ -153,6 +153,15 @@ public class Player {
 		}
 	}
 
+	public Card getSelectedCard(String cardToFind){
+		for(Card card : this.cards) {
+			if( card.getName().equals(cardToFind) ){
+				return card;
+			}
+		}
+		return null;
+	}
+
 	//Method that takes specific materials from a player and gives him the one he chose
 	public void tradeWithBank(String material, String suppliedMaterial, Integer amount) {
 		if(this.getMaterialAmount(suppliedMaterial) >= amount) {

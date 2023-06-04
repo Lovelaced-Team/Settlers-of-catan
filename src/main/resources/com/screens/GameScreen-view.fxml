@@ -352,12 +352,12 @@
                   <Image url="@../../assets/gameScreen/tradeWithBank.png" />
                </image>
             </ImageView>
-            <TextField fx:id="tradePlayerName" layoutX="429.0" layoutY="130.0" prefHeight="40.0" prefWidth="174.0">
+            <TextField fx:id="tradePlayerName" layoutX="429.0" layoutY="130.0" prefHeight="40.0" prefWidth="174.0" styleClass="playerNameTextFieldGameScreen">
                <font>
                   <Font size="19.0" />
                </font>
             </TextField>
-            <TextField fx:id="bankTradeMaterial" layoutX="454.0" layoutY="282.0" prefHeight="40.0" prefWidth="137.0">
+            <TextField fx:id="bankTradeMaterial" layoutX="454.0" layoutY="282.0" prefHeight="40.0" prefWidth="137.0" styleClass="playerNameTextFieldGameScreen">
                <font>
                   <Font size="19.0" />
                </font>
@@ -446,6 +446,18 @@
                   <Image url="@../../assets/gameScreen/Character_Window_blue.png" />
                </image>
             </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cardPane" layoutX="674.0" layoutY="298.0" prefHeight="509.0" prefWidth="658.0" styleClass="buildPanel" visible="false">
+         <children>
+            <ImageView fx:id="takeMaterials" fitHeight="120.0" fitWidth="120.0" layoutX="276.0" layoutY="159.0" onMouseClicked="#getCard">
+               <image>
+                  <Image url="@../../assets/gameScreen/tradeWithPlayer.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="firstMaterial" layoutX="102.0" layoutY="186.0" prefHeight="44.0" prefWidth="159.0" styleClass="playerNameTextFieldGameScreen" visible="false" />
+            <TextField fx:id="secondMaterial" layoutX="411.0" layoutY="186.0" prefHeight="44.0" prefWidth="159.0" styleClass="playerNameTextFieldGameScreen" visible="false" />
+            <ChoiceBox fx:id="selectVictim" layoutX="261.0" layoutY="69.0" prefHeight="50.0" prefWidth="150.0" styleClass="playerNameTextFieldGameScreen" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="menuScreen" prefHeight="1080.0" prefWidth="1924.0" styleClass="menuScreen" stylesheets="@../../styles/style.css" visible="false">

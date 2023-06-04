@@ -51,7 +51,7 @@ public class Pirate {
 			ArrayList<String> materials = new ArrayList<>(); //Array that contains only the names of the materials that the victim possesses
 
 			for(String material : victimMaterials.keySet()){
-				if( victimMaterials.get(material) > 0 ){
+				if( victimMaterials.get(material) > 0 && !material.equals("Sum")){
 					materials.add(material);
 				}
 			}
@@ -66,8 +66,12 @@ public class Pirate {
 			int cardToBeRemovedRandomIndex = rand.nextInt(cards.size());
 			Card cardToBeRemoved = cards.get(cardToBeRemovedRandomIndex);
 
-			victim.removeCard(cardToBeRemoved);
-			perpetrator.addCard(cardToBeRemoved);
+			if(victim.getCardListSize() == 1) {
+				if (!cardToBeRemoved.getName().equals("LongestRoad") && !cardToBeRemoved.getName().equals("LongestArmy")) {
+					victim.removeCard(cardToBeRemoved);
+					perpetrator.addCard(cardToBeRemoved);
+				}
+			}
 		}
 	}
 

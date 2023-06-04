@@ -20,7 +20,14 @@ public class Quest {
         }
     }
     public void setHasLongestRoad(Player player) {
-        Quest.hasLongestArmy = player;
+        SpecialCard card = new SpecialCard("LongestRoad", 2);
+        if(Quest.hasLongestRoad != null) {
+            card = (SpecialCard) Quest.hasLongestRoad.getSelectedCard("LongestRoad");
+            Quest.hasLongestRoad.removeCard(card);
+        }
+
+        Quest.hasLongestRoad = player;
+        if(card!=null) Quest.hasLongestRoad.addCard(card);
     }
 
     public Player getHasLongestRoad(){
@@ -36,9 +43,13 @@ public class Quest {
     }
 
     public static void setHasLongestArmy(Player player) {
-        Quest.hasLongestArmy.subtractPoints(2);
+        SpecialCard card = new SpecialCard("LongestArmy", 2);
+        if( Quest.hasLongestArmy!=null ) {
+            card = (SpecialCard) Quest.hasLongestArmy.getSelectedCard("LongestArmy");
+            Quest.hasLongestArmy.removeCard(card);
+        }
         Quest.hasLongestArmy = player;
-        Quest.hasLongestArmy.addPoints(2);
+        if(card!=null) Quest.hasLongestArmy.addCard(card);
     }
 
     public Player getHasLongestArmy(){
