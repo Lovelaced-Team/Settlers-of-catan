@@ -403,7 +403,7 @@ public class GameScreenController {
             if (tradePane.isVisible()) tradePane.setVisible(false);
             if (buildPane.isVisible()) buildPane.setVisible(false);
             if(!hasBuiltVillage){
-                playersItems.get(game.getCurrentPlayer()).get(1).setStyle(null);
+                playersItems.get(game.getCurrentPlayer()).get(1).getParent().setStyle(null);
 
                 game.endTurn();
                 hasRolled = false;
@@ -415,7 +415,7 @@ public class GameScreenController {
                 circleGroup.getChildren().clear();
                 upgradeButtonMode = false;
 
-                playersItems.get(game.getCurrentPlayer()).get(1).setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
+                playersItems.get(game.getCurrentPlayer()).get(1).getParent().setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
 
 
                 if( game.getRound() <= Game.getPlayerList().size() * 2 ) {
@@ -760,7 +760,7 @@ public class GameScreenController {
     // Initialize player information on the UI
     private void initializePlayers() throws FileNotFoundException {
         Music.changeSong(Music.gameScreenSong);
-        playerBoard1.setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
+        nameLabel1.getParent().setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
         initializePlayerItemsMap();
         initializePlayerInfo();
         initializeMaterialList();

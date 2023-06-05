@@ -2,13 +2,14 @@ package com.game;
 
 import com.board.Structure;
 import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 
 //Class representing the player. Each Player has a name, an avatar, a color and points.
-public class Player {
+public class Player implements Comparable {
 	private String name;
 	private Image avatar;
 	private String color;
@@ -38,12 +39,12 @@ public class Player {
 	}
 
 	public void initializeMaterialAmounts(){
-		this.materials.put("Rock", 0);
-		this.materials.put("Wheat", 2);
-		this.materials.put("Wood", 4);
-		this.materials.put("Wool", 2);
-		this.materials.put("Clay", 4);
-		this.materials.put("Sum", 12);
+		this.materials.put("Rock", 100);
+		this.materials.put("Wheat", 200);
+		this.materials.put("Wood", 400);
+		this.materials.put("Wool", 200);
+		this.materials.put("Clay", 400);
+		this.materials.put("Sum", 1300);
 	}
 
 	public void initializeMaterialTradingCost(){
@@ -211,5 +212,12 @@ public class Player {
 				this.avatar.equals(p.avatar) &&
 				this.color.equals(p.color) &&
 				this.points == p.points;
+	}
+
+	@Override
+	public int compareTo( Object player) {
+		if(this.points < ((Player)player).getPoints()) return 1;
+		else if(this.points > ((Player)player).getPoints()) return -1;
+		else return 0;
 	}
 }

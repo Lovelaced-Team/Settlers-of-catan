@@ -29,7 +29,7 @@ public class PlayerCustomizationController {
     private HashMap<String,ImageView> selectedFlasks = new HashMap<>();
     private HashMap<String, String> selectedNameFields = new HashMap<>();
     private HashMap<String, Image> selectedPlayers = new HashMap<>();
-    private HashSet<String> playerNames = new HashSet<>();
+
 
     @FXML
     private ImageView arrow1, arrow2, arrow3, arrow4;
@@ -85,6 +85,7 @@ public class PlayerCustomizationController {
     }
 
     public boolean checkForDuplicates(){
+        HashSet<String> playerNames = new HashSet<>();
         playerNames.addAll(selectedNameFields.values());
 
         if(playerNames.size() != selectedNameFields.values().size()){

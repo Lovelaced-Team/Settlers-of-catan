@@ -2,22 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="endScreen" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screens.EndScreenController">
-   <center>
-      <ImageView fitHeight="587.0" fitWidth="724.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../assets/endScreen/endScreen.png" />
-         </image>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </ImageView>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="endScreen" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screens.EndScreenController">
    <bottom>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -46,4 +39,35 @@
          </children>
       </VBox>
    </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="587.0" fitWidth="724.0" layoutX="592.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/endScreen/endScreen.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="first" alignment="CENTER" layoutX="643.0" layoutY="364.0" prefHeight="48.0" prefWidth="118.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" text="kalhspera" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Nirmala UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="second" alignment="CENTER" layoutX="794.0" layoutY="414.0" prefHeight="48.0" prefWidth="118.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" text="kalhspera" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Nirmala UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="third" alignment="CENTER" layoutX="956.0" layoutY="482.0" prefHeight="48.0" prefWidth="118.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" text="kalhspera" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Nirmala UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="fourth" alignment="CENTER" layoutX="1126.0" layoutY="545.0" prefHeight="48.0" prefWidth="118.0" styleClass="playerNameTextFieldGameScreen" stylesheets="@../../styles/style.css" text="kalhspera" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Nirmala UI" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>
