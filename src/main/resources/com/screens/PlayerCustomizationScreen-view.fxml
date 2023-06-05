@@ -354,12 +354,20 @@
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
+            <TextField fx:id="errorMessage" editable="false" prefHeight="72.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Duplicate Names" visible="false">
+               <HBox.margin>
+                  <Insets left="1130.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Nirmala UI Bold" size="34.0" />
+               </font>
+            </TextField>
             <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" onMouseClicked="#startGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/playerCustomizationScreen/Play_Button.png" />
                </image>
                <HBox.margin>
-                  <Insets bottom="10.0" left="1390.0" />
+                  <Insets bottom="10.0" left="20.0" />
                </HBox.margin>
             </ImageView>
          </children>

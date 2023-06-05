@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import com.game.Game;
 import com.game.Player;
@@ -28,6 +29,7 @@ public class PlayerCustomizationController {
     private HashMap<String,ImageView> selectedFlasks = new HashMap<>();
     private HashMap<String, String> selectedNameFields = new HashMap<>();
     private HashMap<String, Image> selectedPlayers = new HashMap<>();
+    private HashSet<String> playerNames = new HashSet<>();
 
     @FXML
     private ImageView arrow1, arrow2, arrow3, arrow4;
@@ -44,6 +46,9 @@ public class PlayerCustomizationController {
     @FXML
     private ImageView firstPlayer, secondPlayer, thirdPlayer, fourthPlayer;
 
+    @FXML
+    private TextField errorMessage;
+
     private Stage stage;
     private Parent root;
 
@@ -57,7 +62,7 @@ public class PlayerCustomizationController {
         FileInputStream stream = new FileInputStream("src/main/resources/assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png");
         Image imgBlank = new Image(stream);
 
-        if(((ImageView)event.getSource()) == leftDelete) {
+        if(event.getSource() == leftDelete) {
             pane = pane3;
             thirdPlayer.setImage(imgBlank);
             thirdField.clear();
@@ -79,6 +84,18 @@ public class PlayerCustomizationController {
         pane.setVisible(false);
     }
 
+    public boolean checkForDuplicates(){
+        playerNames.addAll(selectedNameFields.values());
+
+        if(playerNames.size() != selectedNameFields.values().size()){
+            errorMessage.setVisible(true);
+            return true;
+        }
+
+        errorMessage.setVisible(false);
+        return false;
+    }
+
     @FXML
     public void startGame(MouseEvent event) throws IOException {
         Game.getPlayerList().clear();
@@ -87,25 +104,25 @@ public class PlayerCustomizationController {
         Image avatar;
         boolean playerCreationFilter = true;
 
-        for ( String pane : selectedNameFields.keySet()) {
-            if (selectedColors.containsKey(pane)) {
-                name = selectedNameFields.get(pane);
-                colored = selectedColors.get(pane);
-                avatar = selectedPlayers.get(pane);
-                if (!name.equals(""))
-                    Game.addPlayer(createPlayer(name, avatar, colored));
-                else
+        if( !checkForDuplicates() ) {
+            for (String pane : selectedNameFields.keySet()) {
+                if (selectedColors.containsKey(pane)) {
+                    name = selectedNameFields.get(pane);
+                    colored = selectedColors.get(pane);
+                    avatar = selectedPlayers.get(pane);
+                    if (!name.equals(""))
+                        Game.addPlayer(createPlayer(name, avatar, colored));
+                    else
+                        playerCreationFilter = false;
+                } else
                     playerCreationFilter = false;
-            } else
-                playerCreationFilter = false;
 
+            }
+
+            if (Game.getPlayerList().size() >= 2 && playerCreationFilter) {
+                sceneGenerator("GameScreen-view.fxml", event, "Game Screen");
+            }
         }
-        
-        if (Game.getPlayerList().size() >= 2 && playerCreationFilter) {
-            sceneGenerator("GameScreen-view.fxml", event, "Game Screen");
-        }
-
-
     }
 
     @FXML
@@ -181,7 +198,7 @@ public class PlayerCustomizationController {
     @FXML
     void animationPop(MouseEvent event) {
         String color;
-        if(((ImageView)event.getSource()) == leftAddButton || ((ImageView)event.getSource()) == rightAddButton)
+        if(event.getSource() == leftAddButton || event.getSource() == rightAddButton)
             color = "#1DCC04";
         else
             color = "#FFC31C";
@@ -254,21 +271,22 @@ public class PlayerCustomizationController {
         assert arrow2 != null : "fx:id=\"arrow2\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert arrow3 != null : "fx:id=\"arrow3\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert arrow4 != null : "fx:id=\"arrow4\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
+        assert errorMessage != null : "fx:id=\"errorMessage\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert firstPlayer != null : "fx:id=\"firstPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
+        assert fourthField != null : "fx:id=\"fourthField\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert fourthPlayer != null : "fx:id=\"fourthPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert leftAddButton != null : "fx:id=\"leftAddButton\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
+        assert leftDelete != null : "fx:id=\"leftDelete\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert pane1 != null : "fx:id=\"pane1\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert pane2 != null : "fx:id=\"pane2\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert pane3 != null : "fx:id=\"pane3\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert pane4 != null : "fx:id=\"pane4\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert rightAddButton != null : "fx:id=\"rightAddButton\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
-        assert secondPlayer != null : "fx:id=\"secondPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
-        assert thirdPlayer != null : "fx:id=\"thirdPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
-        assert fourthField != null : "fx:id=\"fourthField\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
-        assert leftDelete != null : "fx:id=\"leftDelete\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert rightDelete != null : "fx:id=\"rightDelete\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
+        assert secondPlayer != null : "fx:id=\"secondPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
         assert thirdField != null : "fx:id=\"thirdField\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
+        assert thirdPlayer != null : "fx:id=\"thirdPlayer\" was not injected: check your FXML file 'PlayerCustomizationScreen-view.fxml'.";
     }
 
 }
