@@ -1,6 +1,9 @@
 package com.screens;
 
+import java.io.File;
 import java.io.IOException;
+
+import com.game.Music;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,7 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import static com.almasb.fxgl.dsl.FXGLForKtKt.play;
 
 public class StartScreenController {
 
@@ -24,7 +31,7 @@ public class StartScreenController {
 
     @FXML
     void mouseClicked(MouseEvent event) throws IOException {
-
+        Music.playButtonSound();
         //START
         if (event.getSource() == startButton)
             sceneGenerator("PlayerCustomizationScreen-view.fxml", event, "Player Screen");

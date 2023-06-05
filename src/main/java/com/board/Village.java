@@ -18,23 +18,24 @@ public class Village extends Structure {
 	}
 
 	public static boolean canBeBuilt(Player player) {
-		return player.getMaterialAmount("Wood") >= 1 &&
-				player.getMaterialAmount("Clay") >= 1 &&
-				player.getMaterialAmount("Wool") >= 1 &&
+		return  player.getMaterialAmount("Wood")  >= 1 &&
+				player.getMaterialAmount("Clay")  >= 1 &&
+				player.getMaterialAmount("Wool")  >= 1 &&
 				player.getMaterialAmount("Wheat") >= 1;
 	}
 
 	public void build(HashMap<Integer, Hexagon> hexagonCorners) {
+
 		boolean flag = false, tradingCost = false;
 		Port port = null;
+
 		for (int position : hexagonCorners.keySet()) {
 			Structure[] structures = hexagonCorners.get(position).getStructures();
 
-			if (canBeBuilt(this.owner) && position % 2 == 0) {
-				if (structures[position] instanceof Road) {
+			if ( canBeBuilt(this.owner) && position % 2 == 0 ) {
+				if ( structures[position] instanceof Road ) {
 					port = hexagonCorners.get(position).getPort();
 					tradingCost = true;
-
 				}
 				structures[position] = this;
 				flag = true;
@@ -43,24 +44,26 @@ public class Village extends Structure {
 
 		if( flag ) {
 			this.owner.addStructure("Village", this);
-			this.owner.subtractMaterial("Wood", 1);
-			this.owner.subtractMaterial("Clay", 1);
-			this.owner.subtractMaterial("Wool", 1);
+			this.owner.subtractMaterial("Wood",  1);
+			this.owner.subtractMaterial("Clay",  1);
+			this.owner.subtractMaterial("Wool",  1);
 			this.owner.subtractMaterial("Wheat", 1);
 
 			this.owner.addPoints(this.points);
 		}
 
-		if(tradingCost )
+		if( tradingCost ) {
 			port.changePlayerTradingValue(this.owner);
+		}
 	}
 
 	public static City upgradeToCity(HashMap<Integer, Hexagon> hexagonCorners, Player owner, Coordinates coords) {
+
 		boolean flag = false;
 		int villagePoints = 0;
 		City city = null;
 
-		for(int corner : hexagonCorners.keySet()){
+		for(int corner : hexagonCorners.keySet()) {
 			if( City.canBeBuilt(owner) )
 			{
 				Structure[] structures = hexagonCorners.get(corner).getStructures();
@@ -86,7 +89,7 @@ public class Village extends Structure {
 
 	public boolean equals(Object object) {
 		Village v = (Village)object;
-		return this.image.equals(v.image) &&
+		return  this.image.equals(v.image)   &&
 				this.coords.equals(v.coords) &&
 				this.points == v.points;
 	}

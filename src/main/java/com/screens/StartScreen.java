@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class StartScreen extends Application {
@@ -22,7 +23,7 @@ public class StartScreen extends Application {
         Parent root;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScreen-view.fxml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

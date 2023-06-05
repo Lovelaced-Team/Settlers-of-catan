@@ -28,12 +28,12 @@ public class Hexagon implements Serializable{
 		this.hasPirate = hasPirate;
 		this.port = port;
 
-		if( port != null ){
+		if( port != null ) {
 			int leftCorner=port.getEdge()-1, rightCorner=port.getEdge()+1;
 			if( leftCorner == -1 ) leftCorner = 10;
 			else if( rightCorner == 12 ) rightCorner = 0;
 
-			addStructure(leftCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(leftCorner,  new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
 			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
 		}
 
@@ -49,16 +49,16 @@ public class Hexagon implements Serializable{
 		this.coords = coords;
 		this.port = port;
 
-		if( port != null ){
+		if( port != null ) {
 			int leftCorner=port.getEdge()-1, rightCorner=port.getEdge()+1;
 			if( leftCorner == -1 ) leftCorner = 10;
 			else if( rightCorner == 12 ) rightCorner = 0;
 
-			addStructure(leftCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(leftCorner,  new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
 			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
 		}
 
-		if( biome.equals("Desert") ){
+		if( biome.equals("Desert") ) {
 			this.hasPirate = new Pirate(this);
 		}
 	}
@@ -116,7 +116,7 @@ public class Hexagon implements Serializable{
 	}
 
 	//Returns a hashMap that contains an image source for every biome
-	public static HashMap<String, String> initializeBiomeImages(){
+	public static HashMap<String, String> initializeBiomeImages() {
 		HashMap<String, String> biomeImageSources = new HashMap<>();
 
 		try {
@@ -146,10 +146,10 @@ public class Hexagon implements Serializable{
 	}
 
 	//Produces materials and adds them to a player.
-	public void produceMaterials(Player player){
-		if( getHasPirate() == null ){
-			for(int i = 0; i<12; i += 2){
-				if( structures[i] instanceof Village && structures[i].getOwner().equals(player) ){
+	public void produceMaterials(Player player) {
+		if( getHasPirate() == null ) {
+			for(int i = 0; i<12; i += 2) {
+				if( structures[i] instanceof Village && structures[i].getOwner().equals(player) ) {
 					player.addMaterial(this.biome, structures[i].getPoints());
 					break;
 				}

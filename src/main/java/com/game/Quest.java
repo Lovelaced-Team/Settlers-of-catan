@@ -10,7 +10,7 @@ public class Quest {
     private static int longestArmyAmount;
     private static HashMap<Player, Integer> armyAmounts = new HashMap<>();
 
-    public Quest(ArrayList<Player> players){
+    public Quest(ArrayList<Player> players) {
         Quest.longestRoadAmount = 4;
         Quest.longestArmyAmount = 2;
 
@@ -21,18 +21,16 @@ public class Quest {
     }
     public void setHasLongestRoad(Player player) {
         SpecialCard card = new SpecialCard("LongestRoad", 2);
-        if(Quest.hasLongestRoad != null) {
+        if( Quest.hasLongestRoad != null ) {
             card = (SpecialCard) Quest.hasLongestRoad.getSelectedCard("LongestRoad");
             Quest.hasLongestRoad.removeCard(card);
         }
 
         Quest.hasLongestRoad = player;
-        if(card!=null) Quest.hasLongestRoad.addCard(card);
+        if( card!=null ) Quest.hasLongestRoad.addCard(card);
     }
 
-    public Player getHasLongestRoad(){
-        return Quest.hasLongestRoad;
-    }
+    public Player getHasLongestRoad() { return Quest.hasLongestRoad; }
 
     public void setLongestRoadAmount(int amount){
         Quest.longestRoadAmount = amount;
@@ -49,14 +47,14 @@ public class Quest {
             Quest.hasLongestArmy.removeCard(card);
         }
         Quest.hasLongestArmy = player;
-        if(card!=null) Quest.hasLongestArmy.addCard(card);
+        if( card!=null ) Quest.hasLongestArmy.addCard(card);
     }
 
     public Player getHasLongestArmy(){
         return Quest.hasLongestArmy;
     }
 
-    public static void addArmyAmount(Player player, int amount){
+    public static void addArmyAmount(Player player, int amount) {
         Quest.armyAmounts.put(player, Quest.armyAmounts.get(player)+amount);
         if( Quest.armyAmounts.get(player) > Quest.longestArmyAmount ){
             Quest.longestArmyAmount = Quest.armyAmounts.get(player);

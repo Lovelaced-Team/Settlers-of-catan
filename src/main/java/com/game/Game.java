@@ -24,9 +24,9 @@ public class Game {
 		return Game.players.get(currentPlayer);
 	}
 
-	public void endTurn(){
+	public void endTurn() {
 		this.currentPlayer++;
-		if( this.currentPlayer == Game.players.size() ){
+		if( this.currentPlayer == Game.players.size() ) {
 			this.currentPlayer = 0;
 		}
 		round++;
@@ -40,18 +40,18 @@ public class Game {
 	//Creates the special cards, adds them to a cards list and shuffles it.
 	//Need to add image paths
 	public void initializeCards() {
+
 		cards.clear();
-        for(int i=0; i<29; i++)
-			Game.cards.add(new SpecialCard("Pirate",0));
+        for(int i=0; i<29; i++) {
+			Game.cards.add(new SpecialCard("Pirate", 0));
+		}
 		
         for(int i=0; i<5; i++) {
 			Game.cards.add(new SpecialCard("PlusOne",1));
 
             if (i < 2) {
 				Game.cards.add(new SpecialCard("RoadCard", 0));
-
 				Game.cards.add(new SpecialCard("Monopoly", 0));
-
 				Game.cards.add(new SpecialCard("YearOfPlenty", 0));
             }
         }
@@ -59,9 +59,9 @@ public class Game {
 	}
 
 	//Updates the materials for all the players that have built a structure on the hexagon that got rolled.
-	public void updateMaterials(int rolledNumber){
-		for(Hexagon h : board.getHexagonList()){
-			if( h.getNumber() == rolledNumber ){
+	public void updateMaterials(int rolledNumber) {
+		for(Hexagon h : board.getHexagonList()) {
+			if( h.getNumber() == rolledNumber ) {
 				for(Player p : Game.players){
 					h.produceMaterials(p);
 				}
@@ -69,27 +69,27 @@ public class Game {
 		}
 	}
 
-	public static ArrayList<Card> getCardList(){
+	public static ArrayList<Card> getCardList() {
 		return Game.cards;
 	}
 
-	public static ArrayList<Player> getPlayerList(){
+	public static ArrayList<Player> getPlayerList() {
 		return Game.players;
 	}
 
-	public static void addPlayer(Player player){
+	public static void addPlayer(Player player) {
 		players.add(player);
 	}
 
-	public Board getBoard(){
+	public Board getBoard() {
 		return this.board;
 	}
 
-	public Quest getQuest(){
+	public Quest getQuest() {
 		return this.quest;
 	}
 
-	public int getRound(){
+	public int getRound() {
 		return this.round;
 	}
 }

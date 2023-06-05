@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import com.game.Game;
+import com.game.Music;
 import com.game.Player;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -58,6 +59,7 @@ public class PlayerCustomizationController {
 
     @FXML
     public void deletePlayer(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         AnchorPane pane;
         FileInputStream stream = new FileInputStream("src/main/resources/assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png");
         Image imgBlank = new Image(stream);
@@ -84,11 +86,10 @@ public class PlayerCustomizationController {
         pane.setVisible(false);
     }
 
-    public boolean checkForDuplicates(){
-        HashSet<String> playerNames = new HashSet<>();
-        playerNames.addAll(selectedNameFields.values());
+    public boolean checkForDuplicates() {
+        HashSet<String> playerNames = new HashSet<>(selectedNameFields.values());
 
-        if(playerNames.size() != selectedNameFields.values().size()){
+        if(playerNames.size() != selectedNameFields.values().size()) {
             errorMessage.setVisible(true);
             return true;
         }
@@ -99,6 +100,8 @@ public class PlayerCustomizationController {
 
     @FXML
     public void startGame(MouseEvent event) throws IOException {
+        Music.playButtonSound();
+
         Game.getPlayerList().clear();
         String name;
         String colored;
@@ -135,6 +138,7 @@ public class PlayerCustomizationController {
 
     @FXML
     public void exitClicked(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         sceneGenerator("StartScreen-view.fxml", event, "Start Screen");
     }
 
@@ -151,10 +155,12 @@ public class PlayerCustomizationController {
 
     @FXML
     public void leftClicked(MouseEvent event) {
+        Music.playButtonSound();
         pane3.setVisible(true);
     }
     @FXML
     public void rightClicked(MouseEvent event) {
+        Music.playButtonSound();
         pane4.setVisible(true);
     }
     private ImageView arrow = new ImageView();
@@ -165,6 +171,7 @@ public class PlayerCustomizationController {
         String pane = flask.getParent().getId();
         String color = colorPicker(flask);
         if ( !selectedColors.containsValue(color) ) {
+            Music.playButtonSound();
 
             selectedColors.put( pane, color );
 

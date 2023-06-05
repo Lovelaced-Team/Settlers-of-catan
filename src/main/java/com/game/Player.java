@@ -38,24 +38,24 @@ public class Player implements Comparable {
 		return avatar;
 	}
 
-	public void initializeMaterialAmounts(){
-		this.materials.put("Rock", 100);
-		this.materials.put("Wheat", 200);
-		this.materials.put("Wood", 400);
-		this.materials.put("Wool", 200);
-		this.materials.put("Clay", 400);
-		this.materials.put("Sum", 1300);
+	public void initializeMaterialAmounts() {
+		this.materials.put("Rock",  0);
+		this.materials.put("Wheat", 2);
+		this.materials.put("Wood",  4);
+		this.materials.put("Wool",  2);
+		this.materials.put("Clay",  4);
+		this.materials.put("Sum",   12);
 	}
 
-	public void initializeMaterialTradingCost(){
-		this.materialTradingCost.put("Rock", 4);
+	public void initializeMaterialTradingCost() {
+		this.materialTradingCost.put("Rock",  4);
 		this.materialTradingCost.put("Wheat", 4);
-		this.materialTradingCost.put("Wood", 4);
-		this.materialTradingCost.put("Wool", 4);
-		this.materialTradingCost.put("Clay", 4);
+		this.materialTradingCost.put("Wood",  4);
+		this.materialTradingCost.put("Wool",  4);
+		this.materialTradingCost.put("Clay",  4);
 	}
 
-	public void initializeStructures(){
+	public void initializeStructures() {
 		structures.put("Road", new ArrayList<>());
 		structures.put("Village", new ArrayList<>());
 		structures.put("City", new ArrayList<>());
@@ -84,7 +84,7 @@ public class Player implements Comparable {
 		this.materials.put("Sum", this.materials.get("Sum") + amount);
 	}
 
-	public void subtractMaterial(String material, int amount){
+	public void subtractMaterial(String material, int amount) {
 		if(material.equals("Forest")) material = "Wood";
 		else if(material.equals("Sheep")) material = "Wool";
 
@@ -96,11 +96,11 @@ public class Player implements Comparable {
 		return this.structures;
 	}
 
-	public void addStructure(String structure, Structure addedStructure){
+	public void addStructure(String structure, Structure addedStructure) {
 		this.structures.get(structure).add(addedStructure);
 	}
 
-	public void removeStructure(String structure, Structure addedStructure){
+	public void removeStructure(String structure, Structure addedStructure) {
 		this.structures.get(structure).remove(addedStructure);
 	}
 
@@ -118,28 +118,24 @@ public class Player implements Comparable {
 		if( this.points > 0) this.points -= amount;
 	}
 
-	public void addCard(Card c){
-		if( c.getPoints() > 0 ){
-			this.addPoints(c.getPoints());
-		}
+	public void addCard(Card c) {
+		if( c.getPoints() > 0 ) this.addPoints(c.getPoints());
 		this.cards.add(c);
 	}
 
 	public void removeCard(Card c) {
-		if( c.getPoints() > 0 ) {
-			this.subtractPoints(c.getPoints());
-		}
+		if( c.getPoints() > 0 ) this.subtractPoints(c.getPoints());
 		this.cards.remove(c);
 	}
 
 	public void getSpecialCard() {
 		if( Game.getCardList().size() > 0) {
-			if( this.materials.get("Wool") > 1 &&
-				this.materials.get("Rock") > 1 &&
+			if( this.materials.get("Wool")  > 1 &&
+				this.materials.get("Rock")  > 1 &&
 				this.materials.get("Wheat") > 1)
 			{
-				subtractMaterial("Wool", 1);
-				subtractMaterial("Rock", 1);
+				subtractMaterial("Wool",  1);
+				subtractMaterial("Rock",  1);
 				subtractMaterial("Wheat", 1);
 
 				ArrayList<Card> cards = new ArrayList<>(Game.getCardList());
@@ -154,11 +150,10 @@ public class Player implements Comparable {
 		}
 	}
 
-	public Card getSelectedCard(String cardToFind){
+	public Card getSelectedCard(String cardToFind) {
 		for(Card card : this.cards) {
-			if( card.getName().equals(cardToFind) ){
+			if( card.getName().equals(cardToFind) )
 				return card;
-			}
 		}
 		return null;
 	}
@@ -173,21 +168,21 @@ public class Player implements Comparable {
 
 	//Method that takes materials from one player and adds them to another one
 	public void tradeWithPlayers(Player player, HashMap<String, Integer> demandedMaterials, HashMap<String, Integer> suppliedMaterials) {
-		for(String s : demandedMaterials.keySet()){
+		for(String s : demandedMaterials.keySet()) {
 			this.addMaterial(s, demandedMaterials.get(s));
 			player.subtractMaterial(s, demandedMaterials.get(s));
 		}
 
-		for(String s : suppliedMaterials.keySet()){
+		for(String s : suppliedMaterials.keySet()) {
 			player.addMaterial(s, suppliedMaterials.get(s));
 			this.subtractMaterial(s, suppliedMaterials.get(s));
 		}
 	}
 
 	//Method that returns two random numbers and their sum
-	public int[] rollDice(){
+	public int[] rollDice() {
 		Random rand = new Random();
-		int	firstDice = rand.nextInt(6)+1;
+		int	firstDice  = rand.nextInt(6)+1;
 		int secondDice = rand.nextInt(6)+1;
 
 		return new int[]{firstDice, secondDice, firstDice + secondDice };
@@ -199,10 +194,10 @@ public class Player implements Comparable {
 		}
 	}
 
-	public int getTradingCost(String material){
+	public int getTradingCost(String material) {
 		return this.materialTradingCost.get(material);
 	}
-	public HashMap<String, Integer> getTradingCostList(){
+	public HashMap<String, Integer> getTradingCostList() {
 		return materialTradingCost;
 	}
 
@@ -216,8 +211,6 @@ public class Player implements Comparable {
 
 	@Override
 	public int compareTo( Object player) {
-		if(this.points < ((Player)player).getPoints()) return 1;
-		else if(this.points > ((Player)player).getPoints()) return -1;
-		else return 0;
+		return Integer.compare(((Player) player).getPoints(), this.points);
 	}
 }

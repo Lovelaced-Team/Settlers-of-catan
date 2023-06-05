@@ -1,8 +1,11 @@
 package com.screens;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import com.game.Music;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class TutorialScreenController {
@@ -26,6 +31,7 @@ public class TutorialScreenController {
 
     @FXML
     void changePage(MouseEvent event) throws FileNotFoundException {
+        Music.playButtonSound();
 
         if (event.getSource() == rightArrow && numberOfPage < 11)
             numberOfPage++;
@@ -45,6 +51,7 @@ public class TutorialScreenController {
     }
     @FXML
     public void exit(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         sceneGenerator("StartScreen-view.fxml", event, "Start Screen");
     }
 

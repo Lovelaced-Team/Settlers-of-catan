@@ -16,16 +16,16 @@ public class Road extends Structure {
 				player.getMaterialAmount("Clay") >= 1;
 	}
 
-	public void build(HashMap<Integer, Hexagon> hexagonEdges){
+	public void build(HashMap<Integer, Hexagon> hexagonEdges) {
 		boolean flag = false;
-		for(int position:hexagonEdges.keySet()){
+		for(int position:hexagonEdges.keySet()) {
 			Structure[] structures = hexagonEdges.get(position).getStructures();
-			if( canBeBuilt(this.owner) && position % 2 != 0){
+			if( canBeBuilt(this.owner) && position % 2 != 0 ) {
 				structures[position] = this;
 				flag = true;
 			}
 		}
-		if( flag ){
+		if( flag ) {
 			this.owner.addStructure("Road", this);
 			this.owner.subtractMaterial("Wood", 1);
 			this.owner.subtractMaterial("Clay", 1);

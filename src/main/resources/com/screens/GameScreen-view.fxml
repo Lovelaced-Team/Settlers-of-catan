@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -467,18 +466,17 @@
                   <Image url="@../../assets/gameScreen/Character_Frame_Container.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="616.0" onMouseClicked="#exitGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitButton" fitHeight="150.0" fitWidth="200.0" layoutX="857.0" layoutY="520.0" onMouseClicked="#exitGame" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/gameScreen/exit.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="709.0" layoutY="517.0" onMouseClicked="#mute" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sound" fitHeight="109.0" fitWidth="81.0" layoutX="711.0" layoutY="530.0" onMouseClicked="#mute" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/settings/sound_ON.png" />
                </image>
             </ImageView>
-            <Slider fx:id="volumeSlider" layoutX="809.0" layoutY="522.0" prefHeight="66.0" prefWidth="294.0" value="100.0" />
-            <ImageView fx:id="settingsButton2" fitHeight="81.0" fitWidth="74.0" layoutX="1154.0" layoutY="519.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="settingsButton2" fitHeight="81.0" fitWidth="74.0" layoutX="1143.0" layoutY="529.0" onMouseClicked="#settings" onMouseEntered="#animationPop" onMouseExited="#animationPopUp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/settings/settings.png" />
                </image>

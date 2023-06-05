@@ -49,8 +49,8 @@ public class Port{
         }
         this.coords = coords;
 
-        if(material.equals("Sheep")) material = "Wool";
-        else if(material.equals("Forest")) material = "Wood";
+        if( material.equals("Sheep") ) material = "Wool";
+        else if( material.equals("Forest") ) material = "Wood";
         this.material = material;
 
         try {
@@ -76,12 +76,12 @@ public class Port{
         return this.coords;
     }
 
-    public void changePlayerTradingValue(Player player){
+    public void changePlayerTradingValue(Player player) {
         String material = this.material;
 
         if( material.equals("All") ) {
 
-            for (String tempMaterial : player.getTradingCostList().keySet()){
+            for (String tempMaterial : player.getTradingCostList().keySet()) {
                 if( player.getTradingCost(tempMaterial) > this.cost ) {
                     player.changeTradingCost(tempMaterial, this.cost);
                 }

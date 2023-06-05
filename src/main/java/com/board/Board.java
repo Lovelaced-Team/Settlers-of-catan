@@ -15,7 +15,6 @@ public class Board {
 	private final double YOFFSET = 140;
 	private ArrayList<Hexagon> hexagons = new ArrayList<>(); //List of hexagons in the board
 	private HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonCorners = new HashMap<>();
-
 	private HashMap<Coordinates, HashMap<Integer, Hexagon>> hexagonEdges = new HashMap<>();
 	private HashMap<Integer, String> biomes = new HashMap<>();
 
@@ -52,7 +51,7 @@ public class Board {
 
 					//Creates the hexagons
 					String biome = biomes.get(Integer.parseInt(String.valueOf(s.charAt(2))));
-					if ( biome != null ){
+					if ( biome != null ) {
 						Hexagon hexagon = new Hexagon(coords, biome, port);
 						addHexagon(hexagon);
 						addHexagonCorners(hexagon);
@@ -98,7 +97,7 @@ public class Board {
 	}
 
 	public Hexagon coordinatesToHexagon(Coordinates coords) {
-		for(Hexagon hexagon : getHexagonList()){
+		for(Hexagon hexagon : getHexagonList()) {
 			if( hexagon.getCoords().equals(coords) ) {
 				return hexagon;
 			}
@@ -107,7 +106,7 @@ public class Board {
 	}
 
 	public Hexagon getHexagonContainingPirate() {
-		for(Hexagon hexagon : getHexagonList()){
+		for(Hexagon hexagon : getHexagonList()) {
 			if( hexagon.getHasPirate() != null ) {
 				return hexagon;
 			}
@@ -126,14 +125,14 @@ public class Board {
 		numbers.add(2);
 		numbers.add(12);
 
-		for(int i=0; i<hexagons.size()-3; i++){
+		for(int i=0; i<hexagons.size()-3; i++) {
 			numbers.add(toPickDuplicates[i % 8]);
 		}
 
 		Random rand = new Random();
 		int randomNumber;
-		for(Hexagon hex : hexagons){
-			if( !hex.getBiome().equals("Desert") ){
+		for(Hexagon hex : hexagons) {
+			if( !hex.getBiome().equals("Desert") ) {
 				randomNumber = rand.nextInt(numbers.size());
 				hex.setNumber(numbers.get(randomNumber));
 				numbers.remove(randomNumber);
@@ -149,21 +148,21 @@ public class Board {
 	    The values associated with these keys are inner hashmaps, where the key represents the number of the corner,
 	    and the value represents the hexagon itself.
 	*/
-	public void addHexagonCorners(Hexagon hexagon){
+	public void addHexagonCorners(Hexagon hexagon) {
 		HashMap<Coordinates, Integer> coordsToCorners = new HashMap<>();
 
-		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7, hexagon.getCoords().getY()+36), 0);
-		coordsToCorners.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+74, hexagon.getCoords().getY()-7), 2);
-		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+154, hexagon.getCoords().getY()+36), 4);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7,   hexagon.getCoords().getY()+36),  0);
+		coordsToCorners.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+74, hexagon.getCoords().getY()-7),   2);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+154, hexagon.getCoords().getY()+36),  4);
 		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+154, hexagon.getCoords().getY()+133), 6);
 		coordsToCorners.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+74, hexagon.getCoords().getY()+176), 8);
-		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7, hexagon.getCoords().getY()+133), 10);
+		coordsToCorners.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-7,   hexagon.getCoords().getY()+133), 10);
 
 		for(Coordinates coords : coordsToCorners.keySet()) {
-			if( !this.hexagonCorners.containsKey(coords) ){
+			if( !this.hexagonCorners.containsKey(coords) ) {
 				this.hexagonCorners.put(coords, new HashMap<>());
 			}
-			if ( !this.hexagonCorners.get(coords).containsKey(coordsToCorners.get(coords)) ){
+			if ( !this.hexagonCorners.get(coords).containsKey(coordsToCorners.get(coords)) ) {
 				this.hexagonCorners.get(coords).put(coordsToCorners.get(coords), hexagon);
 			}
 		}
@@ -175,28 +174,28 @@ public class Board {
     	The values associated with these keys are inner hashmaps, where the key represents the number of the edge,
     	and the value represents the hexagon itself.
 	*/
-	public void addHexagonEdges(Hexagon hexagon){
+	public void addHexagonEdges(Hexagon hexagon) {
 		HashMap<Coordinates, Integer> coordsToEdges = new HashMap<>();
 
-		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32, hexagon.getCoords().getY()+13), 1);
-		coordsToEdges.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+113, hexagon.getCoords().getY()+13), 3);
-		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+153, hexagon.getCoords().getY()+82), 5);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32,   hexagon.getCoords().getY()+13),  1);
+		coordsToEdges.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+113, hexagon.getCoords().getY()+13),  3);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+153,  hexagon.getCoords().getY()+82),  5);
 		coordsToEdges.put(new Coordinates(Math.floor(hexagon.getCoords().getX())+113, hexagon.getCoords().getY()+153), 7);
-		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32, hexagon.getCoords().getY()+153), 9);
-		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-8, hexagon.getCoords().getY()+82), 11);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())+32,   hexagon.getCoords().getY()+153), 9);
+		coordsToEdges.put(new Coordinates(Math.ceil(hexagon.getCoords().getX())-8,    hexagon.getCoords().getY()+82),  11);
 
 		for(Coordinates coords : coordsToEdges.keySet()) {
-			if( !this.hexagonEdges.containsKey(coords) ){
+			if( !this.hexagonEdges.containsKey(coords) ) {
 				this.hexagonEdges.put(coords, new HashMap<>());
 			}
-			if ( !this.hexagonEdges.get(coords).containsKey(coordsToEdges.get(coords)) ){
+			if ( !this.hexagonEdges.get(coords).containsKey(coordsToEdges.get(coords)) ) {
 				this.hexagonEdges.get(coords).put(coordsToEdges.get(coords), hexagon);
 			}
 		}
 	}
 
 	//Returns a HashMap with a number corresponding to a biome.
-	public void initializeBiomes(){
+	public void initializeBiomes() {
 		this.biomes.put(1, "Desert");
 		this.biomes.put(2, "Rock");
 		this.biomes.put(3, "Wheat");

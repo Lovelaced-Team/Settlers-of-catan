@@ -8,7 +8,7 @@ public class City extends Village {
 		this.points = 2;
 	}
 
-	public static boolean canBeBuilt(Player player){
+	public static boolean canBeBuilt(Player player) {
 		return player.getMaterialAmount("Rock") >= 3 &&
 				player.getMaterialAmount("Wheat") >= 2;
 	}

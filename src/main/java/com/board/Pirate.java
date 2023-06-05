@@ -36,22 +36,22 @@ public class Pirate {
 	}
 
 	//If a player has more than 8 cards the pirate steals half of them.
-	public static void stealFromPlayer(Player player, HashMap<String, Integer> suppliedMaterials){
+	public static void stealFromPlayer(Player player, HashMap<String, Integer> suppliedMaterials) {
 		for(String s : suppliedMaterials.keySet()){
 			player.subtractMaterial(s, suppliedMaterials.get(s));
 		}
 	}
 
 	//Steals a random material or card from a victim and gives it to the perpetrator.
-	public void stealForPlayer(Player victim, Player perpetrator){
+	public void stealForPlayer(Player victim, Player perpetrator) {
 		Random rand = new Random();
 		HashMap<String, Integer> victimMaterials = victim.getMaterials(); //HashMap containing quantities for every possible material that the victim can have
 
-		if(victim.getMaterialAmount("Sum") >= 1 ){
+		if( victim.getMaterialAmount("Sum") >= 1 ) {
 			ArrayList<String> materials = new ArrayList<>(); //Array that contains only the names of the materials that the victim possesses
 
 			for(String material : victimMaterials.keySet()){
-				if( victimMaterials.get(material) > 0 && !material.equals("Sum")){
+				if( victimMaterials.get(material) > 0 && !material.equals("Sum") ) {
 					materials.add(material);
 				}
 			}
@@ -61,13 +61,14 @@ public class Pirate {
 
 			victim.subtractMaterial(materialToBeRemoved, 1);
 			perpetrator.addMaterial(materialToBeRemoved, 1);
-		} else if(victim.getCardListSize() >= 1){
+
+		} else if( victim.getCardListSize() >= 1 ) {
 			ArrayList<Card> cards = new ArrayList<>(victim.getCardsList());
 			int cardToBeRemovedRandomIndex = rand.nextInt(cards.size());
 			Card cardToBeRemoved = cards.get(cardToBeRemovedRandomIndex);
 
-			if(victim.getCardListSize() == 1) {
-				if (!cardToBeRemoved.getName().equals("LongestRoad") && !cardToBeRemoved.getName().equals("LongestArmy")) {
+			if( victim.getCardListSize() == 1 ) {
+				if ( !cardToBeRemoved.getName().equals("LongestRoad") && !cardToBeRemoved.getName().equals("LongestArmy") ) {
 					victim.removeCard(cardToBeRemoved);
 					perpetrator.addCard(cardToBeRemoved);
 				}

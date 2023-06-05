@@ -63,10 +63,6 @@ public class GameScreenController {
 
     @FXML
     private ImageView sound, buildButton, tradeButton, buildRoadButton, buildVillageButton, upgradeToCityButton, pirate, diceButton, firstDie, secondDie, giveToPirateButton, takeMaterials;
-
-    @FXML
-    private Slider volumeSlider;
-
     private Group roadGroup = new Group();
     private Group buildingsGroup = new Group();
     private Group circleGroup = new Group();
@@ -150,6 +146,7 @@ public class GameScreenController {
     void buildMenu(MouseEvent event){
         AnchorPane pane = null;
         if(hasRolled && !piratePane.isVisible() && !cardPane.isVisible()) {
+            Music.playButtonSound();
             if (tradePane.isVisible()) tradePane.setVisible(false);
             if (event.getSource() == buildButton) {
                 //Player should not be able to open the build menu in his first two rounds
@@ -166,6 +163,7 @@ public class GameScreenController {
     @FXML
     void tradeMenu(MouseEvent event) {
         if(hasRolled && !piratePane.isVisible() && !cardPane.isVisible()){
+            Music.playButtonSound();
             if (buildPane.isVisible()) buildPane.setVisible(false);
 
             tradePlayerName.clear();
@@ -193,12 +191,13 @@ public class GameScreenController {
     }
     @FXML
     void settings(MouseEvent event) {
+        Music.playButtonSound();
         menuScreen.setVisible(!menuScreen.isVisible());
     }
 
     @FXML
     void tradeWithBank (MouseEvent event) throws IOException {
-
+        Music.playButtonSound();
         int i = 0;
         int tradingCost;
         int amount;
@@ -243,6 +242,7 @@ public class GameScreenController {
     }
     @FXML
     void tradeWithPlayer (MouseEvent event) {
+        Music.playButtonSound();
         int amount;
         boolean flag = false;
         int j = 0;
@@ -271,6 +271,7 @@ public class GameScreenController {
     }
     @FXML
     void tradeConfirmed (MouseEvent event) throws IOException {
+        Music.playButtonSound();
 
         int i, j = 0, amount;
         HashMap<String, Integer> suppliedMaterials = new HashMap<>();
@@ -353,6 +354,7 @@ public class GameScreenController {
     }
     @FXML
     void takeMaterial(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         int i=0, amount, totalAmount=0;
         boolean flag = false;
 
@@ -387,6 +389,7 @@ public class GameScreenController {
     @FXML
     void escape(KeyEvent event) {
         if (event.getCode() == KeyCode.P) {
+            Music.playButtonSound();
             menuScreen.setVisible(!menuScreen.isVisible());
         }
     }
@@ -400,6 +403,7 @@ public class GameScreenController {
     @FXML
     void endTurn(MouseEvent event) throws FileNotFoundException {
         if((hasRolled || game.getRound() <= Game.getPlayerList().size() * 2) && !piratePane.isVisible() && !cardPane.isVisible()){
+            Music.playButtonSound();
             if (tradePane.isVisible()) tradePane.setVisible(false);
             if (buildPane.isVisible()) buildPane.setVisible(false);
             if(!hasBuiltVillage){
@@ -429,6 +433,7 @@ public class GameScreenController {
     @FXML
     void rollDice(MouseEvent event) throws IOException {
         if( game.getRound() > Game.getPlayerList().size() * 2 ) {
+            Music.playButtonSound();
             dicePane.setVisible(true);
             diceButton.setVisible(false);
             int dice = updateDice();
@@ -473,6 +478,7 @@ public class GameScreenController {
     // Exit the game and go back to the start screen
     @FXML
     void exitGame(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -532,6 +538,7 @@ public class GameScreenController {
             ListView<String> list = (ListView<String>)playersItems.get(player).get(3);
             list.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+                    Music.playPopSound();
                     String selectedItem = list.getSelectionModel().getSelectedItem();
 
                     if( list == playersItems.get(game.getCurrentPlayer()).get(3) ){
@@ -729,6 +736,7 @@ public class GameScreenController {
                     }
                 }
                 try {
+                    Music.playPopSound();
                     updatePlayerPoints(game.getCurrentPlayer());
                     updatePlayerMaterials(game.getCurrentPlayer());
                     updateBuildPane();
@@ -759,7 +767,7 @@ public class GameScreenController {
 
     // Initialize player information on the UI
     private void initializePlayers() throws FileNotFoundException {
-        Music.changeSong(Music.gameScreenSong);
+        Music.changeSong(Music.getGameScreenSong());
         nameLabel1.getParent().setStyle("-fx-effect: dropShadow(three-pass-box, " + game.getCurrentPlayer().getColor() + ", 50, 0, 0, 0)");
         initializePlayerItemsMap();
         initializePlayerInfo();
@@ -1049,24 +1057,14 @@ public class GameScreenController {
         assert tradingWood != null : "fx:id=\"tradingWood\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert tradingWool != null : "fx:id=\"tradingWool\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
         assert upgradeToCityButton != null : "fx:id=\"upgradeToCityButton\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
-        assert volumeSlider != null : "fx:id=\"volumeSlider\" was not injected: check your FXML file 'GameScreen-view.fxml'.";
 
         EventHandler<MouseEvent> temp = this::errorEvent;
         bankTradeMaterial.setOnMouseClicked(temp);
         tradePlayerName.setOnMouseClicked(temp);
         
-        volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            Music.setVolume(newValue.doubleValue());
-            String isMuted = (newValue.doubleValue() > 0)? "ON" : "OFF";
-            try {
-                sound.setImage(new Image(new FileInputStream("src/main/resources/assets/settings/sound_" + isMuted + ".png")));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        
         buildVillageButton.setOnMouseClicked(event -> {
             if( Village.canBeBuilt(game.getCurrentPlayer()) ){
+                Music.playButtonSound();
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();
@@ -1079,6 +1077,7 @@ public class GameScreenController {
 
         buildRoadButton.setOnMouseClicked(event -> {
             if( Road.canBeBuilt(game.getCurrentPlayer()) ){
+                Music.playButtonSound();
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();
@@ -1093,6 +1092,7 @@ public class GameScreenController {
 
         upgradeToCityButton.setOnMouseClicked(event -> {
             if( City.canBeBuilt(game.getCurrentPlayer()) ){
+                Music.playButtonSound();
                 buildPane.setVisible(false);
                 try {
                     updateBuildPane();

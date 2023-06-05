@@ -34,6 +34,7 @@ public class EndScreenController {
 
     @FXML
     void mouseClicked(MouseEvent event) throws IOException {
+        Music.playButtonSound();
         if (event.getSource() == exitButton) {
             System.exit(0);
         }
@@ -61,18 +62,20 @@ public class EndScreenController {
 
     @FXML
     void initialize() {
-        ArrayList<Label> wonners = new ArrayList<>();
+        ArrayList<Label> winners = new ArrayList<>();
         ArrayList<Player> playersWon = new ArrayList<>();
+
         playersWon = Game.getPlayerList();
         Collections.sort(playersWon);
-        wonners.add(first);
-        wonners.add(second);
-        wonners.add(third);
-        wonners.add(fourth);
+
+        winners.add(first);
+        winners.add(second);
+        winners.add(third);
+        winners.add(fourth);
 
         for(int i = 0; i < playersWon.size(); i++) {
-            wonners.get(i).setText(playersWon.get(i).getName());
-            wonners.get(i).setVisible(true);
+            winners.get(i).setText(playersWon.get(i).getName());
+            winners.get(i).setVisible(true);
         }
 
         assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'EndScreen-view.fxml'.";
