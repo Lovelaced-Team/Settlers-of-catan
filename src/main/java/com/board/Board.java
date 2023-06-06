@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 //Class representing the board of the game. Creates and stores a list of all the hexagons.
 public class Board {
@@ -129,11 +128,11 @@ public class Board {
 			numbers.add(toPickDuplicates[i % 8]);
 		}
 
-		Random rand = new Random();
+
 		int randomNumber;
 		for(Hexagon hex : hexagons) {
 			if( !hex.getBiome().equals("Desert") ) {
-				randomNumber = rand.nextInt(numbers.size());
+				randomNumber =  (int )(Math.random() * numbers.size());
 				hex.setNumber(numbers.get(randomNumber));
 				numbers.remove(randomNumber);
 			} else {

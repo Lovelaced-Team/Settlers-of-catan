@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 //Class representing the pirate of the game.
 //The pirate can be placed on a hexagon to stop it from producing material.
@@ -44,7 +43,6 @@ public class Pirate {
 
 	//Steals a random material or card from a victim and gives it to the perpetrator.
 	public void stealForPlayer(Player victim, Player perpetrator) {
-		Random rand = new Random();
 		HashMap<String, Integer> victimMaterials = victim.getMaterials(); //HashMap containing quantities for every possible material that the victim can have
 
 		if( victim.getMaterialAmount("Sum") >= 1 ) {
@@ -56,7 +54,7 @@ public class Pirate {
 				}
 			}
 
-			int materialToBeRemovedRandomIndex = rand.nextInt(materials.size());
+			int materialToBeRemovedRandomIndex =  (int )(Math.random() * materials.size());
 			String materialToBeRemoved = materials.get(materialToBeRemovedRandomIndex);
 
 			victim.subtractMaterial(materialToBeRemoved, 1);
@@ -64,7 +62,7 @@ public class Pirate {
 
 		} else if( victim.getCardListSize() >= 1 ) {
 			ArrayList<Card> cards = new ArrayList<>(victim.getCardsList());
-			int cardToBeRemovedRandomIndex = rand.nextInt(cards.size());
+			int cardToBeRemovedRandomIndex = (int )(Math.random() * cards.size());
 			Card cardToBeRemoved = cards.get(cardToBeRemovedRandomIndex);
 
 			if( victim.getCardListSize() == 1 ) {

@@ -25,6 +25,7 @@ public class Music {
         mediaPlayer.dispose();
         Media media = new Media(new File(song).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(0.4);
         mediaPlayer.play();
     }

@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 
 //Class representing the player. Each Player has a name, an avatar, a color and points.
@@ -139,8 +138,7 @@ public class Player implements Comparable {
 				subtractMaterial("Wheat", 1);
 
 				ArrayList<Card> cards = new ArrayList<>(Game.getCardList());
-				Random rand = new Random();
-				int randomCardIndex = rand.nextInt(cards.size());
+				int randomCardIndex =  (int )(Math.random() * cards.size());
 
 				Card card = cards.get(randomCardIndex);
 				this.addCard(card);
@@ -181,9 +179,8 @@ public class Player implements Comparable {
 
 	//Method that returns two random numbers and their sum
 	public int[] rollDice() {
-		Random rand = new Random();
-		int	firstDice  = rand.nextInt(6)+1;
-		int secondDice = rand.nextInt(6)+1;
+		int	firstDice  = (int )((Math.random() * 6) + 1);
+		int secondDice = (int )((Math.random() * 6) + 1);
 
 		return new int[]{firstDice, secondDice, firstDice + secondDice };
 	}

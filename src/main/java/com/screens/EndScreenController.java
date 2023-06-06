@@ -11,12 +11,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import com.game.*;
-import com.board.*;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class EndScreenController {
 
@@ -29,7 +29,7 @@ public class EndScreenController {
     private Label first, second, third, fourth;
 
     private Stage stage;
-    private Scene scene;
+
     private Parent root;
 
     @FXML
@@ -39,7 +39,8 @@ public class EndScreenController {
             System.exit(0);
         }
         else if(event.getSource() == returnToMainButton) {
-            root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+            Music.changeSong(Music.getStartScreenSong());
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScreen-view.fxml")));
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
@@ -63,9 +64,8 @@ public class EndScreenController {
     @FXML
     void initialize() {
         ArrayList<Label> winners = new ArrayList<>();
-        ArrayList<Player> playersWon = new ArrayList<>();
+        ArrayList<Player> playersWon = Game.getPlayerList();
 
-        playersWon = Game.getPlayerList();
         Collections.sort(playersWon);
 
         winners.add(first);
