@@ -103,7 +103,20 @@ It was first published in 1995 in Germany. Players take on the roles of settlers
 επιβλέπων καθηγητής: Χατζηγεωργίου Αλέξανδρος </i> </p>
 
 <p align="center"> Θεσσαλονίκη 2023  </p>
+<h2> Running the Game </h2>
 
+<p> Inside the runnableJar Folder you will find the <b> Settlers-of-catan.jar </b> </p>
+ 
+ <p> Double click to open it </p>
+ 
+ <p> <b>or</b> </p>
+ 
+ <p> Run the following command in a terminal </p>
+
+```java
+java -jar Settlers-of-catan.jar
+```
+  
 <h2>license:</h2>
 <hr>
 
