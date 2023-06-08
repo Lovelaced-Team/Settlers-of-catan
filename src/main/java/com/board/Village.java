@@ -67,7 +67,7 @@ public class Village extends Structure {
 			if( City.canBeBuilt(owner) )
 			{
 				Structure[] structures = hexagonCorners.get(corner).getStructures();
-				city = new City("src/main/resources/assets/gameScreen/Build/City/city_"+owner.getColor()+".png", coords, owner);
+				city = new City("/assets/gameScreen/Build/City/city_"+owner.getColor()+".png", coords, owner);
 
 				villagePoints = structures[corner].getPoints();
 

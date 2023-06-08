@@ -1,10 +1,10 @@
 package com.screens;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 
 import com.game.Game;
 import com.game.Music;
@@ -58,11 +58,10 @@ public class PlayerCustomizationController {
     }
 
     @FXML
-    public void deletePlayer(MouseEvent event) throws IOException {
+    public void deletePlayer(MouseEvent event) {
         Music.playButtonSound();
         AnchorPane pane;
-        FileInputStream stream = new FileInputStream("src/main/resources/assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png");
-        Image imgBlank = new Image(stream);
+        Image imgBlank = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/playerCustomizationScreen/playerAvatars/Character_Window_blank.png")));
 
         if(event.getSource() == leftDelete) {
             pane = pane3;
@@ -143,7 +142,7 @@ public class PlayerCustomizationController {
     }
 
     private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(name));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(name)));
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
@@ -251,23 +250,23 @@ public class PlayerCustomizationController {
 
     }
 
-    public void setPlayerImage(String pane) throws FileNotFoundException {
-        String path = "src/main/resources/assets/gameScreen/Character_Window_";
+    public void setPlayerImage(String pane) {
+        String path = "/assets/gameScreen/Character_Window_";
         switch (pane) {
             case "pane1" -> {
-                firstPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                firstPlayer.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(path + selectedColors.get(pane) + ".png"))));
                 selectedPlayers.put(pane, firstPlayer.getImage());
             }
             case "pane2" -> {
-                secondPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                secondPlayer.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(path + selectedColors.get(pane) + ".png"))));
                 selectedPlayers.put(pane, secondPlayer.getImage());
             }
             case "pane3" -> {
-                thirdPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                thirdPlayer.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(path + selectedColors.get(pane) + ".png"))));
                 selectedPlayers.put(pane, thirdPlayer.getImage());
             }
             case "pane4" -> {
-                fourthPlayer.setImage(new Image(new FileInputStream(path + selectedColors.get(pane) + ".png")));
+                fourthPlayer.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(path + selectedColors.get(pane) + ".png"))));
                 selectedPlayers.put(pane, fourthPlayer.getImage());
             }
         }

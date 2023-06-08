@@ -2,12 +2,11 @@ package com.board;
 
 import com.game.Card;
 import com.game.Player;
+import com.screens.StartScreen;
 import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 //Class representing the pirate of the game.
 //The pirate can be placed on a hexagon to stop it from producing material.
@@ -18,12 +17,7 @@ public class Pirate {
 
 	public Pirate(Hexagon hexagon) {
 		this.belongsTo = hexagon;
-
-		try {
-			this.image = new Image(new FileInputStream("src/main/resources/assets/hexagons/pirate/Pirate.png"));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+		this.image = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/hexagons/pirate/Pirate.png")));
 	}
 
 	public void moveHexagon(Hexagon hexagon) {

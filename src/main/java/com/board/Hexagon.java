@@ -1,10 +1,12 @@
 package com.board;
 
 import com.game.Player;
+import com.screens.StartScreen;
 import javafx.scene.image.Image;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Objects;
 
 //Class representing the hexagons of the game.
 //Structures and a pirate can be placed on hexagons.
@@ -33,19 +35,15 @@ public class Hexagon implements Serializable{
 			if( leftCorner == -1 ) leftCorner = 10;
 			else if( rightCorner == 12 ) rightCorner = 0;
 
-			addStructure(leftCorner,  new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
-			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(leftCorner,  new Road("assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(rightCorner, new Road("assets/gameScreen/Build/Road/road_blank.png", null, null));
 		}
 
 	}
 
 	public Hexagon(Coordinates coords, String biome, Port port) {
 		this.biome = biome;
-		try {
-			this.image = new Image(new FileInputStream(biomeToImage(biome)));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+		this.image = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(biomeToImage(biome))));
 		this.coords = coords;
 		this.port = port;
 
@@ -54,8 +52,8 @@ public class Hexagon implements Serializable{
 			if( leftCorner == -1 ) leftCorner = 10;
 			else if( rightCorner == 12 ) rightCorner = 0;
 
-			addStructure(leftCorner,  new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
-			addStructure(rightCorner, new Road("src/main/resources/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(leftCorner,  new Road("/assets/gameScreen/Build/Road/road_blank.png", null, null));
+			addStructure(rightCorner, new Road("/assets/gameScreen/Build/Road/road_blank.png", null, null));
 		}
 
 		if( biome.equals("Desert") ) {
@@ -120,7 +118,7 @@ public class Hexagon implements Serializable{
 		HashMap<String, String> biomeImageSources = new HashMap<>();
 
 		try {
-			FileReader fileIn = new FileReader("src/main/resources/map/biomeImages.txt");
+			InputStreamReader fileIn = new InputStreamReader(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/map/biomeImages.txt")));
 			BufferedReader in = new BufferedReader(fileIn);
 
 			String line;

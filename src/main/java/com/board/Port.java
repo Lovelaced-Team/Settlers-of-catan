@@ -1,10 +1,9 @@
 package com.board;
 
 import com.game.Player;
+import com.screens.StartScreen;
 import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.Objects;
 
 //Class representing the harbors.
 //Harbors are stored on hexagons.
@@ -53,11 +52,7 @@ public class Port{
         else if( material.equals("Forest") ) material = "Wood";
         this.material = material;
 
-        try {
-            this.image = new Image(new FileInputStream("src/main/resources/assets/port/Ship_"+this.material+".png"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        this.image = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/port/Ship_" + this.material + ".png")));
 
         this.edge = edge;
 

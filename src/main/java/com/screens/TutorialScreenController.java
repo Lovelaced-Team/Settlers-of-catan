@@ -1,9 +1,7 @@
 package com.screens;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 import com.game.Music;
 import javafx.fxml.FXML;
@@ -14,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class TutorialScreenController {
@@ -26,11 +22,11 @@ public class TutorialScreenController {
     private Stage stage;
     private Parent root;
 
-    String page = "src/main/resources/assets/tutorialScreen/TutorialScreen";
+    String page = "/assets/tutorialScreen/TutorialScreen";
     int numberOfPage = 1;
 
     @FXML
-    void changePage(MouseEvent event) throws FileNotFoundException {
+    void changePage(MouseEvent event) {
         Music.playButtonSound();
 
         if (event.getSource() == rightArrow && numberOfPage < 11)
@@ -39,7 +35,7 @@ public class TutorialScreenController {
         else if (event.getSource() == leftArrow && numberOfPage > 1)
             numberOfPage--;
         
-        tutorialInfo.setImage(new Image(new FileInputStream(page + numberOfPage + ".png")));
+        tutorialInfo.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(page + numberOfPage + ".png"))));
         switch(numberOfPage) {
             case 1 -> leftArrow.setVisible(false);
             case 2 -> leftArrow.setVisible(true);
@@ -66,7 +62,7 @@ public class TutorialScreenController {
     }
 
     private void sceneGenerator(String name, MouseEvent event, String Player_Screen) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(name));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(name)));
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);

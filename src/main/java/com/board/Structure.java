@@ -1,11 +1,10 @@
 package com.board;
 
 import com.game.Player;
+import com.screens.StartScreen;
 import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Objects;
 
 abstract public class Structure {
 	
@@ -14,11 +13,7 @@ abstract public class Structure {
 	protected Player owner;
 	
 	public Structure (String image, Coordinates coords, Player player) {
-		try {
-			this.image = new Image(new FileInputStream(image));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+		this.image = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(image)));
 		this.coords = coords;
 		this.owner = player;
 	}

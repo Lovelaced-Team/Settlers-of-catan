@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//CalculateContinuousRoads method wasn't implemented. Required for the longest Road quest.
 
 //Class representing the player. Each Player has a name, an avatar, a color and points.
 public class Player implements Comparable {
@@ -166,14 +167,25 @@ public class Player implements Comparable {
 
 	//Method that takes materials from one player and adds them to another one
 	public void tradeWithPlayers(Player player, HashMap<String, Integer> demandedMaterials, HashMap<String, Integer> suppliedMaterials) {
-		for(String s : demandedMaterials.keySet()) {
-			this.addMaterial(s, demandedMaterials.get(s));
-			player.subtractMaterial(s, demandedMaterials.get(s));
+		boolean canTrade = true;
+		for(String s : demandedMaterials.keySet()){
+			if( player.getMaterialAmount(s) < demandedMaterials.get(s) ) canTrade = false;
 		}
 
-		for(String s : suppliedMaterials.keySet()) {
-			player.addMaterial(s, suppliedMaterials.get(s));
-			this.subtractMaterial(s, suppliedMaterials.get(s));
+		for(String s : suppliedMaterials.keySet()){
+			if( this.getMaterialAmount(s) < suppliedMaterials.get(s) ) canTrade = false;
+		}
+
+		if( canTrade ) {
+			for(String s : demandedMaterials.keySet()) {
+				this.addMaterial(s, demandedMaterials.get(s));
+				player.subtractMaterial(s, demandedMaterials.get(s));
+			}
+
+			for(String s : suppliedMaterials.keySet()) {
+				player.addMaterial(s, suppliedMaterials.get(s));
+				this.subtractMaterial(s, suppliedMaterials.get(s));
+			}
 		}
 	}
 

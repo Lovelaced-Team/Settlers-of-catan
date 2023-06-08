@@ -1,10 +1,13 @@
 package com.board;
 
+import com.screens.StartScreen;
+
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 //Class representing the board of the game. Creates and stores a list of all the hexagons.
 public class Board {
@@ -24,7 +27,7 @@ public class Board {
 			//The first digit represents the edge you need to reach to get to the port
 			//The second digit represents the type of port
 			//The third digit represents the hexagon's biome
-			FileReader fileReader = new FileReader("src/main/resources/map/StartingMap.txt");
+			InputStreamReader fileReader = new InputStreamReader(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/map/StartingMap.txt")));
 			BufferedReader reader = new BufferedReader(fileReader);
 
 			double currentX = XLOCATION+XOFFSET/2;

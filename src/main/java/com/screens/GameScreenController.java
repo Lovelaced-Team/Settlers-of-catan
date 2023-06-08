@@ -19,7 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -395,9 +394,9 @@ public class GameScreenController {
     }
 
     @FXML
-    void mute(MouseEvent event) throws FileNotFoundException {
+    void mute(MouseEvent event) {
         String isMuted = (!Music.isMute())? "ON" : "OFF";
-        ((ImageView) event.getSource()).setImage(new Image(new FileInputStream("src/main/resources/assets/settings/sound_" + isMuted + ".png")));
+        ((ImageView) event.getSource()).setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/settings/sound_" + isMuted + ".png"))));
     }
 
     @FXML
@@ -458,28 +457,28 @@ public class GameScreenController {
         }
     }
 
-    private int updateDice() throws FileNotFoundException {
+    private int updateDice() {
         int[] dice = game.getCurrentPlayer().rollDice();
-        firstDie.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Dice/" + dice[0]+".png")));
-        secondDie.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Dice/" + dice[1]+".png")));
+        firstDie.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Dice/" + dice[0] + ".png"))));
+        secondDie.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Dice/" + dice[1] + ".png"))));
         return dice[2];
     }
 
     private void updateBuildPane() throws FileNotFoundException {
-        upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_blank.png")));
-        buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_blank.png")));
-        buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_blank.png")));
+        upgradeToCityButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/City/city_blank.png"))));
+        buildVillageButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/Village/village_blank.png"))));
+        buildRoadButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/Road/road_blank.png"))));
 
-        if( City.canBeBuilt(game.getCurrentPlayer()) ) upgradeToCityButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/City/city_" + game.getCurrentPlayer().getColor() + ".png")));
-        if( Village.canBeBuilt(game.getCurrentPlayer()) ) buildVillageButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Village/village_"+ game.getCurrentPlayer().getColor() + ".png")));
-        if( Road.canBeBuilt(game.getCurrentPlayer()) ) buildRoadButton.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/Road/road_"+ game.getCurrentPlayer().getColor() + ".png")));
+        if( City.canBeBuilt(game.getCurrentPlayer()) ) upgradeToCityButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/City/city_" + game.getCurrentPlayer().getColor() + ".png"))));
+        if( Village.canBeBuilt(game.getCurrentPlayer()) ) buildVillageButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/Village/village_" + game.getCurrentPlayer().getColor() + ".png"))));
+        if( Road.canBeBuilt(game.getCurrentPlayer()) ) buildRoadButton.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/Road/road_" + game.getCurrentPlayer().getColor() + ".png"))));
     }
 
     // Exit the game and go back to the start screen
     @FXML
     void exitGame(MouseEvent event) throws IOException {
         Music.playButtonSound();
-        root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScreen-view.fxml")));
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         configureStage(stage, "Start");
@@ -569,22 +568,14 @@ public class GameScreenController {
                                 }
                                 break;
                             case "Monopoly":
-                                try {
-                                    takeMaterials.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/tradeWithPlayer.png")));
-                                } catch (FileNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                takeMaterials.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/tradeWithPlayer.png"))));
                                 tradePane.setVisible(false);
                                 buildPane.setVisible(false);
                                 cardPane.setVisible(true);
                                 firstMaterial.setVisible(true);
                                 break;
                             case "YearOfPlenty":
-                                try {
-                                    takeMaterials.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/tradeWithBank.png")));
-                                } catch (FileNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                takeMaterials.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/tradeWithBank.png"))));
                                 tradePane.setVisible(false);
                                 buildPane.setVisible(false);
                                 cardPane.setVisible(true);
@@ -600,15 +591,15 @@ public class GameScreenController {
 
 
     // Initialize the hexagons on the game board
-    private void initializeHexagons() throws FileNotFoundException {
+    private void initializeHexagons() {
         for(Hexagon hexagon : game.getBoard().getHexagonList()) {
             ImageView boardItems = new ImageView(hexagon.getImage());
             initializeBoardImages(hexagon.getCoords(), boardItems, 0, 0, 178.0, 195.0);
             boardPane.getChildren().add(boardItems);
 
             if (!hexagon.getBiome().equals("Desert")) {
-                String path = "src/main/resources/assets/hexagons/hexagonNumbers/no." + hexagon.getNumber() + ".png";
-                boardItems = new ImageView(new Image(new FileInputStream(path)));
+                String path = "/assets/hexagons/hexagonNumbers/no." + hexagon.getNumber() + ".png";
+                boardItems = new ImageView(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream(path))));
                 initializeBoardImages(hexagon.getCoords(), boardItems, 48, 52, 80.0, 80.0);
                 boardPane.getChildren().add(boardItems);
             } else {
@@ -639,7 +630,7 @@ public class GameScreenController {
     //This method is used to create the areas where a player can click to build
     private void initializeButtons(HashSet<Coordinates> buttons, String structure) throws FileNotFoundException {
         for(Coordinates coords : buttons){
-            Image buttonImage = new Image(new FileInputStream("src/main/resources/assets/gameScreen/Build/selectionCircle.png"));
+            Image buttonImage = new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/Build/selectionCircle.png")));
             ImageView button = new ImageView(buttonImage);
             button.setLayoutX(coords.getX());
             button.setLayoutY(coords.getY());
@@ -650,7 +641,7 @@ public class GameScreenController {
             button.setOnMouseClicked(event -> {
                 if( button.getImage() == buttonImage ) {
                     if( structure.equals("Village") ){
-                        String villageImagePath = "src/main/resources/assets/gameScreen/Build/Village/village_" + game.getCurrentPlayer().getColor() + ".png";
+                        String villageImagePath = "/assets/gameScreen/Build/Village/village_" + game.getCurrentPlayer().getColor() + ".png";
                         Village village = new Village(villageImagePath, new Coordinates(coords.getX(), coords.getY()), game.getCurrentPlayer());
                         village.build(game.getBoard().getHexagonCorners().get(coords));
 
@@ -658,7 +649,7 @@ public class GameScreenController {
                         button.setImage(village.getImage());
                         buildingsGroup.getChildren().add(button);
                     } else if( structure.equals("Road") ){
-                        String roadImagePath = "src/main/resources/assets/gameScreen/Build/Road/road_" + game.getCurrentPlayer().getColor() + ".png";
+                        String roadImagePath = "/assets/gameScreen/Build/Road/road_" + game.getCurrentPlayer().getColor() + ".png";
                         Road road = new Road(roadImagePath, new Coordinates(coords.getX(), coords.getY()), game.getCurrentPlayer());
                         HashMap<Integer, Hexagon> edgeCoords = game.getBoard().getHexagonEdges().get(coords);
                         road.build(edgeCoords);
@@ -703,11 +694,7 @@ public class GameScreenController {
                             for(Player victim : victims){
                                 if(victim != null && !game.getCurrentPlayer().equals(victim)) selectVictim.getItems().add(victim.getName());
                             }
-                            try {
-                                takeMaterials.setImage(new Image(new FileInputStream("src/main/resources/assets/gameScreen/tradeWithPlayer.png")));
-                            } catch (FileNotFoundException e) {
-                                throw new RuntimeException(e);
-                            }
+                            takeMaterials.setImage(new Image(Objects.requireNonNull(StartScreen.class.getResourceAsStream("/assets/gameScreen/tradeWithPlayer.png"))));
 
                             if( victims.size()>0 ){
                                 tradePane.setVisible(false);

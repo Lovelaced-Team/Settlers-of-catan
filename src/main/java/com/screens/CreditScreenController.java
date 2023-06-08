@@ -1,6 +1,7 @@
 package com.screens;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import com.game.Music;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ public class CreditScreenController {
     @FXML
     void returnToMain(MouseEvent event) throws IOException {
         Music.playButtonSound();
-        root = FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScreen-view.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         configureStage(stage, "Start");
     }
@@ -40,7 +41,7 @@ public class CreditScreenController {
 
 
 
-    private void configureStage(Stage stage, String stageTitle) throws IOException {
+    private void configureStage(Stage stage, String stageTitle) {
         stage.getScene().setRoot(root);
         stage.setFullScreen(true);
         stage.setTitle(stageTitle + " " + "Screen");
