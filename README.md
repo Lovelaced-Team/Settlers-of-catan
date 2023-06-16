@@ -6,6 +6,22 @@ The Settlers of Catan, is a multiplayer board game designed by Klaus Teuber.
 
 It was first published in 1995 in Germany. Players take on the roles of settlers, each attempting to build and develop holdings while trading and acquiring resources. Players gain victory points as their settlements grow and the first to reach a set number of victory points, typically 10, wins.
 
+<h2>Trading Materials</h2>
+<ol>
+  <li>Click on the 'Trade' button.</li>
+  <li>A window will pop up after you click the button.</li>
+  <li>Select the materials you plan to spend.</li>
+  <li>In the top text box you can write the name of the player you want to trade with.</li>
+  <li>In the bottom text box you can write the name of the material (Rock, Wheat, Wood, Wool, Clay, Special Card) you want in order to trade with the bank.</li>
+  <li>After you are done, press the corresponding button - either the player's head icon or the bank icon.</li>
+  <li>If you chose the player icon then the other player needs to fill in the materials they are going to give you and confirm the trade.</li>
+</ol>
+
+<h2>Using Special Cards</h2>
+<ul>
+  <li>If you have a special card, it will appear next to your materials. To use the card, simply double-click the one you want.</li>
+</ul>
+<br>
 <table style="text-align: left; border-collapse: collapse; border: none; ">
 
   <caption>Ομάδα 17</caption>
