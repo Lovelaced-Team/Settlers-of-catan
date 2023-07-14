@@ -36,6 +36,7 @@ public class Coordinates {
 		Coordinates c = (Coordinates) object;
 		return this.x == c.x && this.y == c.y;
 	}
+
 	public int hashCode() {
 		return Objects.hash(x, y);
 	}

@@ -34,7 +34,7 @@ public class Game {
 
 	//Checks if the current player has reached 10 points
 	public boolean hasWon(){
-		return this.getCurrentPlayer().getPoints() == 10;
+		return this.getCurrentPlayer().getPoints() >= 10;
 	}
 
 	//Creates the special cards, adds them to a cards list and shuffles it.

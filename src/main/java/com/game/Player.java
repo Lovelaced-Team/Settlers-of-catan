@@ -96,6 +96,10 @@ public class Player implements Comparable {
 		return this.structures;
 	}
 
+	public int getStructureAmount(String structure) {
+		return this.structures.get(structure).size();
+	}
+
 	public void addStructure(String structure, Structure addedStructure) {
 		this.structures.get(structure).add(addedStructure);
 	}

@@ -19,7 +19,6 @@ public class SpecialCard extends Card {
 				break;
 			}
 		}
-		Quest.addArmyAmount(perpetrator, 1);
 	}
 
 	public void takeMaterialFromPlayers(Player player, String material) {

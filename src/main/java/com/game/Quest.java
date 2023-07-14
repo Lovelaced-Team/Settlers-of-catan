@@ -19,24 +19,25 @@ public class Quest {
             armyAmounts.put(p, 0);
         }
     }
-    public void setHasLongestRoad(Player player) {
+    public static void setHasLongestRoad(Player player, int amount) {
         SpecialCard card = new SpecialCard("LongestRoad", 2);
         if( Quest.hasLongestRoad != null ) {
             card = (SpecialCard) Quest.hasLongestRoad.getSelectedCard("LongestRoad");
             Quest.hasLongestRoad.removeCard(card);
         }
 
+        Quest.longestRoadAmount = amount;
         Quest.hasLongestRoad = player;
         if( card!=null ) Quest.hasLongestRoad.addCard(card);
     }
 
-    public Player getHasLongestRoad() { return Quest.hasLongestRoad; }
+    public static Player getHasLongestRoad() { return Quest.hasLongestRoad; }
 
     public void setLongestRoadAmount(int amount){
         Quest.longestRoadAmount = amount;
     }
 
-    public int getLongestRoadAmount(){
+    public static int getLongestRoadAmount(){
         return Quest.longestRoadAmount;
     }
 

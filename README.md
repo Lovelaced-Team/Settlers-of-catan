@@ -11,8 +11,8 @@ It was first published in 1995 in Germany. Players take on the roles of settlers
   <li>Click on the 'Trade' button.</li>
   <li>A window will pop up after you click the button.</li>
   <li>Select the materials you plan to spend.</li>
-  <li>In the top text box you can write the name of the player you want to trade with.</li>
-  <li>In the bottom text box you can write the name of the material (Rock, Wheat, Wood, Wool, Clay, Special Card) you want in order to trade with the bank.</li>
+  <li>In the top choice box you can select the name of the player you want to trade with.</li>
+  <li>In the bottom choice box you can write the name of the material (Rock, Wheat, Wood, Wool, Clay, Special Card) you want in order to trade with the bank.</li>
   <li>After you are done, press the corresponding button - either the player's head icon or the bank icon.</li>
   <li>If you chose the player icon then the other player needs to fill in the materials they are going to give you and confirm the trade.</li>
 </ol>

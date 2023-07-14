@@ -121,3 +121,15 @@
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }
+
+.choice-box .context-menu {
+    -fx-background-color: #26020a;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #dab682;
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: gold;
+}
